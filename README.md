@@ -15,12 +15,12 @@
 ---
 
 ## Ссылка на Netlify
-[https://app.netlify.com/sites/deploy](https://app.netlify.com/sites/deploy)
+[~~https://app.netlify.com/sites/deploy~~](https://app.netlify.com/sites/deploy)
 
 ---
 
 ## Прототип в Figma
-[https://www.figma.com/file/24EUnEHGEDNLdOcxg7ULwV/Chat](https://www.figma.com/file/24EUnEHGEDNLdOcxg7ULwV/Chat)
+[~~https://www.figma.com/file/24EUnEHGEDNLdOcxg7ULwV/Chat~~](https://www.figma.com/file/24EUnEHGEDNLdOcxg7ULwV/Chat)
 
 ---
 
