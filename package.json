@@ -1,0 +1,31 @@
+{
+  "name": "mf.messenger.praktikum.yandex",
+  "version": "0.0.1",
+  "description": "Simple messenger with js & css & html",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js --dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dvs-crcr/mf.messenger.praktikum.yandex.git"
+  },
+  "keywords": [
+    "messenger",
+    "praktikum.yandex",
+    "html",
+    "css",
+    "js"
+  ],
+  "author": "dvs <dvs@crcr.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dvs-crcr/mf.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/dvs-crcr/mf.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}
