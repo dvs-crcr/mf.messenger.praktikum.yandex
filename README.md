@@ -15,7 +15,7 @@
 ---
 
 ## Ссылка на Netlify
-[~~https://app.netlify.com/sites/deploy~~](https://app.netlify.com/sites/deploy)
+[https://relaxed-hawking-b16965.netlify.app](https://relaxed-hawking-b16965.netlify.app)
 
 ---
 
