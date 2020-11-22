@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/dvs-crcr/mf.messenger.praktikum.yandex#readme",
   "devDependencies": {
-    "express": "^4.17.1"
+    "express": "4.17.1"
   }
 }
