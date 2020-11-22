@@ -20,7 +20,7 @@
 ---
 
 ## Прототип в Figma
-[~~https://www.figma.com/file/24EUnEHGEDNLdOcxg7ULwV/Chat~~](https://www.figma.com/file/24EUnEHGEDNLdOcxg7ULwV/Chat)
+[https://www.figma.com/file/GxSgsXztBNG3pM7ZsF8xZV/Messenger](https://www.figma.com/file/GxSgsXztBNG3pM7ZsF8xZV/Messenger)
 
 ---
 
