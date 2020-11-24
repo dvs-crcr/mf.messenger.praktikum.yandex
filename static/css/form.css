@@ -1,0 +1,22 @@
+.form__group {
+  margin-bottom: 15px;
+}
+.form__input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #d8d8d8;
+  line-height: 31px;
+  font-size: 13px;
+}
+.form__input_error {
+  border-bottom: 1px solid #FF5A4C;
+}
+.form__input:focus {
+  outline: 0;
+  border-bottom: 1px solid #0099d2;
+}
+.form__input-error-msg {
+  font-size: 11px;
+  color: #FF5A4C;
+  text-align: right;
+}
