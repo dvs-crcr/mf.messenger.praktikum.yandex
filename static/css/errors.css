@@ -1,0 +1,16 @@
+.error-page {
+  text-align: center;
+}
+.error-page__title {
+  font-weight: 800;
+  font-size: 200px;
+  color: #dbdbdb;
+  display: inline-block;
+  line-height: 135px;
+  margin-bottom: 40px;
+  margin-top: 128px;
+}
+.error-page__description {
+  font-size: 24px;
+  margin-bottom: 50px;
+}
