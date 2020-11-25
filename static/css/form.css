@@ -1,5 +1,10 @@
 .form__group {
   margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+.form > .form__group:last-child {
+  margin-bottom: 0;
 }
 .form__input {
   width: 100%;
@@ -19,4 +24,10 @@
   font-size: 11px;
   color: #FF5A4C;
   text-align: right;
+}
+.form__text {
+  font-size: 13px;
+  line-height: 18px;
+  color: #757575;
+  margin-bottom: 15px;
 }

@@ -11,6 +11,8 @@ body, html {
   display: block;
   height: 100%;
   color: #000000;
+  scrollbar-width: 5px;
+  scrollbar-color: rgba(0, 0, 0, 0.4);
 }
 .index {
   margin: 50px;
@@ -29,4 +31,15 @@ a:hover {
   display: inline-block;
   vertical-align: middle;
   height: 100%;
+}
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4);
 }
