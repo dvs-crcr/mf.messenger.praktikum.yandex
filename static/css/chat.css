@@ -1,0 +1,38 @@
+.root {
+  height: 100%;
+}
+.chat {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+  height: 100%;
+}
+.chat__left {
+  width: 300px;
+  flex-grow: 0;
+  background: #fbfbfb;
+  border-right: 1px solid #DBDBDB;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: stretch;
+  align-content: flex-start;
+}
+.chat__profile-link {
+  height: 40px;
+}
+
+
+.chat__right {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chat__default-message {
+  font-size: 13px;
+  color: #757575;
+}
