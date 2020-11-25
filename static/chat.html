@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Чат</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/btn.css">
+  <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="css/dropdown.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <script src="https://use.fontawesome.com/ed0ce605fd.js"></script>
+</head>
+<body>
+  <div class="root">
+    <div class="chat">
+      <aside class="chat__left">
+        <a class="chat__profile-link" href="/profile.html">Профиль<i class="fa fa-chevron-right"></i></a>
+        <div class="chat__search">
+          <input class="chat__search-input" type="text" placeholder="Поиск" />
+          <i class="fa fa-search chat__search-icon"></i>
+        </div>
+        <div class="chat__list">
+
+          <div class="chat__list-item">
+            <img class="chat__list-item-avatar" src="img/avatar_50x50.png" />
+            <div class="chat__list-item-descr">
+              <div class="chat__list-item-title">Константин Константино...</div>
+              <div class="chat__list-item-lastmsg">изображение</div>
+            </div>
+            <span class="chat__list-item-time">15:00</span>
+            <span class="chat__list-item-count">1</span>
+            <div class="chat__list-item-hover"></div>
+          </div>
+
+          <div class="chat__list-item chat__list-item_active">
+            <img class="chat__list-item-avatar" src="img/avatar_50x50.png" />
+            <div class="chat__list-item-descr">
+              <div class="chat__list-item-title">Антошка</div>
+              <div class="chat__list-item-lastmsg"><span class="chat__list-item-lastmsg-self">Вы: </span>Пошли копать картошку, дили-дили-трали-вали это мы...</div>
+            </div>
+            <span class="chat__list-item-time">9:57</span>
+            <span class="chat__list-item-count"></span>
+            <div class="chat__list-item-hover"></div>
+          </div>
+
+          <div class="chat__list-item">
+            <img class="chat__list-item-avatar" src="img/avatar_50x50.png" />
+            <div class="chat__list-item-descr">
+              <div class="chat__list-item-title">Паша Работа</div>
+              <div class="chat__list-item-lastmsg">Привет! Как дела?</div>
+            </div>
+            <span class="chat__list-item-time">Вс</span>
+            <span class="chat__list-item-count">1</span>
+            <div class="chat__list-item-hover"></div>
+          </div>
+
+          <div class="chat__list-item">
+            <img class="chat__list-item-avatar" src="img/avatar_50x50.png" />
+            <div class="chat__list-item-descr">
+              <div class="chat__list-item-title">10 Невероятных фактов</div>
+              <div class="chat__list-item-lastmsg">Факт №1. А вы знали, что у длинноголового хвостоклювик...</div>
+            </div>
+            <span class="chat__list-item-time">Сб</span>
+            <span class="chat__list-item-count"></span>
+            <div class="chat__list-item-hover"></div>
+          </div>
+
+          <div class="chat__list-item">
+            <img class="chat__list-item-avatar" src="img/avatar_50x50.png" />
+            <div class="chat__list-item-descr">
+              <div class="chat__list-item-title">TEDx</div>
+              <div class="chat__list-item-lastmsg">Лекция о том как стать фронтенд разаработчиком  и не быть пол...</div>
+            </div>
+            <span class="chat__list-item-time">Сб</span>
+            <span class="chat__list-item-count"></span>
+            <div class="chat__list-item-hover"></div>
+          </div>
+
+          <div class="chat__list-item">
+            <img class="chat__list-item-avatar" src="img/avatar_50x50.png" />
+            <div class="chat__list-item-descr">
+              <div class="chat__list-item-title">Иван Иванович</div>
+              <div class="chat__list-item-lastmsg"><span class="chat__list-item-lastmsg-self">Вы: </span>Иван Иванович, добрый день. Хочу напомнить про встр...</div>
+            </div>
+            <span class="chat__list-item-time">Пт</span>
+            <span class="chat__list-item-count"></span>
+            <div class="chat__list-item-hover"></div>
+          </div>
+
+          <div class="chat__list-item">
+            <img class="chat__list-item-avatar" src="img/avatar_50x50.png" />
+            <div class="chat__list-item-descr">
+              <div class="chat__list-item-title">Жена</div>
+              <div class="chat__list-item-lastmsg">Хлеб, молоко, индейка, овощи, йогурт детям, корм для кошки...</div>
+            </div>
+            <span class="chat__list-item-time">Чт</span>
+            <span class="chat__list-item-count">99+</span>
+            <div class="chat__list-item-hover"></div>
+          </div>
+
+          <div class="chat__list-item">
+            <img class="chat__list-item-avatar" src="img/avatar_50x50.png" />
+            <div class="chat__list-item-descr">
+              <div class="chat__list-item-title">КиноНаходка...</div>
+              <div class="chat__list-item-lastmsg">Только у нас все премьеры этой недели в отличном качестве!</div>
+            </div>
+            <span class="chat__list-item-time">Чт</span>
+            <span class="chat__list-item-count">14</span>
+            <div class="chat__list-item-hover"></div>
+          </div>
+
+          <div class="chat__list-item">
+            <img class="chat__list-item-avatar" src="img/avatar_50x50.png" />
+            <div class="chat__list-item-descr">
+              <div class="chat__list-item-title">1-2-3</div>
+              <div class="chat__list-item-lastmsg"><span class="chat__list-item-lastmsg-self">Вы: </span>ОК</div>
+            </div>
+            <span class="chat__list-item-time">Ср</span>
+            <span class="chat__list-item-count"></span>
+            <div class="chat__list-item-hover"></div>
+          </div>
+
+          <div class="chat__list-item">
+            <img class="chat__list-item-avatar" src="img/avatar_50x50.png" />
+            <div class="chat__list-item-descr">
+              <div class="chat__list-item-title">Вася Диагност</div>
+              <div class="chat__list-item-lastmsg">Машина готова, приезжай</div>
+            </div>
+            <span class="chat__list-item-time">Ср</span>
+            <span class="chat__list-item-count">1</span>
+            <div class="chat__list-item-hover"></div>
+          </div>
+
+        </div>
+        
+      </aside>
+      <main class="chat__right">
+        <div class="chat__header">
+          <div class="chat__header-info">
+            <img class="chat__header-info-avatar" src="img/avatar_30x30.png" />
+            <span class="chat__header-info-title">Антошка</span>
+          </div>
+          <div class="chat__header-actions">
+            <div class="dropdown bottom_right">
+              <button class="dropdown__toggle btn-round btn-round_transparent chat__header-button">
+                <svg width="3" height="15" viewBox="0 0 3 15" fill="#757575" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 1.5C3 2.32843 2.32843 3 1.5 3C0.671573 3 0 2.32843 0 1.5C0 0.671573 0.671573 0 1.5 0C2.32843 0 3 0.671573 3 1.5Z" />
+                  <path d="M3 13.5C3 14.3284 2.32843 15 1.5 15C0.671573 15 0 14.3284 0 13.5C0 12.6716 0.671573 12 1.5 12C2.32843 12 3 12.6716 3 13.5Z" />
+                  <path d="M3 7.5C3 8.32843 2.32843 9 1.5 9C0.671573 9 0 8.32843 0 7.5C0 6.67157 0.671573 6 1.5 6C2.32843 6 3 6.67157 3 7.5Z" />
+                  </svg>
+              </button>
+              <nav class="dropdown__list">
+                <li><button onclick="Chat.showModal('add_user_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_add-user"></i>Добавить пользователя</button></li>
+                <li><button onclick="Chat.showModal('delete_user_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_delete-user"></i>Удалить пользователя</button></li>
+                <li><button onclick="Chat.showModal('delete_chat_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_delete-chat"></i>Удалить чат</button></li>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="chat__body">
+          <div class="chat__body-date">19 ноября</div>
+          <div class="chat__body-message">
+            <div class="chat__body-message-text">
+              Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.
+
+              Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.
+            </div>
+            <div class="chat__body-message-time">08:56</div>
+          </div>
+
+          <div class="chat__body-message chat__body-message_image">
+            <img src="img/message_img_640x400.png">
+            <div class="chat__body-message-time">08:56</div>
+          </div>
+
+          <div class="chat__body-message chat__body-message_self  chat__body-message_read">
+            <div class="chat__body-message-text">
+              Пошли копать картошку, дили-дили-трали-вали это мы не проходили, это нам не задавали...
+            </div>
+            <div class="chat__body-message-status"><i class="fa fa-check"></i></div>
+            <div class="chat__body-message-time">09:57</div>
+          </div>
+
+        </div>
+        <form class="chat__message" method="POST" onsubmit="Chat.submitForm(event);">
+          <div class="dropdown top_left">
+            <button type="button" class="dropdown__toggle chat__message-attach"><i class="fa fa-paperclip"></i></button>
+            <nav class="dropdown__list">
+              <li><button class="dropdown__list-button"><i class="icon-btn icon-btn_media"></i>Фото и Видео</button></li>
+              <li><button class="dropdown__list-button"><i class="icon-btn icon-btn_file"></i>Файл</button></li>
+              <li><button class="dropdown__list-button"><i class="icon-btn icon-btn_location"></i>Локация</button></li>
+            </nav>
+          </div>
+          <input class="chat__message-text" name="message" type="text" placeholder="Сообщение">
+          <button type="submit" class="btn-round btn-round_primary chat__message-send">
+            <i class="fa fa-arrow-right"></i>
+          </button>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal" id="add_user_modal">
+    <div class="modal__background">
+      <div class="modal__wrapper">
+        <div class="modal__header">Добавить пользователя</div>
+        <div class="modal__content">
+          <form class="form" method="POST" onsubmit="Chat.closeModal(event);">
+            <div class="form__group">
+              <input class="form__input" name="login" type="text" placeholder="Логин">
+            </div>
+            <div class="form__group"> 
+              <button class="btn btn_primary btn_fullwidth" type="submit">Добавить</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="delete_user_modal">
+    <div class="modal__background">
+      <div class="modal__wrapper">
+        <div class="modal__header">Удалить пользователя</div>
+        <div class="modal__content">
+          <form class="form" method="POST" onsubmit="Chat.closeModal(event);">
+            <div class="form__group">
+              <input class="form__input" name="login" type="text" placeholder="Логин">
+            </div>
+            <div class="form__group"> 
+              <button class="btn btn_warning btn_fullwidth" type="submit">Удалить</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="delete_chat_modal">
+    <div class="modal__background">
+      <div class="modal__wrapper">
+        <div class="modal__header">Удалить чат</div>
+        <div class="modal__content">
+          <form class="form" method="POST" onsubmit="Chat.closeModal(event);">
+            <p class="form__text">
+              Вы уверены, что желаете удалить текущий чат? 
+            </p>
+            <div class="form__group"> 
+              <button class="btn btn_gray" type="submit">Нет, я передумал</button>
+              <button class="btn btn_warning" type="submit">Да!</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/chat.js"></script>
+</body>
+</html>
