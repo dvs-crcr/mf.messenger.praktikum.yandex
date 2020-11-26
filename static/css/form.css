@@ -1,5 +1,7 @@
 .form__group {
   margin-bottom: 15px;
+}
+.form__group_flex {
   display: flex;
   justify-content: space-between;
 }

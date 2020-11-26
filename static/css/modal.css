@@ -36,3 +36,12 @@
 .modal__content {
   margin-top: 15px;
 }
+.modal__error {
+  margin: 20px -40px;
+  line-height: 32px;
+  background: #FFE5E5;
+  color: #FF5A4C;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}

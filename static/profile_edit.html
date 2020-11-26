@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Редактирование профиля</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/btn.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <script src="https://use.fontawesome.com/ed0ce605fd.js"></script>
+</head>
+<body>
+  <main class="root profile">
+    <aside class="profile__goback" onclick="Profile.goBack();">
+      <button type="button" class="btn-round btn-round_primary">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+    </aside>
+    <div class="profile__content">
+      <div class="profile__avatar">
+        <img class="profile__avatar-image" src="img/avatar_profile_128x128.png">
+      </div>
+      <p class="profile__name">&nbsp;</p>
+      <form class="profile__form form" method="POST" onsubmit="Profile.submitForm(event);">
+        <ul class="profile__list">
+          <li>
+            <span class="profile__settings-label">Электронная почта</span>
+            <span class="profile__settings-value">
+              <input class="profile__input" type="email" name="email" placeholder="johndoe@mail.rus">
+            </span>
+          </li>
+          <li>
+            <span class="profile__settings-label">Логин</span>
+            <span class="profile__settings-value">
+              <input class="profile__input" type="text" name="login" placeholder="johndoe">
+            </span>
+          </li>
+          <li>
+            <span class="profile__settings-label">Имя</span>
+            <span class="profile__settings-value">
+              <input class="profile__input" type="text" name="first_name" placeholder="John">
+            </span>
+          </li>
+          <li>
+            <span class="profile__settings-label">Фамилия</span>
+            <span class="profile__settings-value">
+              <input class="profile__input" type="text" name="second_name" placeholder="Doe">
+            </span>
+          </li>
+          <li>
+            <span class="profile__settings-label">Имя в чате</span>
+            <span class="profile__settings-value">
+              <input class="profile__input" type="text" name="display_name" placeholder="John Ivanov">
+            </span>
+          </li>
+          <li>
+            <span class="profile__settings-label">Телефон</span>
+            <span class="profile__settings-value">
+              <input class="profile__input" type="text" name="phone" placeholder="+7 (123) 456 78 90">
+            </span>
+          </li>
+        </ul>
+        <div class="profile__buttons form__group"> 
+          <button class="btn btn_primary profile__btn-save" type="submit">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/profile.js"></script>
+</body>
+</html>
