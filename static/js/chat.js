@@ -9,8 +9,7 @@ dropdowns.forEach((item) => {
 
 const modals = document.querySelectorAll('.modal');
 modals.forEach((modal) => {
-  let modalBg = modal.querySelector('.modal__background');
-  modalBg.addEventListener('click', (event) => {
+  modal.addEventListener('click', (event) => {
     if (event.target === event.currentTarget) {
       modal.classList.remove('modal_open');
     }

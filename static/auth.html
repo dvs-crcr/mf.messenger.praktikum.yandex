@@ -12,21 +12,14 @@
 </head>
 <body>
   <div class="root">
-    <div class="vertical-helper"></div>
     <div class="auth">
       <h1 class="auth__header">Авторизация</h1>
       <p class="auth__error hidden">Неверный логин или пароль</p>
       <div class="auth__content">
         <form class="auth__form form" method="POST" onsubmit="Auth.submitForm(event);">
-          <div class="form__group">
-            <input class="form__input" name="login" type="text" placeholder="Логин" />
-          </div>
-          <div class="form__group">
-            <input class="form__input" name="password" type="password" placeholder="Пароль" />
-          </div>
-          <div class="form__group"> 
-            <button class="btn btn_primary btn_fullwidth" type="submit">Войти</button>
-          </div>
+          <input class="auth__input form__input" name="login" type="text" placeholder="Логин" />
+          <input class="auth__input form__input" name="password" type="password" placeholder="Пароль" />
+          <button class="auth__button btn btn_primary btn_fullwidth" type="submit">Войти</button>
         </form>
         <nav class="auth__links">
           <a href="/registration.html">создать аккаунт</a>

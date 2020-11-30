@@ -42,7 +42,9 @@ let Profile = {
   uploadAvatar(event) {
     event.preventDefault();
     let uploadBtn = event.target.querySelector('.upload-avatar-btn');
-    if (event.submitter === uploadBtn) {
+    if (event.submitter !== uploadBtn) {
+      return;
+    } else {
       let formdata = new FormData(event.target);
       let avatar = formdata.get('avatar')
       let result = {

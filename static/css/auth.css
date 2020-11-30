@@ -1,14 +1,14 @@
 .root {
-  display: block;
+  display: flex;
   height: 100%;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+
 }
 .auth {
   position: relative;
-  display: inline-block;
-  vertical-align: middle;
   text-align: center;
-  margin: 70px 0;
+  margin: 0px;
   width: 300px;
   max-width: 100%;
   padding: 40px;
@@ -36,4 +36,10 @@
 }
 .auth__links {
   margin-top: 15px;
+}
+.auth__input {
+  margin-bottom: 15px;
+}
+.auth__button {
+  margin-bottom: 15px;
 }
