@@ -1,11 +1,12 @@
 {
   "name": "mf.messenger.praktikum.yandex",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple messenger with js & css & html",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "node index.js --dev",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
