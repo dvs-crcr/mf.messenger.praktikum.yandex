@@ -1,13 +1,12 @@
 import { Auth } from './Auth.js';
 import { renderDOM } from './../../utils/renderDOM.js';
-
 import { Button } from './../Button/Button.js';
 
 // <button class="auth__button btn btn_primary btn_fullwidth" type="submit">{{enter}}</button>
 const btn = new Button({
-  className: 'btn',
+  className: ['auth__button', 'btn', 'btn_primary', 'btn_fullwidth'],
   text: 'Войти'
-});
+}, true);
 
 (<any>window)['btn'] = btn;
 
@@ -19,10 +18,10 @@ const btn = new Button({
   password: 'Пароль',
   create_account: 'создать аккаунт',
   'btn:enter': btn,
-  authSubmitFormHander: function(event: Event) {
+  authSubmitFormHander: (event: Event) => {
     event.preventDefault();
     console.log(event.target);
   }
-});
+}, true);
 
 renderDOM('.root', (<any>window)['auth'])

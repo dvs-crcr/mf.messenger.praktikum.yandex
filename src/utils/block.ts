@@ -54,7 +54,7 @@ export class Block implements Block {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     let node = document.createElement(tagName);
     this._setClassName(node);
-    return node;
+    return node
   }
 
   _setClassName(node: HTMLElement): void {
@@ -72,13 +72,13 @@ export class Block implements Block {
   }
 
   init(): void {
-    console.log('- INIT', this._meta.tagName)
+    console.log('- INIT')
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   _componentDidMount() {
-    console.log('-- MOUNT', this._meta.tagName)
+    console.log('-- MOUNT')
     const { props } = this._meta;
     this.componentDidMount(props);
     if (this._needRender) {
@@ -93,10 +93,10 @@ export class Block implements Block {
   }
 
   _componentDidUpdate(oldProps: object, newProps: object) {
-    console.log('--- didUpdate', this._meta.tagName)
+    console.log('--- didUpdate')
     const response = this.componentDidUpdate(oldProps, newProps);
     if (response) {
-      console.log('--- needUpdate', this._meta.tagName)
+      console.log('--- needUpdate')
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
   }
@@ -126,18 +126,24 @@ export class Block implements Block {
   }
 
   _render() {
-    console.log('---- render', this._meta.tagName)
+    console.log('---- render')
     const block = this.render();
     // Этот небезопасный метод для упрощения логики
     // Используйте шаблонизатор из npm или напишите свой безопасный
     // Нужно не в строку компилировать (или делать это правильно),
     // либо сразу в DOM-элементы возвращать из compile DOM-ноду
     this._element.innerHTML = block;
+    this._element.addEventListener('click', ()=> {
+      console.log('click')
+    })
   }
 
 	// Может переопределять пользователь, необязательно трогать
   render(): string {
     const tmpl = new Templator(this._template);
+    console.log(tmpl)
+    let doc = new DOMParser().parseFromString(this._template, 'text/html');
+    console.log(doc)
     return tmpl.compile(this.props);
   }
 

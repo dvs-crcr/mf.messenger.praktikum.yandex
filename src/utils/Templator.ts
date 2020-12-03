@@ -32,7 +32,13 @@ export class Templator {
         const tmplValue: string = key[1].trim();
         const data = this.get(ctx, tmplValue);
 
-        console.log(data)
+        if (typeof data === 'object' && typeof data._element !== 'undefined') {
+          tmpl = tmpl.replace(
+            new RegExp(key[0], 'gi'),
+            data._element.outerHTML
+          );
+          continue;
+        }
 
         if (typeof data === 'function') {
           (<any>window)[tmplValue] = data;
