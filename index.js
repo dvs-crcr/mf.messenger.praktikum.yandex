@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 
 const PORT = 3000;
 
@@ -10,7 +11,10 @@ _log = (...msg) => {
   }
 }
 
-app.use(express.static(__dirname + '/static/'));
+app.use('/src', express.static(path.join(__dirname, 'src')));
+app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(path.join(__dirname, 'dist')));
+
 app.listen(PORT, () => {
   _log(`APP running on port: ${PORT}`);
 });

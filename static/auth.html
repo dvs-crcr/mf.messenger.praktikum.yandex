@@ -4,29 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Авторизация</title>
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/auth.css">
-  <link rel="stylesheet" href="css/form.css">
-  <link rel="stylesheet" href="css/btn.css">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <div class="root">
-    <div class="auth">
-      <h1 class="auth__header">Авторизация</h1>
-      <p class="auth__error hidden">Неверный логин или пароль</p>
-      <div class="auth__content">
-        <form class="auth__form form" method="POST" onsubmit="Auth.submitForm(event);">
-          <input class="auth__input form__input" name="login" type="text" placeholder="Логин" />
-          <input class="auth__input form__input" name="password" type="password" placeholder="Пароль" />
-          <button class="auth__button btn btn_primary btn_fullwidth" type="submit">Войти</button>
-        </form>
-        <nav class="auth__links">
-          <a href="/registration.html">создать аккаунт</a>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <script src="js/auth.js"></script>
+  <div class="root"></div>
+  <script src="/components/Auth/Auth.js" type="module"></script>
 </body>
 </html>
