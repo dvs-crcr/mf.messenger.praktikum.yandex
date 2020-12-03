@@ -1,45 +1,47 @@
-.root {
-  display: flex;
+.modal {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  right: 0;
   height: 100%;
+  width: 100%;
+  z-index: 2;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-
 }
-.auth {
-  position: relative;
-  text-align: center;
-  margin: 0px;
+
+.modal_open {
+  display: flex;
+}
+
+.modal__wrapper {
   width: 300px;
   max-width: 100%;
   padding: 40px;
   background: #ffffff;
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
-.auth__header {
+
+.modal__header {
   text-align: center;
-  height: 45px;
-  line-height: 45px;
+  line-height: 40px;
   font-weight: 300;
   font-size: 30px;
   margin-bottom: 15px;
 }
-.auth__error {
+
+.modal__content {
+  margin-top: 15px;
+}
+
+.modal__error {
   margin: 20px -40px;
   line-height: 32px;
   background: #FFE5E5;
   color: #FF5A4C;
   font-size: 12px;
   font-weight: 600;
-}
-.auth__content {
-  margin-top: 15px;
-}
-.auth__links {
-  margin-top: 15px;
-}
-.auth__input {
-  margin-bottom: 15px;
-}
-.auth__button {
-  margin-bottom: 15px;
+  text-align: center;
 }

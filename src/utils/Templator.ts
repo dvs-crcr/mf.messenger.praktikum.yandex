@@ -1,58 +1,50 @@
-import { template } from "../components/Auth/Auth.html";
-
-export interface Templator {
-
+type TemplatorType = {
+  [index: string]: any
 }
 
-export class Templator implements Templator {
-  static TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
+export class Templator {
+  TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
 
   constructor(private _template: string) {}
   
-  get(obj, path, defaultValue) {
+  get(obj: {}, path: string, defaultValue: string = ''): any {
     const keys = path.split('.');
-
-    let result = obj;
+    let result: TemplatorType = obj;
     for (let key of keys) {
       result = result[key];
-
       if (result === undefined) {
         return defaultValue;        
       }
     }
+    return result ?? defaultValue;
+  } 
 
-    return result ?? defaultValue; // "??" — [оператор нуллевого слияния](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator) (не поддерживается старыми браузерами, для них нужен полифил)
-} 
-
-  compile(ctx) {
-    return _compileTemplate(this._template, ctx);
+  compile(ctx: {}) {
+    return this._compileTemplate(this._template, ctx);
   }
 
-_compileTemplate(template: string, ctx) {
-let tmpl = template;
-let key = null;
+  _compileTemplate(template: string, ctx: {}) {
+    let tmpl = template;
+    let key = null;
 
-// Важно делать exec именно через константу, иначе уйдете в бесконечный цикл
-while ((key = Templator.TEMPLATE_REGEXP.exec(tmpl))) {
-if (key[1]) {
-const tmplValue = key[1].trim();
-const data = window.get(ctx, tmplValue);
+    while ((key = this.TEMPLATE_REGEXP.exec(tmpl))) {
+      if (key[1]) {
+        const tmplValue: string = key[1].trim();
+        const data = this.get(ctx, tmplValue);
 
-if (typeof data === "function") {
-window[tmplValue] = data;
-tmpl = tmpl.replace(
-new RegExp(key[0], "gi"),
-`window.${key[1].trim()}()`
-);
-continue;
-}
-
-tmpl = tmpl.replace(new RegExp(key[0], "gi"), data);
-}
-}
-
-return tmpl;
-}
+        if (typeof data === 'function') {
+          (<any>window)[tmplValue] = data;
+          tmpl = tmpl.replace(
+            new RegExp(key[0], 'gi'),
+            `window.${key[1].trim()}(event)`
+          );
+          continue;
+        }
+        tmpl = tmpl.replace(new RegExp(key[0], 'gi'), data);
+      }
+    }
+    return tmpl;
+  }
 
 
 }
