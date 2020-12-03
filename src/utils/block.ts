@@ -1,15 +1,19 @@
-import { EventBus } from './event-bus.js'
+import { EventBus } from './eventBus.js'
 import { Templator } from './Templator.js'
+
+type PropsType = {
+  className?: string
+}
 
 export interface Block {
   _meta: {
     tagName: string,
-    props: object
+    props: PropsType
   };
-  template: string;
-  tmpl: Templator;
+  _needRender: boolean;
+  props: PropsType;
   _element: HTMLElement;
-  eventBus: () => EventBus;
+  _template: string;
 }
 export class Block implements Block {
   static EVENTS = {
@@ -18,17 +22,17 @@ export class Block implements Block {
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render'
   };
-  
-  props: object;
 
-  constructor(tagName: string, template: string, props: {}) {
+  private eventBus: () => EventBus;
+  
+  constructor(tagName: string, props: object = {}, _template = '',  _needRender: boolean = false) {
     const eventBus = new EventBus();
     this._meta = {
       tagName,
       props
     };
-    this.template = template;
-    this.tmpl = new Templator(template);
+    this._template = _template;
+    this._needRender = _needRender;
     this.props = this._makePropsProxy(props);
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
@@ -43,35 +47,56 @@ export class Block implements Block {
   }
 
   _createResources() {
-    const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
+    this._element = this._createDocumentElement(this._meta.tagName);
+  }
+
+  _createDocumentElement(tagName: string) {
+    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
+    let node = document.createElement(tagName);
+    this._setClassName(node);
+    return node;
+  }
+
+  _setClassName(node: HTMLElement): void {
+    const { props } = this._meta;
+    if (typeof props.className !== 'undefined') {
+      let className = '';
+      if (typeof props.className === 'string') {
+        className = props.className;
+      }
+      if (Array.isArray(props.className)) {
+        className = props.className.join(' ');
+      }
+      node.className = className;
+    }
   }
 
   init(): void {
-    console.log('- init')
+    console.log('- INIT', this._meta.tagName)
     this._createResources();
-    this.eventBus().emit(Block.EVENTS.FLOW_CDM)
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   _componentDidMount() {
-    console.log('-- mount')
+    console.log('-- MOUNT', this._meta.tagName)
     const { props } = this._meta;
     this.componentDidMount(props);
+    if (this._needRender) {
+      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    }
   }
 
 	componentDidMount(oldProps?: object) {
     if (typeof oldProps !== 'undefined') {
-      
+
     }
   }
 
   _componentDidUpdate(oldProps: object, newProps: object) {
-    console.log(oldProps, newProps)
-    console.log('--- didUpdate')
-
+    console.log('--- didUpdate', this._meta.tagName)
     const response = this.componentDidUpdate(oldProps, newProps);
     if (response) {
-      console.log('--- needUpdate')
+      console.log('--- needUpdate', this._meta.tagName)
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
   }
@@ -79,17 +104,20 @@ export class Block implements Block {
 	// Может переопределять пользователь, необязательно трогать
   componentDidUpdate(oldProps?: object, newProps?: object) {
     if (typeof oldProps !== 'undefined' && typeof newProps !== 'undefined') {
-
+      if (oldProps === newProps) {
+        return false
+      } else {
+        return true
+      }
+    } else {
+      return true;
     }
-    return true;
   }
   
   setProps = (nextProps: object) => {
     if (!nextProps) {
       return;
     }
-    console.log(this.props)
-    console.log(nextProps)
     Object.assign(this.props, nextProps);
   }
 
@@ -98,7 +126,7 @@ export class Block implements Block {
   }
 
   _render() {
-    console.log('---- render')
+    console.log('---- render', this._meta.tagName)
     const block = this.render();
     // Этот небезопасный метод для упрощения логики
     // Используйте шаблонизатор из npm или напишите свой безопасный
@@ -109,8 +137,8 @@ export class Block implements Block {
 
 	// Может переопределять пользователь, необязательно трогать
   render(): string {
-    return ''
-    // return this.tmpl.compile(this.props);
+    const tmpl = new Templator(this._template);
+    return tmpl.compile(this.props);
   }
 
   getContent() {
@@ -118,20 +146,14 @@ export class Block implements Block {
   }
 
   _makePropsProxy(props: {}) {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
-    const self = this;
     return new Proxy(props, {
-      set(target: { [index: string]: string }, prop: string, value) {
-        console.log(target.display)
+      set: (target: { [index: string]: string }, prop: string, value) => {
         if (prop.startsWith('_')) {
           throw new Error('нет доступа');
         } else {
+          let oldProp = target[prop]
           target[prop] = value;
-          if (prop === 'display') {
-            self.element.style[prop] = value
-          }
-          self.eventBus().emit(Block.EVENTS.FLOW_CDU, 1, 2);
+          this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProp, value);
           return true;
         }
       },
@@ -141,20 +163,11 @@ export class Block implements Block {
     });
   }
 
-  _createDocumentElement(tagName: string) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-    return document.createElement(tagName);
-  }
-
   show(): void {
-    this.setProps({
-      display: 'block'
-    })
+    this.getContent().style.display = 'block';
   }
 
   hide(): void {
-    this.setProps({
-      display: 'none'
-    })
+    this.getContent().style.display = 'none';
   }
 }

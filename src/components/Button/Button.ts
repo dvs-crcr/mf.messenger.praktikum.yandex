@@ -1,33 +1,10 @@
-// class Button extends Block {
-//   constructor(props) {
-// 		// Создаём враппер дом-элемент button
-//     super("button", props);
-//         this.setProps(props)
+import { Block } from './../../utils/Block.js'
+import { template } from './Button.html.js'
 
-//   }
+export class Button extends Block {
 
-//   render() {
-// 		// В проекте должен быть ваш собственный шаблонизатор
-//     return `<div>${this.props.text}</div>`;
-//   }
-// }
+  constructor(props: {}, _needRender: boolean = false) {
+    super('button', props, template, _needRender)
+  }
 
-// function render(query, block) {
-//   const root = document.querySelector(query);
-//   root.appendChild(block.getContent());
-//   return root;
-// }
-
-// const button = new Button({
-// 		text: 'Click me',
-// });
-
-// // app — это id дива в корне DOM
-// render(".app", button);
-
-// // Через секунду контент изменится сам, достаточно обновить пропсы
-// setTimeout(() => {
-//   button.setProps({
-//     text: 'Click me, please',
-//   });
-// }, 1000);
+}

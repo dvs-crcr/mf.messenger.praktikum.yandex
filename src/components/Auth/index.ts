@@ -1,26 +1,28 @@
-import { Auth } from './Auth.js'
-import { renderDOM } from './../../utils/renderDOM.js'
+import { Auth } from './Auth.js';
+import { renderDOM } from './../../utils/renderDOM.js';
+
+import { Button } from './../Button/Button.js';
+
+// <button class="auth__button btn btn_primary btn_fullwidth" type="submit">{{enter}}</button>
+const btn = new Button({
+  className: 'btn',
+  text: 'Войти'
+});
+
+(<any>window)['btn'] = btn;
 
 (<any>window)['auth'] = new Auth({
-  locale: {
-    ru: {
-      header: 'Авотризация',
-      errors: {
-        wrong_credentials: 'Неверный логин или пароль'
-      },
-      login: 'Логин',
-      password: 'Пароль',
-      create_account: 'создать аккаунт',
-      enter: 'Войти'
-    }
-  },
-  clickHandler: function() {
-
-  },
+  className: 'auth',
+  header: 'Авотризация',
+  wrong_credentials: 'Неверный логин или пароль',
+  login: 'Логин',
+  password: 'Пароль',
+  create_account: 'создать аккаунт',
+  'btn:enter': btn,
   authSubmitFormHander: function(event: Event) {
     event.preventDefault();
     console.log(event.target);
   }
-})
+});
 
 renderDOM('.root', (<any>window)['auth'])

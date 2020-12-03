@@ -32,6 +32,8 @@ export class Templator {
         const tmplValue: string = key[1].trim();
         const data = this.get(ctx, tmplValue);
 
+        console.log(data)
+
         if (typeof data === 'function') {
           (<any>window)[tmplValue] = data;
           tmpl = tmpl.replace(
