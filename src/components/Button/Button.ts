@@ -1,10 +1,13 @@
-import { Block } from './../../utils/Block.js'
-import { template } from './Button.html.js'
+import { Block } from './../../utils/Block.js';
+import {default as buttonTemplate} from './Button.html.js';
 
 export class Button extends Block {
 
-  constructor(props: {}, _needRender: boolean = false) {
-    super('button', props, template, _needRender)
+  constructor(props: {}) {
+    Object.assign(props, {
+      _template: buttonTemplate
+    })
+    super('button', props);
   }
 
 }

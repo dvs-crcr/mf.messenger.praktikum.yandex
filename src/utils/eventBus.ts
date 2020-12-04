@@ -7,7 +7,7 @@ export interface EventBus {
 export class EventBus {
 
   constructor() {
-    this.listeners = {}
+    this.listeners = {};
   }
 
   on(event: string, callback: Function) {

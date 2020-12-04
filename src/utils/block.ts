@@ -1,20 +1,22 @@
-import { EventBus } from './eventBus.js'
+import { EventBus } from './EventBus.js'
 import { Templator } from './Templator.js'
 
 type PropsType = {
-  className?: string
+  _template?: string,
+  attr?: {
+    [key: string]: string
+  }
 }
 
 export interface Block {
   _meta: {
     tagName: string,
-    props: PropsType
+    props: PropsType,
+    
   };
-  _needRender: boolean;
   props: PropsType;
-  _element: HTMLElement;
-  _template: string;
 }
+
 export class Block implements Block {
   static EVENTS = {
     INIT: 'init',
@@ -24,15 +26,14 @@ export class Block implements Block {
   };
 
   private eventBus: () => EventBus;
-  
-  constructor(tagName: string, props: object = {}, _template = '',  _needRender: boolean = false) {
+  _element: HTMLElement | undefined = undefined;
+
+  constructor(tagName: string = 'div', props: object = {}) {
     const eventBus = new EventBus();
     this._meta = {
       tagName,
       props
     };
-    this._template = _template;
-    this._needRender = _needRender;
     this.props = this._makePropsProxy(props);
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
@@ -53,37 +54,18 @@ export class Block implements Block {
   _createDocumentElement(tagName: string) {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     let node = document.createElement(tagName);
-    this._setClassName(node);
-    return node
-  }
-
-  _setClassName(node: HTMLElement): void {
-    const { props } = this._meta;
-    if (typeof props.className !== 'undefined') {
-      let className = '';
-      if (typeof props.className === 'string') {
-        className = props.className;
-      }
-      if (Array.isArray(props.className)) {
-        className = props.className.join(' ');
-      }
-      node.className = className;
-    }
+    return node;
   }
 
   init(): void {
-    console.log('- INIT')
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   _componentDidMount() {
-    console.log('-- MOUNT')
     const { props } = this._meta;
     this.componentDidMount(props);
-    if (this._needRender) {
-      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    }
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
 	componentDidMount(oldProps?: object) {
@@ -93,17 +75,14 @@ export class Block implements Block {
   }
 
   _componentDidUpdate(oldProps: object, newProps: object) {
-    console.log('--- didUpdate')
-    const response = this.componentDidUpdate(oldProps, newProps);
-    if (response) {
-      console.log('--- needUpdate')
+    if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
   }
 
-	// Может переопределять пользователь, необязательно трогать
   componentDidUpdate(oldProps?: object, newProps?: object) {
     if (typeof oldProps !== 'undefined' && typeof newProps !== 'undefined') {
+      // если пропсы являются объектами, то сравнение х****ое
       if (oldProps === newProps) {
         return false
       } else {
@@ -125,26 +104,33 @@ export class Block implements Block {
     return this._element;
   }
 
-  _render() {
-    console.log('---- render')
-    const block = this.render();
-    // Этот небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно не в строку компилировать (или делать это правильно),
-    // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-    this._element.innerHTML = block;
-    this._element.addEventListener('click', ()=> {
-      console.log('click')
-    })
+  _setAttributes() {
+    if (typeof this.props.attr !== 'undefined' && typeof this._element !== 'undefined') {
+      for (let i in this.props.attr) {
+        this._element.setAttribute(i, this.props.attr[i]);
+      }
+    }
+    return;
   }
 
-	// Может переопределять пользователь, необязательно трогать
-  render(): string {
-    const tmpl = new Templator(this._template);
-    console.log(tmpl)
-    let doc = new DOMParser().parseFromString(this._template, 'text/html');
-    console.log(doc)
-    return tmpl.compile(this.props);
+  _render() {
+    const block = this.render();
+    console.log(this._element)
+    this._setAttributes();
+    if (block !== undefined && typeof this._element !== 'undefined') {
+      this._element.childNodes.forEach((item) => {
+        this._element?.removeChild(item);
+      })
+      this._element.appendChild(block);
+    }
+  }
+
+  render() {
+    if (typeof this.props._template !== 'undefined') {
+      const tmpl = new Templator(this.props._template);
+      return tmpl.compile(this.props);
+    }
+    return undefined
   }
 
   getContent() {
@@ -157,7 +143,7 @@ export class Block implements Block {
         if (prop.startsWith('_')) {
           throw new Error('нет доступа');
         } else {
-          let oldProp = target[prop]
+          let oldProp = target[prop];
           target[prop] = value;
           this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProp, value);
           return true;
@@ -169,11 +155,6 @@ export class Block implements Block {
     });
   }
 
-  show(): void {
-    this.getContent().style.display = 'block';
-  }
 
-  hide(): void {
-    this.getContent().style.display = 'none';
-  }
+
 }

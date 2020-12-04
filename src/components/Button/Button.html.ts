@@ -1,1 +1,2 @@
-export const template = `{{text}}`
+export default 
+`{{text}}`
