@@ -4,7 +4,7 @@
     "module": "ES2015",
     "lib": ["DOM", "ES2016"],
     "sourceMap": true,
-    "outDir": "./dist/",
+    "outDir": "./static/dist/",
     "rootDir": "./src/",
     "strict": true,
     "noImplicitAny": true,

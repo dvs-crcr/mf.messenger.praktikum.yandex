@@ -1,23 +1,20 @@
 import { EventBus } from './EventBus.js'
 import { Templator } from './Templator.js'
 
-type PropsType = {
-  _template?: string,
+export type BlockPropsMethods = {
+  [key: string]: EventListenerOrEventListenerObject | Function | undefined
+}
+
+type BlockPropsType = {
+  [key: string]: any,
   attr?: {
-    [key: string]: string
-  }
+    [key: string]: string | undefined
+  },
+  methods?: BlockPropsMethods,
+  content?: Block[] | string
 }
 
-export interface Block {
-  _meta: {
-    tagName: string,
-    props: PropsType,
-    
-  };
-  props: PropsType;
-}
-
-export class Block implements Block {
+export class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -27,13 +24,17 @@ export class Block implements Block {
 
   private eventBus: () => EventBus;
   _element: HTMLElement | undefined = undefined;
+  _meta: {tagName: string, props: BlockPropsType};
+  _template: string | undefined;
+  props: BlockPropsType;
 
-  constructor(tagName: string = 'div', props: object = {}) {
+  constructor(tagName: string = 'div', props: BlockPropsType = {}, template?: string) {
     const eventBus = new EventBus();
     this._meta = {
       tagName,
       props
     };
+    this._template = template;
     this.props = this._makePropsProxy(props);
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
@@ -52,8 +53,22 @@ export class Block implements Block {
   }
 
   _createDocumentElement(tagName: string) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
+    const { props } = this._meta;
     let node = document.createElement(tagName);
+    if (typeof props.content !== 'undefined') {
+      let chunkFragment = document.createDocumentFragment();
+      if (typeof props.content === 'string') {
+        chunkFragment.textContent = props.content;
+      } else {
+        props.content.forEach((item) => {
+          let itemContent = item.getContent()
+          if (typeof itemContent !== 'undefined') {
+            chunkFragment.appendChild(itemContent);
+          }
+        })
+      }
+      node.appendChild(chunkFragment);
+    }
     return node;
   }
 
@@ -97,7 +112,9 @@ export class Block implements Block {
     if (!nextProps) {
       return;
     }
+    let oldprops = this.props;
     Object.assign(this.props, nextProps);
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldprops, nextProps);
   }
 
   get element() {
@@ -107,30 +124,50 @@ export class Block implements Block {
   _setAttributes() {
     if (typeof this.props.attr !== 'undefined' && typeof this._element !== 'undefined') {
       for (let i in this.props.attr) {
-        this._element.setAttribute(i, this.props.attr[i]);
+        let value = this.props.attr[i];
+        if (typeof value !== 'undefined') {
+          if (i === 'className') {
+            this._element.className = value;
+          } else {
+            this._element.setAttribute(i, value);
+          }
+          
+        }
+      }
+    }
+    return;
+  }
+
+  _addEvents() {
+    if (typeof this.props.methods !== 'undefined' && typeof this._element !== 'undefined') {
+      for (let i in this.props.methods) {
+        let listener = this.props.methods[i];
+        if (typeof listener !== 'undefined') {
+          this._element.addEventListener(i, (listener as EventListenerOrEventListenerObject));
+        }
       }
     }
     return;
   }
 
   _render() {
-    const block = this.render();
-    console.log(this._element)
+    const blockRender = this.render(this._template, this.props);
+    let props = this.props;
+    if (typeof blockRender.props !== 'undefined') {
+      props = blockRender.props;
+    }
+    const block = new Templator(blockRender.template).compile(props);
     this._setAttributes();
+    this._addEvents();
     if (block !== undefined && typeof this._element !== 'undefined') {
-      this._element.childNodes.forEach((item) => {
-        this._element?.removeChild(item);
-      })
+
+      this._element.textContent = '';
       this._element.appendChild(block);
     }
   }
 
-  render() {
-    if (typeof this.props._template !== 'undefined') {
-      const tmpl = new Templator(this.props._template);
-      return tmpl.compile(this.props);
-    }
-    return undefined
+  render(template: string | undefined, props: BlockPropsType | undefined) {
+    return { template, props }
   }
 
   getContent() {
@@ -143,9 +180,7 @@ export class Block implements Block {
         if (prop.startsWith('_')) {
           throw new Error('нет доступа');
         } else {
-          let oldProp = target[prop];
           target[prop] = value;
-          this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProp, value);
           return true;
         }
       },

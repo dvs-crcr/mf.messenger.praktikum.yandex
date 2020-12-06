@@ -7,15 +7,6 @@ dropdowns.forEach((item) => {
   }, false);
 });
 
-const modals = document.querySelectorAll('.modal');
-modals.forEach((modal) => {
-  modal.addEventListener('click', (event) => {
-    if (event.target === event.currentTarget) {
-      modal.classList.remove('modal_open');
-    }
-  }, false);
-});
-
 let Chat = {
 
   submitForm(event) {

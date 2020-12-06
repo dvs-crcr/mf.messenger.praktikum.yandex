@@ -7,7 +7,7 @@ export class Templator {
   TAG_TEMPLATE_REGEXP = /\>[\s]*(\{\{(.*?)\}\})[\s]*\</gi;
   PROP_TEMPLATE_REGEXP = /\"[\s]*(\{\{(.*?)\}\})[\s]*\"/gi;
 
-  constructor(private _template: string) {}
+  constructor(private _template: string | undefined) {}
   
   get(obj: {}, path: string, defaultValue: string = ''): any {
     const keys = path.split('.');
@@ -22,6 +22,9 @@ export class Templator {
   }
 
   compile(ctx: {}) {
+    if (typeof this._template === 'undefined') {
+      return undefined
+    }
     let html = this._parseTemplate(this._template, ctx);
     let block = this._htmlToElement(html);
     let fragment = this._prepareFragment(block);
@@ -30,6 +33,15 @@ export class Templator {
       let selector = tpl.getAttribute('selector');
       if (selector !== null) {
         const data = this.get(ctx, selector);
+        if (Array.isArray(data)) {
+          let chunkFragment = document.createDocumentFragment();
+          data.forEach((item) => {
+            if (typeof item === 'object' && typeof item._element !== 'undefined') {
+              chunkFragment.appendChild(item.getContent())
+            }
+          })
+          tpl.replaceWith(chunkFragment);
+        }
         if (typeof data === 'string') {
           let textnode = document.createTextNode(data);
           tpl.replaceWith(textnode);

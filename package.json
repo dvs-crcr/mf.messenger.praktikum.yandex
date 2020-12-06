@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node index.js --dev",
-    "sass": "node-sass src -o dist",
+    "sass": "node-sass src -o static/dist",
     "build": "tsc && npm run sass",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

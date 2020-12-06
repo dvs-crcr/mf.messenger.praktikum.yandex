@@ -15,6 +15,9 @@
 </head>
 <body>
   <div class="root">
+
+
+
     <div class="chat">
       <aside class="chat__left">
         <a class="chat__profile-link" href="/profile.html">Профиль<i class="fa fa-chevron-right"></i></a>
@@ -162,6 +165,7 @@
         </header>
         <ul class="chat__body">
           <li class="chat__body-date">19 ноября</li>
+
           <li class="chat__body-message">
             <div class="chat__body-message-text">
               Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.
@@ -185,6 +189,8 @@
           </li>
 
         </ul>
+
+        
         <form class="chat__message" method="POST" onsubmit="Chat.submitForm(event);">
           <div class="dropdown top_left">
             <button type="button" class="dropdown__toggle chat__message-attach"><i class="fa fa-paperclip"></i></button>
@@ -199,8 +205,14 @@
             <i class="fa fa-arrow-right"></i>
           </button>
         </form>
+
+
       </main>
     </div>
+
+
+
+    
   </div>
 
   <div class="modal" id="add_user_modal">
@@ -253,5 +265,8 @@
   </div>
 
   <script src="js/chat.js"></script>
+
+
+
 </body>
 </html>
