@@ -1,17 +1,32 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 import { Block } from './../../../utils/Block.js';
 import { chatMessageDateTemplate, chatMessageImageTemplate, chatMessageTextTemplate } from './Chat__message.html.js';
 import { Custom } from './../../../blocks/Custom/Custom.js';
-export class Chat__message extends Block {
-    constructor(props = {}) {
-        super('li', props);
+var Chat__message = /** @class */ (function (_super) {
+    __extends(Chat__message, _super);
+    function Chat__message(props) {
+        if (props === void 0) { props = {}; }
+        return _super.call(this, 'li', props) || this;
     }
-    render(template, props) {
-        const { className, methods, isSelf, type, msgContent, time, status } = props;
-        const classes = [];
+    Chat__message.prototype.render = function (template, props) {
+        var className = props.className, methods = props.methods, isSelf = props.isSelf, type = props.type, msgContent = props.msgContent, time = props.time, status = props.status;
+        var classes = [];
         if (typeof className !== 'undefined') {
             classes.push(className);
         }
-        let msgStatus;
+        var msgStatus;
         if (typeof type !== 'undefined') {
             if (type === 'date') {
                 template = chatMessageDateTemplate;
@@ -43,9 +58,11 @@ export class Chat__message extends Block {
             attr: {
                 className: classes.join(' ')
             },
-            methods, isSelf, type, msgContent, time, status, msgStatus
+            methods: methods, isSelf: isSelf, type: type, msgContent: msgContent, time: time, status: status, msgStatus: msgStatus
         });
-        return { template, props };
-    }
-}
+        return { template: template, props: props };
+    };
+    return Chat__message;
+}(Block));
+export { Chat__message };
 //# sourceMappingURL=Chat__message.js.map

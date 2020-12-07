@@ -1,75 +1,78 @@
 import { EventBus } from './Event_bus.js';
 import { Templator } from './UglyTemplator.js';
-export class Block {
-    constructor(tagName = 'div', props = {}, template) {
+var Block = /** @class */ (function () {
+    function Block(tagName, props, template) {
+        var _this = this;
+        if (tagName === void 0) { tagName = 'div'; }
+        if (props === void 0) { props = {}; }
         this._element = undefined;
-        this.setProps = (nextProps) => {
+        this.setProps = function (nextProps) {
             if (!nextProps) {
                 return;
             }
-            let oldprops = this.props;
-            Object.assign(this.props, nextProps);
-            this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldprops, nextProps);
+            var oldprops = _this.props;
+            Object.assign(_this.props, nextProps);
+            _this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldprops, nextProps);
         };
-        const eventBus = new EventBus();
+        var eventBus = new EventBus();
         this._meta = {
-            tagName,
-            props
+            tagName: tagName,
+            props: props
         };
         this._template = template;
         this.props = this._makePropsProxy(props);
-        this.eventBus = () => eventBus;
+        this.eventBus = function () { return eventBus; };
         this._registerEvents(eventBus);
         eventBus.emit(Block.EVENTS.INIT);
     }
-    _registerEvents(eventBus) {
+    Block.prototype._registerEvents = function (eventBus) {
         eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
-    }
-    _createResources() {
+    };
+    Block.prototype._createResources = function () {
         this._element = this._createDocumentElement(this._meta.tagName);
-    }
-    _createDocumentElement(tagName) {
-        const { props } = this._meta;
-        let node = document.createElement(tagName);
+    };
+    Block.prototype._createDocumentElement = function (tagName) {
+        var props = this._meta.props;
+        var node = document.createElement(tagName);
         if (typeof props.content !== 'undefined') {
-            let chunkFragment = document.createDocumentFragment();
+            var chunkFragment_1 = document.createDocumentFragment();
             if (typeof props.content === 'string') {
-                chunkFragment.textContent = props.content;
+                chunkFragment_1.textContent = props.content;
             }
             else {
-                props.content.forEach((item) => {
-                    let itemContent = item.getContent();
+                props.content.forEach(function (item) {
+                    var itemContent = item.getContent();
                     if (typeof itemContent !== 'undefined') {
-                        chunkFragment.appendChild(itemContent);
+                        chunkFragment_1.appendChild(itemContent);
                     }
                 });
             }
-            node.appendChild(chunkFragment);
+            node.appendChild(chunkFragment_1);
         }
         return node;
-    }
-    init() {
+    };
+    Block.prototype.init = function () {
         this._createResources();
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-    }
-    _componentDidMount() {
-        const { props } = this._meta;
+    };
+    Block.prototype._componentDidMount = function () {
+        var props = this._meta.props;
         this.componentDidMount(props);
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    }
-    componentDidMount(oldProps) {
+    };
+    Block.prototype.componentDidMount = function (oldProps) {
         if (typeof oldProps !== 'undefined') {
         }
-    }
-    _componentDidUpdate(oldProps, newProps) {
+    };
+    Block.prototype._componentDidUpdate = function (oldProps, newProps) {
         if (this.componentDidUpdate(oldProps, newProps)) {
             this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
         }
-    }
-    componentDidUpdate(oldProps, newProps) {
+    };
+    Block.prototype.componentDidUpdate = function (oldProps, newProps) {
         if (typeof oldProps !== 'undefined' && typeof newProps !== 'undefined') {
             // если пропсы являются объектами, то сравнение х****ое
             if (oldProps === newProps) {
@@ -82,14 +85,18 @@ export class Block {
         else {
             return true;
         }
-    }
-    get element() {
-        return this._element;
-    }
-    _setAttributes() {
+    };
+    Object.defineProperty(Block.prototype, "element", {
+        get: function () {
+            return this._element;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Block.prototype._setAttributes = function () {
         if (typeof this.props.attr !== 'undefined' && typeof this._element !== 'undefined') {
-            for (let i in this.props.attr) {
-                let value = this.props.attr[i];
+            for (var i in this.props.attr) {
+                var value = this.props.attr[i];
                 if (typeof value !== 'undefined') {
                     if (i === 'className') {
                         this._element.className = value;
@@ -101,41 +108,41 @@ export class Block {
             }
         }
         return;
-    }
-    _addEvents() {
+    };
+    Block.prototype._addEvents = function () {
         if (typeof this.props.methods !== 'undefined' && typeof this._element !== 'undefined') {
-            for (let i in this.props.methods) {
-                let listener = this.props.methods[i];
+            for (var i in this.props.methods) {
+                var listener = this.props.methods[i];
                 if (typeof listener !== 'undefined') {
                     this._element.addEventListener(i, listener);
                 }
             }
         }
         return;
-    }
-    _render() {
-        const blockRender = this.render(this._template, this.props);
-        let props = this.props;
+    };
+    Block.prototype._render = function () {
+        var blockRender = this.render(this._template, this.props);
+        var props = this.props;
         if (typeof blockRender.props !== 'undefined') {
             props = blockRender.props;
         }
-        const block = new Templator(blockRender.template).compile(props);
+        var block = new Templator(blockRender.template).compile(props);
         this._setAttributes();
         this._addEvents();
         if (block !== undefined && typeof this._element !== 'undefined') {
             this._element.textContent = '';
             this._element.appendChild(block);
         }
-    }
-    render(template, props) {
-        return { template, props };
-    }
-    getContent() {
+    };
+    Block.prototype.render = function (template, props) {
+        return { template: template, props: props };
+    };
+    Block.prototype.getContent = function () {
         return this.element;
-    }
-    _makePropsProxy(props) {
+    };
+    Block.prototype._makePropsProxy = function (props) {
         return new Proxy(props, {
-            set: (target, prop, value) => {
+            set: function (target, prop, value) {
                 if (prop.startsWith('_')) {
                     throw new Error('нет доступа');
                 }
@@ -144,24 +151,26 @@ export class Block {
                     return true;
                 }
             },
-            deleteProperty() {
+            deleteProperty: function () {
                 throw new Error('нет доступа');
             }
         });
-    }
-    show() {
+    };
+    Block.prototype.show = function () {
         var _a;
         (_a = this._element) === null || _a === void 0 ? void 0 : _a.classList.remove('hidden');
-    }
-    hide() {
+    };
+    Block.prototype.hide = function () {
         var _a;
         (_a = this._element) === null || _a === void 0 ? void 0 : _a.classList.add('hidden');
-    }
-}
-Block.EVENTS = {
-    INIT: 'init',
-    FLOW_CDM: 'flow:component-did-mount',
-    FLOW_CDU: 'flow:component-did-update',
-    FLOW_RENDER: 'flow:render'
-};
+    };
+    Block.EVENTS = {
+        INIT: 'init',
+        FLOW_CDM: 'flow:component-did-mount',
+        FLOW_CDU: 'flow:component-did-update',
+        FLOW_RENDER: 'flow:render'
+    };
+    return Block;
+}());
+export { Block };
 //# sourceMappingURL=Block.js.map

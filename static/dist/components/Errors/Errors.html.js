@@ -1,6 +1,2 @@
-export default `
-<h1 class="error-page__title">{{header}}</h1>
-<p class="error-page__description">{{p1}}<br>{{p2}}</p>
-<a href="/" onclick="{{errorsGoBackHander}}">← вернуться назад</a>
-`;
+export default "\n<h1 class=\"error-page__title\">{{header}}</h1>\n<p class=\"error-page__description\">{{p1}}<br>{{p2}}</p>\n<a href=\"/\" onclick=\"{{errorsGoBackHander}}\">\u2190 \u0432\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u043D\u0430\u0437\u0430\u0434</a>\n";
 //# sourceMappingURL=Errors.html.js.map

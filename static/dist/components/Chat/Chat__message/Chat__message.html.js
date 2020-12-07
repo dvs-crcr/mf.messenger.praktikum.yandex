@@ -1,14 +1,4 @@
-export const chatMessageDateTemplate = `
-{{msgContent}}
-`;
-export const chatMessageTextTemplate = `
-<div class="chat__body-message-text">{{msgContent}}</div>
-{{msgStatus}}
-<div class="chat__body-message-time">{{time}}</div>
-`;
-export const chatMessageImageTemplate = `
-<img src="{{msgContent}}">
-{{msgStatus}}
-<div class="chat__body-message-time">{{time}}</div>
-`;
+export var chatMessageDateTemplate = "\n{{msgContent}}\n";
+export var chatMessageTextTemplate = "\n<div class=\"chat__body-message-text\">{{msgContent}}</div>\n{{msgStatus}}\n<div class=\"chat__body-message-time\">{{time}}</div>\n";
+export var chatMessageImageTemplate = "\n<img src=\"{{msgContent}}\">\n{{msgStatus}}\n<div class=\"chat__body-message-time\">{{time}}</div>\n";
 //# sourceMappingURL=Chat__message.html.js.map

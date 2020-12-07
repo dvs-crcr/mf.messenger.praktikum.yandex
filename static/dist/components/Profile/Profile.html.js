@@ -1,14 +1,2 @@
-export default `
-<aside class="profile__goback" onclick="{{goBackProfileHandler}}">
-  {{goBackButton}}
-</aside>
-<div class="profile__content">
-  <div class="profile__avatar">
-    <img class="profile__avatar-image" src="{{avatar}}">
-    <div class="profile__avatar-hover" onclick="{{uploadAvatarProfileHandler}}">Новый аватар</div>
-  </div>
-  <p class="profile__name">{{title}}</p>
-  {{profileContent}}
-</div>
-`;
+export default "\n<aside class=\"profile__goback\" onclick=\"{{goBackProfileHandler}}\">\n  {{goBackButton}}\n</aside>\n<div class=\"profile__content\">\n  <div class=\"profile__avatar\">\n    <img class=\"profile__avatar-image\" src=\"{{avatar}}\">\n    <div class=\"profile__avatar-hover\" onclick=\"{{uploadAvatarProfileHandler}}\">\u041D\u043E\u0432\u044B\u0439 \u0430\u0432\u0430\u0442\u0430\u0440</div>\n  </div>\n  <p class=\"profile__name\">{{title}}</p>\n  {{profileContent}}\n</div>\n";
 //# sourceMappingURL=Profile.html.js.map

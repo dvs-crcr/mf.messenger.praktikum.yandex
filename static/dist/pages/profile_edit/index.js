@@ -15,11 +15,11 @@ function goBackProfileHandler() {
 ;
 function submitProfileHandler(event) {
     event.preventDefault();
-    const formEl = event.target;
-    inputs.forEach(items => items._validateBlock());
+    var formEl = event.target;
+    inputs.forEach(function (items) { return items._validateBlock(); });
     if (formEl.checkValidity()) {
-        let formdata = new FormData(formEl);
-        let result = {
+        var formdata = new FormData(formEl);
+        var result = {
             email: formdata.get('email'),
             login: formdata.get('login'),
             first_name: formdata.get('first_name'),
@@ -30,15 +30,16 @@ function submitProfileHandler(event) {
         console.log(result);
     }
 }
-const goBackButton = new Button({
+var goBackButton = new Button({
     className: 'btn-round btn-round_primary',
     type: 'button',
     _template: '<i class="fa fa-arrow-left"></i>'
 });
-const className = 'profile__input';
-const inputs = [
+var className = 'profile__input';
+var inputs = [
     {
-        className, name: 'email', type: 'email',
+        className: className,
+        name: 'email', type: 'email',
         placeholder: 'johndoe@mail.rus',
         value: 'johndoe@mail.rus',
         validate: [
@@ -54,7 +55,8 @@ const inputs = [
         label: 'Электронная почта'
     },
     {
-        className, name: 'login', type: 'text',
+        className: className,
+        name: 'login', type: 'text',
         placeholder: 'johndoe',
         value: 'johndoe',
         validate: [
@@ -70,7 +72,8 @@ const inputs = [
         label: 'Логин'
     },
     {
-        className, name: 'first_name', type: 'text',
+        className: className,
+        name: 'first_name', type: 'text',
         placeholder: 'Иван',
         value: 'Иван',
         validate: [
@@ -86,7 +89,8 @@ const inputs = [
         label: 'Имя'
     },
     {
-        className, name: 'second_name', type: 'text',
+        className: className,
+        name: 'second_name', type: 'text',
         placeholder: 'Петров',
         value: 'Petrov',
         validate: [
@@ -102,7 +106,8 @@ const inputs = [
         label: 'Фамилия'
     },
     {
-        className, name: 'display_name', type: 'text',
+        className: className,
+        name: 'display_name', type: 'text',
         placeholder: 'John Ivanov',
         value: 'John Ivanov',
         validate: [
@@ -114,13 +119,14 @@ const inputs = [
         label: 'Имя в чате',
         methods: {
             keyup: function (event) {
-                const title = event.target.value;
-                pageTitle.setProps({ title });
+                var title = event.target.value;
+                pageTitle.setProps({ title: title });
             }
         }
     },
     {
-        className, name: 'phone', type: 'text',
+        className: className,
+        name: 'phone', type: 'text',
         placeholder: '81234567890',
         value: '81234567890',
         validate: [
@@ -135,25 +141,22 @@ const inputs = [
         ],
         label: 'Телефон'
     }
-].map((props) => new Input(props));
-const profileListBlocks = inputs.map(inputItem => {
+].map(function (props) { return new Input(props); });
+var profileListBlocks = inputs.map(function (inputItem) {
     return new Custom('li', {
         attr: { className: 'profile__list' },
         label: inputItem.props.label,
         input: [inputItem],
-        _template: `
-      <span class="profile__settings-label">{{label}}</span>
-      <span class="profile__settings-value">{{input}}</span>
-    `,
+        _template: "\n      <span class=\"profile__settings-label\">{{label}}</span>\n      <span class=\"profile__settings-value\">{{input}}</span>\n    ",
         content: [inputItem]
     });
 });
-const saveButton = new Button({
+var saveButton = new Button({
     className: 'btn btn_primary profile__btn-save',
     type: 'submit',
     content: 'Сохранить'
 });
-const formContent = [
+var formContent = [
     new Custom('ul', {
         attr: { className: 'profile__list' },
         content: profileListBlocks
@@ -163,22 +166,22 @@ const formContent = [
         content: [saveButton]
     }),
 ];
-const form = new Form({
+var form = new Form({
     attr: { className: 'profile__form form', method: 'POST' },
     methods: { submit: submitProfileHandler },
     content: formContent
 });
-const pageTitle = new Custom('span', {
-    _template: `{{title}}`,
+var pageTitle = new Custom('span', {
+    _template: "{{title}}",
     title: 'John Ivanov'
 });
-const profilePage = new Profile({
+var profilePage = new Profile({
     attr: {
         className: 'profile'
     },
-    goBackProfileHandler,
-    uploadAvatarProfileHandler,
-    goBackButton,
+    goBackProfileHandler: goBackProfileHandler,
+    uploadAvatarProfileHandler: uploadAvatarProfileHandler,
+    goBackButton: goBackButton,
     avatar: '/assets/img/avatar_profile_128x128.png',
     title: [pageTitle],
     profileContent: form

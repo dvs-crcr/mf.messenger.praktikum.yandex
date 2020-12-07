@@ -13,11 +13,11 @@ export default `
           <path d="M3 7.5C3 8.32843 2.32843 9 1.5 9C0.671573 9 0 8.32843 0 7.5C0 6.67157 0.671573 6 1.5 6C2.32843 6 3 6.67157 3 7.5Z" />
           </svg>
       </button>
-      <nav class="dropdown__list">
-        <li><button onclick="Chat.showModal('add_user_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_add-user"></i>Добавить пользователя</button></li>
-        <li><button onclick="Chat.showModal('delete_user_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_delete-user"></i>Удалить пользователя</button></li>
-        <li><button onclick="Chat.showModal('delete_chat_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_delete-chat"></i>Удалить чат</button></li>
-      </nav>
+      <div class="dropdown__list">
+        <button onclick="Chat.showModal('add_user_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_add-user"></i>Добавить пользователя</button>
+        <button onclick="Chat.showModal('delete_user_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_delete-user"></i>Удалить пользователя</button>
+        <button onclick="Chat.showModal('delete_chat_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_delete-chat"></i>Удалить чат</button>
+      </div>
     </div>
   </div>
 </header>
@@ -25,14 +25,14 @@ export default `
 <form class="chat__message" method="POST" onsubmit="Chat.submitForm(event);">
   <div class="dropdown top_left">
     <button type="button" class="dropdown__toggle chat__message-attach"><i class="fa fa-paperclip"></i></button>
-    <nav class="dropdown__list">
-      <li><button class="dropdown__list-button"><i class="icon-btn icon-btn_media"></i>Фото и Видео</button></li>
-      <li><button class="dropdown__list-button"><i class="icon-btn icon-btn_file"></i>Файл</button></li>
-      <li><button class="dropdown__list-button"><i class="icon-btn icon-btn_location"></i>Локация</button></li>
-    </nav>
+    <div class="dropdown__list">
+      <button class="dropdown__list-button"><i class="icon-btn icon-btn_media"></i>Фото и Видео</button>
+      <button class="dropdown__list-button"><i class="icon-btn icon-btn_file"></i>Файл</button>
+      <button class="dropdown__list-button"><i class="icon-btn icon-btn_location"></i>Локация</button>
+    </div>
   </div>
   <input class="chat__message-text" name="message" type="text" placeholder="Сообщение">
-  <button type="submit" class="btn-round btn-round_primary chat__message-send">
+  <button type="button" class="btn-round btn-round_primary chat__message-send">
     <i class="fa fa-arrow-right"></i>
   </button>
 </form>

@@ -12,19 +12,19 @@ function goBackProfileHandler() {
     return false;
 }
 ;
-const profileContent = new Custom('div', {
+var profileContent = new Custom('div', {
     _template: profileInfoTemplate
 });
-const profilePage = new Profile({
+var profilePage = new Profile({
     attr: { className: 'profile' },
-    goBackProfileHandler,
-    uploadAvatarProfileHandler,
+    goBackProfileHandler: goBackProfileHandler,
+    uploadAvatarProfileHandler: uploadAvatarProfileHandler,
     goBackButton: new Button({
         className: 'btn-round btn-round_primary', type: 'button', _template: '<i class="fa fa-arrow-left"></i>'
     }),
     avatar: '/assets/img/avatar_profile_128x128.png',
     title: 'John Ivanov',
-    profileContent
+    profileContent: profileContent
 });
 renderDOM('.root', profilePage, 'Профиль');
 //# sourceMappingURL=index.js.map

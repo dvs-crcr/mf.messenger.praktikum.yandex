@@ -1,10 +1,7 @@
 import { renderDOM } from './../../utils/renderDOM.js';
 import { Custom } from './../../blocks/Custom/Custom.js';
-const linksTemplate = `
-<a target="{{target}}" href="{{href}}">{{title}}</a>
-<span>{{descr}}</span>
-`;
-const links = [
+var linksTemplate = "\n<a target=\"{{target}}\" href=\"{{href}}\">{{title}}</a>\n<span>{{descr}}</span>\n";
+var links = [
     { target: 'blank', href: '/auth.html', title: 'Авторизация', descr: ' - макет страницы авторизации' },
     { target: '_blank', href: '/registration.html', title: 'Регистрация', descr: ' - макет страницы регистрации' },
     { target: '_blank', href: '/chat-list.html', title: 'Список чатов', descr: ' - макет страницы со списком чатов' },
@@ -15,12 +12,12 @@ const links = [
     { target: '', href: '/404.html', title: 'Ошибка 404', descr: ' - макет страницы c ошибкой 404' },
     { target: '', href: '/500.html', title: 'Ошибка 500', descr: ' - макет страницы c ошибкой 5**' }
 ];
-const indexList = new Custom('nav', {
-    content: links.map(link => {
-        const { target, href, title, descr } = link;
+var indexList = new Custom('nav', {
+    content: links.map(function (link) {
+        var target = link.target, href = link.href, title = link.title, descr = link.descr;
         return new Custom('li', {
             _template: linksTemplate,
-            target, href, title, descr
+            target: target, href: href, title: title, descr: descr
         });
     }),
 });

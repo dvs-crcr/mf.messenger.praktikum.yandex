@@ -15,23 +15,23 @@ function goBackProfileHandler() {
 ;
 function submitProfileHandler(event) {
     event.preventDefault();
-    const formEl = event.target;
-    inputs.forEach(items => items._validateBlock());
+    var formEl = event.target;
+    inputs.forEach(function (items) { return items._validateBlock(); });
     if (formEl.checkValidity()) {
-        let formdata = new FormData(formEl);
-        let result = {
+        var formdata = new FormData(formEl);
+        var result = {
             newPassword: formdata.get('newPassword'),
             oldPassword: formdata.get('oldPassword')
         };
         console.log(result);
     }
 }
-const goBackButton = new Button({
+var goBackButton = new Button({
     className: 'btn-round btn-round_primary',
     type: 'button',
     _template: '<i class="fa fa-arrow-left"></i>'
 });
-const inputs = [
+var inputs = [
     {
         className: 'profile__input', name: 'oldPassword', type: 'password', placeholder: '•••••••••••••••••',
         validate: [
@@ -57,25 +57,22 @@ const inputs = [
         ],
         label: 'Подтверждение пароля'
     }
-].map((props) => new Input(props));
-const profileListBlocks = inputs.map(inputItem => {
+].map(function (props) { return new Input(props); });
+var profileListBlocks = inputs.map(function (inputItem) {
     return new Custom('li', {
         attr: { className: 'profile__list' },
         label: inputItem.props.label,
         input: [inputItem],
-        _template: `
-      <span class="profile__settings-label">{{label}}</span>
-      <span class="profile__settings-value">{{input}}</span>
-    `,
+        _template: "\n      <span class=\"profile__settings-label\">{{label}}</span>\n      <span class=\"profile__settings-value\">{{input}}</span>\n    ",
         content: [inputItem]
     });
 });
-const saveButton = new Button({
+var saveButton = new Button({
     className: 'btn btn_primary profile__btn-save',
     type: 'submit',
     content: 'Сохранить'
 });
-const formContent = [
+var formContent = [
     new Custom('ul', {
         attr: { className: 'profile__list' },
         content: profileListBlocks
@@ -85,18 +82,18 @@ const formContent = [
         content: [saveButton]
     }),
 ];
-const form = new Form({
+var form = new Form({
     attr: { className: 'profile__form form', method: 'POST' },
     methods: { submit: submitProfileHandler },
     content: formContent
 });
-const profilePage = new Profile({
+var profilePage = new Profile({
     attr: {
         className: 'profile'
     },
-    goBackProfileHandler,
-    uploadAvatarProfileHandler,
-    goBackButton,
+    goBackProfileHandler: goBackProfileHandler,
+    uploadAvatarProfileHandler: uploadAvatarProfileHandler,
+    goBackButton: goBackButton,
     avatar: '/assets/img/avatar_profile_128x128.png',
     title: 'Смена пароля',
     profileContent: form

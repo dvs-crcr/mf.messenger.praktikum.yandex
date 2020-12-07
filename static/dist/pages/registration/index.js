@@ -1,19 +1,27 @@
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 import { Auth } from './../../components/Auth/Auth.js';
 import { renderDOM } from './../../utils/renderDOM.js';
 import { Form } from './../../blocks/Form/Form.js';
 import { Button } from './../../blocks/Button/Button.js';
 import { Input } from './../../blocks/Input/Input.js';
 import { Custom } from './../../blocks/Custom/Custom.js';
-const error_line = new Custom('p', {
+var error_line = new Custom('p', {
     attr: {
         className: 'auth__error hidden'
     },
     content: 'Не все поля заполнены корректно'
 });
-const className = 'auth__input form__input';
-const inputsParams = [
+var className = 'auth__input form__input';
+var inputsParams = [
     {
-        className, name: 'email', type: 'email', placeholder: 'Электронная почта', validate: [
+        className: className,
+        name: 'email', type: 'email', placeholder: 'Электронная почта', validate: [
             {
                 type: 'notEmpty',
                 msg: 'Поле не должно быть пустым'
@@ -25,7 +33,8 @@ const inputsParams = [
         ]
     },
     {
-        className, name: 'login', type: 'text', placeholder: 'Логин',
+        className: className,
+        name: 'login', type: 'text', placeholder: 'Логин',
         validate: [
             {
                 type: 'notEmpty',
@@ -38,7 +47,8 @@ const inputsParams = [
         ]
     },
     {
-        className, name: 'first_name', type: 'text', placeholder: 'Имя',
+        className: className,
+        name: 'first_name', type: 'text', placeholder: 'Имя',
         validate: [
             {
                 type: 'notEmpty',
@@ -51,7 +61,8 @@ const inputsParams = [
         ]
     },
     {
-        className, name: 'second_name', type: 'text', placeholder: 'Фамилия',
+        className: className,
+        name: 'second_name', type: 'text', placeholder: 'Фамилия',
         validate: [
             {
                 type: 'notEmpty',
@@ -64,7 +75,8 @@ const inputsParams = [
         ]
     },
     {
-        className, name: 'phone', type: 'text', placeholder: 'Телефон',
+        className: className,
+        name: 'phone', type: 'text', placeholder: 'Телефон',
         validate: [
             {
                 type: 'notEmpty',
@@ -80,7 +92,8 @@ const inputsParams = [
         attr: {
             id: 'password'
         },
-        className, name: 'password', type: 'password', placeholder: 'Пароль',
+        className: className,
+        name: 'password', type: 'password', placeholder: 'Пароль',
         validate: [
             {
                 type: 'notEmpty',
@@ -89,7 +102,8 @@ const inputsParams = [
         ]
     },
     {
-        className, name: 'password_confirm', type: 'password', placeholder: 'Подтверждение пароля',
+        className: className,
+        name: 'password_confirm', type: 'password', placeholder: 'Подтверждение пароля',
         validate: [
             {
                 type: 'notEmpty',
@@ -105,26 +119,25 @@ const inputsParams = [
         ]
     }
 ];
-const inputs = inputsParams.map((props) => new Input(props));
-const formcontent = [
-    ...inputs,
+var inputs = inputsParams.map(function (props) { return new Input(props); });
+var formcontent = __spreadArrays(inputs, [
     new Button({
         className: 'auth__button btn btn_primary btn_fullwidth',
         type: 'submit',
         content: 'Зарегистрировать'
     })
-];
-const form = new Form({
+]);
+var form = new Form({
     attr: {
         className: 'auth__form form',
         method: 'POST'
     },
     content: formcontent,
     methods: {
-        submit: (event) => {
+        submit: function (event) {
             event.preventDefault();
-            const formEl = event.target;
-            inputs.forEach(items => {
+            var formEl = event.target;
+            inputs.forEach(function (items) {
                 items._validateBlock();
             });
             if (!formEl.checkValidity()) {
@@ -132,8 +145,8 @@ const form = new Form({
             }
             else {
                 error_line.hide();
-                let formdata = new FormData(formEl);
-                let result = {
+                var formdata = new FormData(formEl);
+                var result = {
                     email: formdata.get('email'),
                     login: formdata.get('login'),
                     first_name: formdata.get('first_name'),
@@ -146,7 +159,7 @@ const form = new Form({
         }
     }
 });
-const auth = new Auth({
+var auth = new Auth({
     attr: {
         className: 'auth'
     },

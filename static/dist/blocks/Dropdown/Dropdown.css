@@ -16,7 +16,8 @@
 .dropdown.bottom_right > .dropdown__list {
   margin-top: 15px;
   right: 0;
-  top: 33px; }
+  top: 33px;
+  text-align: left; }
 
 .dropdown.top_left > .dropdown__list {
   margin-bottom: 15px;
