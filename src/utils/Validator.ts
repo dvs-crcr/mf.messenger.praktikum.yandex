@@ -1,4 +1,3 @@
-// type ValidatorTargetType = string | object
 export interface ValidateListInterface {
   type: string;
   options?: object | undefined;
@@ -40,6 +39,29 @@ class Validator {
   isAlpha(target: string) {
     return /^[A-Z]+$/i.test(target);
   }
+
+  isRussianAlpha(target: string) {
+    return /^[А-ЯЁ]+$/i.test(target);
+  }
+
+  isEmail(target: string) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(target);
+  }
+
+  isPhone(target: string) {
+    const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/i;
+    return re.test(target);
+  }
+
+  isInputValueEqual(target: string, options: {selector: string}) {
+    const { selector } = options;
+    if (typeof selector === 'undefined') {
+      return false
+    }
+    return (document.querySelector(selector) as HTMLInputElement).value === target;
+  }
+
 }
 
 export const validator = new Validator();

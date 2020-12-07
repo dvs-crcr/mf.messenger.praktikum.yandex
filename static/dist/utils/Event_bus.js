@@ -23,4 +23,4 @@ export class EventBus {
         });
     }
 }
-//# sourceMappingURL=EventBus.js.map
+//# sourceMappingURL=Event_bus.js.map

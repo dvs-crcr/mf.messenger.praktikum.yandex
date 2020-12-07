@@ -1,5 +1,5 @@
-import { EventBus } from './EventBus.js'
-import { Templator } from './Templator.js'
+import { EventBus } from './Event_bus.js';
+import { Templator } from './UglyTemplator.js';
 
 export type BlockPropsMethods = {
   [key: string]: EventListenerOrEventListenerObject | Function | undefined
@@ -188,6 +188,14 @@ export class Block {
         throw new Error('нет доступа');
       }
     });
+  }
+
+  show() {
+    this._element?.classList.remove('hidden');
+  }
+
+  hide() {
+    this._element?.classList.add('hidden');
   }
 
 

@@ -114,4 +114,4 @@ export class Templator {
         return tmpl;
     }
 }
-//# sourceMappingURL=Templator.js.map
+//# sourceMappingURL=UglyTemplator.js.map

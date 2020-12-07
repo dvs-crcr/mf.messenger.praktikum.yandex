@@ -29,7 +29,7 @@ export class Input extends Block {
           this._validateBlock()
         },
         blur: () => {
-          this._validateBlock()
+          this._validateBlock(false)
         }
       })
     }
@@ -43,7 +43,7 @@ export class Input extends Block {
     return { template, props }
   }
 
-  _validateBlock() {
+  _validateBlock(needReport: boolean = true) {
     const target = (this._element as HTMLInputElement);
     if (typeof target !== 'undefined') {
       const { validate = [] } = this.props
@@ -52,7 +52,9 @@ export class Input extends Block {
         target.setCustomValidity('');
       } else if (typeof validMessage === 'string') {
         target.setCustomValidity(validMessage);
-        target.reportValidity();
+        if (needReport) {
+          target.reportValidity();
+        }
       }
     }
   }

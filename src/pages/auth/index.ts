@@ -4,7 +4,7 @@ import { renderDOM } from './../../utils/renderDOM.js';
 import { Form } from './../../blocks/Form/Form.js' 
 import { Button } from './../../blocks/Button/Button.js';
 import { Input } from './../../blocks/Input/Input.js';
-import { Custom } from './../../blocks/Custom/Custom.js'
+import { Custom } from './../../blocks/Custom/Custom.js';
 
 const error_line = new Custom('p', {
   attr: {
@@ -44,18 +44,14 @@ const inputsParams = [
   }
 ]
 
-const inputs = inputsParams.map((props) => {
-  return new Input(props)
-})
+const inputs = inputsParams.map((props) => new Input(props))
 
 const formcontent = [
   ...inputs,
   new Button({
-    attr: {
-      className: 'auth__button btn btn_primary btn_fullwidth',
-      type: 'submit',
-      value: 'Войти'
-    }
+    className: 'auth__button btn btn_primary btn_fullwidth',
+    type: 'submit',
+    content: 'Войти'
   })
 ];
 
@@ -73,9 +69,9 @@ const form = new Form({
         items._validateBlock();
       })
       if (!formEl.checkValidity()) {
-        error_line.getContent()?.classList.remove('hidden');
+        error_line.show();
       } else {
-        error_line.getContent()?.classList.add('hidden');
+        error_line.hide();
         let formdata = new FormData(formEl);
         let result = {
           login: formdata.get('login'),

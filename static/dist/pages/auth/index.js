@@ -40,17 +40,13 @@ const inputsParams = [
         ]
     }
 ];
-const inputs = inputsParams.map((props) => {
-    return new Input(props);
-});
+const inputs = inputsParams.map((props) => new Input(props));
 const formcontent = [
     ...inputs,
     new Button({
-        attr: {
-            className: 'auth__button btn btn_primary btn_fullwidth',
-            type: 'submit',
-            value: 'Войти'
-        }
+        className: 'auth__button btn btn_primary btn_fullwidth',
+        type: 'submit',
+        content: 'Войти'
     })
 ];
 const form = new Form({
@@ -61,17 +57,16 @@ const form = new Form({
     content: formcontent,
     methods: {
         submit: (event) => {
-            var _a, _b;
             event.preventDefault();
             const formEl = event.target;
             inputs.forEach(items => {
                 items._validateBlock();
             });
             if (!formEl.checkValidity()) {
-                (_a = error_line.getContent()) === null || _a === void 0 ? void 0 : _a.classList.remove('hidden');
+                error_line.show();
             }
             else {
-                (_b = error_line.getContent()) === null || _b === void 0 ? void 0 : _b.classList.add('hidden');
+                error_line.hide();
                 let formdata = new FormData(formEl);
                 let result = {
                     login: formdata.get('login'),

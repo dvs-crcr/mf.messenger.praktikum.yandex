@@ -11,31 +11,112 @@ const error_line = new Custom('p', {
     className: 'auth__error hidden'
   },
   content: 'Не все поля заполнены корректно'
-})
+});
 
 const className = 'auth__input form__input'
 const inputsParams = [
-  { className, name: 'email', type: 'email', placeholder: 'Электронная почта' },
-  { className, name: 'login', type: 'text', placeholder: 'Логин' },
-  { className, name: 'first_name', type: 'text', placeholder: 'Имя' },
-  { className, name: 'second_name', type: 'text', placeholder: 'Фамилия' },
-  { className, name: 'phone', type: 'text', placeholder: 'Телефон' },
-  { className, name: 'password', type: 'password', placeholder: 'Пароль' },
-  { className, name: 'password_confirm', type: 'password', placeholder: 'Подтверждение пароля' }
+  {
+    className, name: 'email', type: 'email', placeholder: 'Электронная почта',validate: [
+      {
+        type: 'notEmpty',
+        msg: 'Поле не должно быть пустым'
+      },
+      {
+        type: 'isEmail',
+        msg: 'Поле должно содержать адрес электронной почты'
+      }
+    ]
+  },
+  { 
+    className, name: 'login', type: 'text', placeholder: 'Логин',
+    validate: [
+      {
+        type: 'notEmpty',
+        msg: 'Поле не должно быть пустым'
+      },
+      {
+        type: 'isAlpha',
+        msg: 'Поле должно состоять только из латинских букв'
+      }
+    ]
+  },
+  { 
+    className, name: 'first_name', type: 'text', placeholder: 'Имя',
+    validate: [
+      {
+        type: 'notEmpty',
+        msg: 'Поле не должно быть пустым'
+      },
+      {
+        type: 'isRussianAlpha',
+        msg: 'Плиз, энтер рассиан леттерз'
+      }
+    ]
+  },
+  { 
+    className, name: 'second_name', type: 'text', placeholder: 'Фамилия',
+    validate: [
+      {
+        type: 'notEmpty',
+        msg: 'Поле не должно быть пустым'
+      },
+      {
+        type: 'isRussianAlpha',
+        msg: 'Плиз, энтер рассиан леттерз'
+      }
+    ]
+  },
+  { 
+    className, name: 'phone', type: 'text', placeholder: 'Телефон',
+    validate: [
+      {
+        type: 'notEmpty',
+        msg: 'Поле не должно быть пустым'
+      },
+      {
+        type: 'isPhone',
+        msg: 'Поле должно содержать номер телефона'
+      }
+    ]
+  },
+  { 
+    attr: {
+      id: 'password'
+    },
+    className, name: 'password', type: 'password', placeholder: 'Пароль',
+    validate: [
+      {
+        type: 'notEmpty',
+        msg: 'Поле не должно быть пустым'
+      }
+    ]
+  },
+  { 
+    className, name: 'password_confirm', type: 'password', placeholder: 'Подтверждение пароля',
+    validate: [
+      {
+        type: 'notEmpty',
+        msg: 'Поле не должно быть пустым'
+      },
+      {
+        type: 'isInputValueEqual',
+        msg: 'Пароли не совпадают',
+        options: {
+          selector: '#password'
+        }
+      }
+    ]
+  }
 ]
 
-const inputs = inputsParams.map((props) => {
-  return new Input(props)
-})
+const inputs = inputsParams.map((props) => new Input(props))
 
 const formcontent = [
   ...inputs,
   new Button({
-    attr: {
-      className: 'auth__button btn btn_primary btn_fullwidth',
-      type: 'submit',
-      value: 'Зарегистрировать'
-    }
+    className: 'auth__button btn btn_primary btn_fullwidth',
+    type: 'submit',
+    content: 'Зарегистрировать'
   })
 ];
 
@@ -53,12 +134,16 @@ const form = new Form({
         items._validateBlock();
       })
       if (!formEl.checkValidity()) {
-        error_line.getContent()?.classList.remove('hidden');
+        error_line.show();
       } else {
-        error_line.getContent()?.classList.add('hidden');
+        error_line.hide();
         let formdata = new FormData(formEl);
         let result = {
+          email: formdata.get('email'),
           login: formdata.get('login'),
+          first_name: formdata.get('first_name'),
+          second_name: formdata.get('second_name'),
+          phone: formdata.get('phone'),
           password: formdata.get('password')
         }
         console.log(result)

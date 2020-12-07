@@ -13,6 +13,7 @@ const chatListContent = new Chat({
         click: function () {
             if (typeof this !== 'undefined') {
                 this.classList.toggle(activeItemClass);
+                window.location.href = '/chat.html';
             }
         }
     }

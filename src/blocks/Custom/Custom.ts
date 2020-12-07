@@ -1,6 +1,7 @@
 import { Block, BlockPropsMethods } from './../../utils/Block.js';
 
 type CustomProps = {
+  [key: string]: any;
   attr?: {
     className?: string;
     [key: string]: any

@@ -12,7 +12,7 @@ export class Input extends Block {
                     this._validateBlock();
                 },
                 blur: () => {
-                    this._validateBlock();
+                    this._validateBlock(false);
                 }
             });
         }
@@ -23,7 +23,7 @@ export class Input extends Block {
         });
         return { template, props };
     }
-    _validateBlock() {
+    _validateBlock(needReport = true) {
         const target = this._element;
         if (typeof target !== 'undefined') {
             const { validate = [] } = this.props;
@@ -33,7 +33,9 @@ export class Input extends Block {
             }
             else if (typeof validMessage === 'string') {
                 target.setCustomValidity(validMessage);
-                target.reportValidity();
+                if (needReport) {
+                    target.reportValidity();
+                }
             }
         }
     }

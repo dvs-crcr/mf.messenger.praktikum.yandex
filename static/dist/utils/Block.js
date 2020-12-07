@@ -1,5 +1,5 @@
-import { EventBus } from './EventBus.js';
-import { Templator } from './Templator.js';
+import { EventBus } from './Event_bus.js';
+import { Templator } from './UglyTemplator.js';
 export class Block {
     constructor(tagName = 'div', props = {}, template) {
         this._element = undefined;
@@ -148,6 +148,14 @@ export class Block {
                 throw new Error('нет доступа');
             }
         });
+    }
+    show() {
+        var _a;
+        (_a = this._element) === null || _a === void 0 ? void 0 : _a.classList.remove('hidden');
+    }
+    hide() {
+        var _a;
+        (_a = this._element) === null || _a === void 0 ? void 0 : _a.classList.add('hidden');
     }
 }
 Block.EVENTS = {
