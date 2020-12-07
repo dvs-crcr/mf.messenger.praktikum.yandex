@@ -4,6 +4,7 @@ type FormProps = {
   attr?: {
     className?: string;
     method?: 'POST' | 'GET' | 'PUT' | 'DELETE';
+    action?: string;
   };
   methods?: BlockPropsMethods;
   content?: Block[]

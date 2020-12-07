@@ -1,15 +1,41 @@
 import { Block } from './../../utils/Block.js';
+import { validator } from './../../utils/Validator.js';
 export class Input extends Block {
     constructor(props = {}) {
         super('input', props);
     }
     render(template, props) {
-        const { className, name, type, placeholder, value, methods } = props;
+        const { attr, className, name, type, placeholder, value, validate = [], methods = {} } = props;
+        if (validate.length > 0) {
+            Object.assign(methods, {
+                focus: () => {
+                    this._validateBlock();
+                },
+                blur: () => {
+                    this._validateBlock();
+                }
+            });
+        }
         Object.assign(props, {
-            attr: { className, name, type, placeholder, value },
-            methods: methods
+            attr: Object.assign({ className, name, type, placeholder, value }, attr),
+            methods,
+            validate
         });
         return { template, props };
+    }
+    _validateBlock() {
+        const target = this._element;
+        if (typeof target !== 'undefined') {
+            const { validate = [] } = this.props;
+            const validMessage = validator._exec(validate, target.value, true);
+            if (validMessage === true) {
+                target.setCustomValidity('');
+            }
+            else if (typeof validMessage === 'string') {
+                target.setCustomValidity(validMessage);
+                target.reportValidity();
+            }
+        }
     }
 }
 //# sourceMappingURL=Input.js.map

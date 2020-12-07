@@ -1,6 +1,4 @@
-import { ChatPropsListExported } from './../../components/Chat/Chat.js';
-
-export const chatList: ChatPropsListExported[] = [
+export const chatList = [
   {
     id: 1,
     avatar: '/assets/img/avatar_50x50.png',
@@ -82,30 +80,33 @@ export const chatList: ChatPropsListExported[] = [
   }
 ];
 
-export const messages = [
-  {
-    type: 'date',
-    msgContent: '19 ноября'
-  },
-  {
-    type: 'text',
-    msgContent: `
+export const chatContentData = {
+  title: 'Антошка',
+  avatar: '/assets/img/avatar_30x30.png',
+  messageList: [
+    {
+      type: 'date',
+      msgContent: '19 ноября'
+    },
+    {
+      type: 'text',
+      msgContent: `
 Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.   
 
 Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.`,
-    time: '08:56'
-  },
-  {
-    type: 'image',
-    msgContent: '/assets/img/message_img_640x400.png',
-    time: '08:56'
-  },
-  {
-    isSelf: true,
-    type: 'text',
-    msgContent: 'Пошли копать картошку, дили-дили-трали-вали это мы не проходили, это нам не задавали...',
-    time: '09:57',
-    status: 'read'
-  },
-  
-]
+      time: '08:56'
+    },
+    {
+      type: 'image',
+      msgContent: '/assets/img/message_img_640x400.png',
+      time: '08:56'
+    },
+    {
+      isSelf: true,
+      status: 'read',
+      type: 'text',
+      msgContent: 'Пошли копать картошку, дили-дили-трали-вали это мы не проходили, это нам не задавали...',
+      time: '09:57'
+    }
+  ]
+}

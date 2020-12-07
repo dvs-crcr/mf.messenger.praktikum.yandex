@@ -7,8 +7,7 @@ export default `
     </div>
     {{chatListContent}}
   </aside>
-  <main class="chat__right">
-    {{chatContent}}
-  </main>
+  {{chatContent}}
+  <span></span>
 `;
 //# sourceMappingURL=Chat.html.js.map

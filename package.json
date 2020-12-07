@@ -4,10 +4,10 @@
   "description": "Simple messenger with js & css & html",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node index.js --dev",
-    "sass": "node-sass src -o static/dist",
     "build": "tsc && npm run sass",
+    "dev": "node index.js --dev",
+    "start": "node index.js",
+    "sass": "node-sass src -o static/dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

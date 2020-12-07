@@ -8,11 +8,37 @@ const error_line = new Custom('p', {
     attr: {
         className: 'auth__error hidden'
     },
-    content: 'Неверный логин или пароль'
+    content: 'Не все поля заполнены корректно'
 });
 const inputsParams = [
-    { className: 'auth__input form__input', name: 'login', type: 'text', placeholder: 'Логин' },
-    { className: 'auth__input form__input', name: 'password', type: 'password', placeholder: 'Пароль' }
+    {
+        className: 'auth__input form__input',
+        name: 'login',
+        type: 'text',
+        placeholder: 'Логин',
+        validate: [
+            {
+                type: 'notEmpty',
+                msg: 'Поле не должно быть пустым'
+            },
+            {
+                type: 'isAlpha',
+                msg: 'Поле должно состоять только из латинских букв'
+            }
+        ]
+    },
+    {
+        className: 'auth__input form__input',
+        name: 'password',
+        type: 'password',
+        placeholder: 'Пароль',
+        validate: [
+            {
+                type: 'notEmpty',
+                msg: 'Поле не должно быть пустым'
+            }
+        ]
+    }
 ];
 const inputs = inputsParams.map((props) => {
     return new Input(props);
@@ -35,25 +61,27 @@ const form = new Form({
     content: formcontent,
     methods: {
         submit: (event) => {
+            var _a, _b;
             event.preventDefault();
-            let formdata = new FormData(event.target);
-            let result = {
-                login: formdata.get('login'),
-                password: formdata.get('password')
-            };
-            console.log(result);
-            showError();
+            const formEl = event.target;
+            inputs.forEach(items => {
+                items._validateBlock();
+            });
+            if (!formEl.checkValidity()) {
+                (_a = error_line.getContent()) === null || _a === void 0 ? void 0 : _a.classList.remove('hidden');
+            }
+            else {
+                (_b = error_line.getContent()) === null || _b === void 0 ? void 0 : _b.classList.add('hidden');
+                let formdata = new FormData(formEl);
+                let result = {
+                    login: formdata.get('login'),
+                    password: formdata.get('password')
+                };
+                console.log(result);
+            }
         }
     }
 });
-function showError() {
-    var _a;
-    (_a = error_line.getContent()) === null || _a === void 0 ? void 0 : _a.classList.remove('hidden');
-    inputs.forEach((input) => {
-        var _a;
-        (_a = input.getContent()) === null || _a === void 0 ? void 0 : _a.classList.add('form__input_error');
-    });
-}
 const auth = new Auth({
     attr: {
         className: 'auth'
@@ -66,6 +94,5 @@ const auth = new Auth({
         title: 'создать аккаунт'
     }
 });
-window['inputs'] = inputs[0];
 renderDOM('.root', auth, 'Авторизация');
 //# sourceMappingURL=index.js.map

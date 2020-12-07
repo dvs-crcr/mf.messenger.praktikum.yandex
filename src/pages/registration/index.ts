@@ -10,7 +10,7 @@ const error_line = new Custom('p', {
   attr: {
     className: 'auth__error hidden'
   },
-  content: 'Заполнены не все поля'
+  content: 'Не все поля заполнены корректно'
 })
 
 const className = 'auth__input form__input'
@@ -48,23 +48,24 @@ const form = new Form({
   methods: {
     submit: (event: Event) => {
       event.preventDefault();
-      let formdata = new FormData((event.target as HTMLFormElement));
-      let result = {
-        login: formdata.get('login'),
-        password: formdata.get('password')
+      const formEl = (event.target as HTMLFormElement);
+      inputs.forEach(items => {
+        items._validateBlock();
+      })
+      if (!formEl.checkValidity()) {
+        error_line.getContent()?.classList.remove('hidden');
+      } else {
+        error_line.getContent()?.classList.add('hidden');
+        let formdata = new FormData(formEl);
+        let result = {
+          login: formdata.get('login'),
+          password: formdata.get('password')
+        }
+        console.log(result)
       }
-      console.log(result)
-      showError();
     }
   }
 });
-
-function showError() {
-  error_line.getContent()?.classList.remove('hidden');
-  inputs.forEach((input) => {
-    input.getContent()?.classList.add('form__input_error');
-  })
-}
 
 const auth = new Auth({
   attr: {

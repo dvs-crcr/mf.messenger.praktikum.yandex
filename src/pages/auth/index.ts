@@ -10,12 +10,38 @@ const error_line = new Custom('p', {
   attr: {
     className: 'auth__error hidden'
   },
-  content: 'Неверный логин или пароль'
+  content: 'Не все поля заполнены корректно'
 })
 
 const inputsParams = [
-  { className: 'auth__input form__input', name: 'login', type: 'text', placeholder: 'Логин' },
-  { className: 'auth__input form__input', name: 'password', type: 'password', placeholder: 'Пароль' }
+  { 
+    className: 'auth__input form__input',
+    name: 'login', 
+    type: 'text', 
+    placeholder: 'Логин', 
+    validate: [
+      {
+        type: 'notEmpty',
+        msg: 'Поле не должно быть пустым'
+      },
+      {
+        type: 'isAlpha',
+        msg: 'Поле должно состоять только из латинских букв'
+      }
+    ]
+  },
+  {
+    className: 'auth__input form__input',
+    name: 'password',
+    type: 'password',
+    placeholder: 'Пароль',
+    validate: [
+      {
+        type: 'notEmpty',
+        msg: 'Поле не должно быть пустым'
+      }
+    ]
+  }
 ]
 
 const inputs = inputsParams.map((props) => {
@@ -42,23 +68,24 @@ const form = new Form({
   methods: {
     submit: (event: Event) => {
       event.preventDefault();
-      let formdata = new FormData((event.target as HTMLFormElement));
-      let result = {
-        login: formdata.get('login'),
-        password: formdata.get('password')
+      const formEl = (event.target as HTMLFormElement);
+      inputs.forEach(items => {
+        items._validateBlock();
+      })
+      if (!formEl.checkValidity()) {
+        error_line.getContent()?.classList.remove('hidden');
+      } else {
+        error_line.getContent()?.classList.add('hidden');
+        let formdata = new FormData(formEl);
+        let result = {
+          login: formdata.get('login'),
+          password: formdata.get('password')
+        }
+        console.log(result)
       }
-      console.log(result)
-      showError();
     }
   }
 });
-
-function showError() {
-  error_line.getContent()?.classList.remove('hidden');
-  inputs.forEach((input) => {
-    input.getContent()?.classList.add('form__input_error');
-  })
-}
 
 const auth = new Auth({
   attr: {
@@ -72,7 +99,5 @@ const auth = new Auth({
     title: 'создать аккаунт'
   }
 });
-
-(<any>window)['inputs'] = inputs[0];
 
 renderDOM('.root', auth, 'Авторизация')

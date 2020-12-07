@@ -15,10 +15,9 @@
   font-size: 13px; }
   .form__input:focus {
     outline: 0;
-    border-bottom: 1px solid #0099d2; }
-
-.form__input_error {
-  border-bottom: 1px solid #FF5A4C; }
+    border-bottom-color: #0099d2; }
+  .form__input:invalid {
+    border-bottom-color: #FF5A4C; }
 
 .form__input-error-msg {
   font-size: 11px;

@@ -1,13 +1,6 @@
 import { Chat } from './../../components/Chat/Chat.js';
 import { renderDOM } from './../../utils/renderDOM.js';
-import { Custom } from './../../blocks/Custom/Custom.js';
-import { Data } from './../chat/data.js';
-const chatContent = new Custom('p', {
-    attr: {
-        className: 'chat__default-message'
-    },
-    content: 'Чтобы отправить сообщение выберите чат'
-});
+import { chatList } from './../chat/data.js';
 const activeItemClass = 'chat__list-item_active';
 const chatListContent = new Chat({
     className: 'chat',
@@ -15,8 +8,7 @@ const chatListContent = new Chat({
     listItemClassName: 'chat__list-item',
     activeListItemClassName: activeItemClass,
     selfmsg: 'Вы: ',
-    chatList: Data,
-    chatContent,
+    chatList,
     itemMethods: {
         click: function () {
             if (typeof this !== 'undefined') {

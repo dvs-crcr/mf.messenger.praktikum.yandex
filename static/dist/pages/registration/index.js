@@ -8,7 +8,7 @@ const error_line = new Custom('p', {
     attr: {
         className: 'auth__error hidden'
     },
-    content: 'Заполнены не все поля'
+    content: 'Не все поля заполнены корректно'
 });
 const className = 'auth__input form__input';
 const inputsParams = [
@@ -41,25 +41,31 @@ const form = new Form({
     content: formcontent,
     methods: {
         submit: (event) => {
+            var _a, _b;
             event.preventDefault();
-            let formdata = new FormData(event.target);
-            let result = {
-                login: formdata.get('login'),
-                password: formdata.get('password')
-            };
-            console.log(result);
-            showError();
+            const formEl = event.target;
+            inputs.forEach(items => {
+                items._validateBlock();
+            });
+            if (!formEl.checkValidity()) {
+                (_a = error_line.getContent()) === null || _a === void 0 ? void 0 : _a.classList.remove('hidden');
+            }
+            else {
+                (_b = error_line.getContent()) === null || _b === void 0 ? void 0 : _b.classList.add('hidden');
+                let formdata = new FormData(formEl);
+                //   for (var key of formdata.keys()) {
+                //     console.log(key); 
+                //  }
+                console.log(formdata);
+                let result = {
+                    login: formdata.get('login'),
+                    password: formdata.get('password')
+                };
+                console.log(result);
+            }
         }
     }
 });
-function showError() {
-    var _a;
-    (_a = error_line.getContent()) === null || _a === void 0 ? void 0 : _a.classList.remove('hidden');
-    inputs.forEach((input) => {
-        var _a;
-        (_a = input.getContent()) === null || _a === void 0 ? void 0 : _a.classList.add('form__input_error');
-    });
-}
 const auth = new Auth({
     attr: {
         className: 'auth'
