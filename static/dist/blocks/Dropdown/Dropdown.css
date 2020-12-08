@@ -1,0 +1,83 @@
+.dropdown {
+  position: relative;
+  display: inline-block; }
+
+.dropdown__list {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  padding: 15px;
+  z-index: 1; }
+
+.dropdown_opened > .dropdown__list {
+  display: block; }
+
+.dropdown.bottom_right > .dropdown__list {
+  margin-top: 15px;
+  right: 0;
+  top: 33px;
+  text-align: left; }
+
+.dropdown.top_left > .dropdown__list {
+  margin-bottom: 15px;
+  left: 0;
+  bottom: 40px; }
+
+.dropdown__list > li {
+  list-style: none;
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 15px;
+  text-align: left; }
+
+.dropdown__list > li:last-child {
+  margin-bottom: 0px; }
+
+.dropdown__list-button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: all 0.2s ease-in;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  color: #000000;
+  white-space: nowrap; }
+  .dropdown__list-button:hover {
+    color: #0099D2; }
+  .dropdown__list-button:active, .dropdown__list-button:focus {
+    outline: none; }
+
+.dropdown__toggle_active {
+  color: #0099D2; }
+
+.dropdown__toggle_active > svg {
+  fill: #0099D2; }
+
+.icon-btn {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("/assets/img/icons.png");
+  vertical-align: middle;
+  margin-right: 15px; }
+
+.icon-btn_add-user {
+  background-position: 0px 0px; }
+
+.icon-btn_delete-user {
+  background-position: 0px -20px; }
+
+.icon-btn_delete-chat {
+  background-position: 0px -40px; }
+
+.icon-btn_media {
+  background-position: 0px -80px; }
+
+.icon-btn_file {
+  background-position: 0px -100px; }
+
+.icon-btn_location {
+  background-position: 0px -60px; }

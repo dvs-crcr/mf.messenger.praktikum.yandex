@@ -1,0 +1,41 @@
+.modal {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+
+.modal_open {
+  display: flex; }
+
+.modal__wrapper {
+  width: 300px;
+  max-width: 100%;
+  padding: 40px;
+  background: #ffffff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
+
+.modal__header {
+  text-align: center;
+  line-height: 40px;
+  font-weight: 300;
+  font-size: 30px;
+  margin-bottom: 15px; }
+
+.modal__content {
+  margin-top: 15px; }
+
+.modal__error {
+  margin: 20px -40px;
+  line-height: 32px;
+  background: #FFE5E5;
+  color: #FF5A4C;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center; }
