@@ -1,12 +1,15 @@
-import { Block } from "./Block";
+import { Block } from './Block';
 
-export function renderDOM(query: any, block: Block, title?: string) {
-  const root = document.querySelector(query);
-  root.appendChild(block.getContent());
-  if (typeof title !== 'undefined') {
-    document.title = title;
+export function renderDOM(selector: string, block: Block, title?: string) {
+  const root = document.querySelector(selector);
+  const blockContent = block.getContent();
+  if (typeof blockContent !== 'undefined' && root !== null) {
+    root.appendChild(blockContent);
+    if (typeof title !== 'undefined') {
+      document.title = title;
+    }
+    return root;
   }
-  return root;
 }
 
 

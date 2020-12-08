@@ -1,2 +1,0 @@
-export default "\n  <aside class=\"chat__left\">\n    <a class=\"chat__profile-link\" href=\"/profile.html\">\u041F\u0440\u043E\u0444\u0438\u043B\u044C<i class=\"fa fa-chevron-right\"></i></a>\n    <div class=\"chat__search\">\n      <input class=\"chat__search-input\" type=\"text\" placeholder=\"\u041F\u043E\u0438\u0441\u043A\" />\n      <i class=\"fa fa-search chat__search-icon\"></i>\n    </div>\n    {{chatListContent}}\n  </aside>\n  {{chatContent}}\n  <span></span>\n";
-//# sourceMappingURL=Chat.html.js.map

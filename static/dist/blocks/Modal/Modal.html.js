@@ -1,2 +1,0 @@
-export default "\n<div class=\"modal__wrapper\">\n  <div class=\"modal__header\">{{header}}</div>\n  <div class=\"modal__content\">\n    {{modalContent}}\n  </div>\n</div>\n";
-//# sourceMappingURL=Modal.html.js.map

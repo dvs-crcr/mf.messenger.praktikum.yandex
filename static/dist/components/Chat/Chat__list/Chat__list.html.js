@@ -1,2 +1,0 @@
-export default "\n  <img class=\"chat__list-item-avatar\" src=\"{{avatar}}\" />\n  <div class=\"chat__list-item-descr\">\n    <div class=\"chat__list-item-title\">{{title}}</div>\n    <div class=\"chat__list-item-lastmsg\">\n      <span class=\"chat__list-item-lastmsg-self\">{{selfmsg}}</span>\n      {{lastmsg}}\n    </div>\n  </div>\n  <span class=\"chat__list-item-time\">{{time}}</span>\n  <span class=\"chat__list-item-count\">{{count}}</span>\n  <div class=\"chat__list-item-hover\"></div>\n";
-//# sourceMappingURL=Chat__list.html.js.map

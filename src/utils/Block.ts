@@ -1,4 +1,4 @@
-import { EventBus } from './Event_bus.js';
+import { EventBus } from './EventBus.js';
 import { Templator } from './UglyTemplator.js';
 
 export type BlockPropsMethods = {
@@ -135,7 +135,6 @@ export class Block {
         }
       }
     }
-    return;
   }
 
   _addEvents() {
@@ -197,7 +196,5 @@ export class Block {
   hide() {
     this._element?.classList.add('hidden');
   }
-
-
 
 }

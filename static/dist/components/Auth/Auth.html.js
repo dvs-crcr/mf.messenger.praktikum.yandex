@@ -1,2 +1,0 @@
-export default "\n<h1 class=\"auth__header\">{{ header }}</h1>\n{{error_line}}\n<div class=\"auth__content\">\n  {{form}}\n  <nav class=\"auth__links\">\n    <a href=\"{{link.href}}\">{{link.title}}</a>\n  </nav>\n</div>\n\n";
-//# sourceMappingURL=Auth.html.js.map

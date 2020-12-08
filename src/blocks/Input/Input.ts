@@ -1,3 +1,4 @@
+// Использование расширения .js согласовано с наставником
 import { Block, BlockPropsMethods } from './../../utils/Block.js';
 import { validator, ValidateListInterface } from './../../utils/Validator.js';
 

@@ -1,6 +1,6 @@
 export interface ValidateListInterface {
-  type: string;
-  options?: object | undefined;
+  type: 'notEmpty' | 'isEmpty' | 'isAlpha' | 'isRussianAlpha' | 'isEmail' | 'isPhone' | 'isInputValueEqual';
+  options?: object;
   msg?: string;
 }
 
@@ -29,7 +29,7 @@ class Validator {
   }
 
   notEmpty(target: string) {
-    return target.trim().length === 0 ? false : true;
+    return target.trim().length !== 0;
   }
 
   isEmpty(target: string) {
@@ -57,6 +57,9 @@ class Validator {
   isInputValueEqual(target: string, options: {selector: string}) {
     const { selector } = options;
     if (typeof selector === 'undefined') {
+      return false
+    }
+    if (typeof document.querySelector(selector) === 'undefined') {
       return false
     }
     return (document.querySelector(selector) as HTMLInputElement).value === target;
