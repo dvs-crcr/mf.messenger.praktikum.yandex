@@ -1,5 +1,5 @@
 export interface ValidateListInterface {
-  type: 'notEmpty' | 'isEmpty' | 'isAlpha' | 'isRussianAlpha' | 'isEmail' | 'isPhone' | 'isInputValueEqual';
+  type: 'notEmpty' | 'isEmpty' | 'isAlpha' | 'isRussianAlpha' | 'isEmail' | 'isPhone' | 'isInputValueEqual' | string;
   options?: object;
   msg?: string;
 }
