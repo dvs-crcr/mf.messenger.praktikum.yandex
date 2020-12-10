@@ -1,5 +1,6 @@
 import { EventBus } from './EventBus.js';
 import { Templator } from './UglyTemplator.js';
+import { default as shallowEqualObjects } from './shallowEqualObjects.js';
 
 export type BlockPropsMethods = {
   [key: string]: EventListenerOrEventListenerObject | Function | undefined
@@ -97,8 +98,7 @@ export class Block {
 
   componentDidUpdate(oldProps?: object, newProps?: object) {
     if (typeof oldProps !== 'undefined' && typeof newProps !== 'undefined') {
-      // если пропсы являются объектами, то сравнение х****ое
-      if (oldProps === newProps) {
+      if (shallowEqualObjects(oldProps, newProps)) {
         return false
       } else {
         return true

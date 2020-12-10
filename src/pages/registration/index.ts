@@ -3,7 +3,7 @@ import { renderDOM } from './../../utils/renderDOM.js';
 
 import { Form } from './../../blocks/Form/Form.js' 
 import { Button } from './../../blocks/Button/Button.js';
-import { Input } from './../../blocks/Input/Input.js';
+import { Input, InputProps } from './../../blocks/Input/Input.js';
 import { Custom } from './../../blocks/Custom/Custom.js'
 
 const error_line = new Custom('p', {
@@ -14,7 +14,7 @@ const error_line = new Custom('p', {
 });
 
 const className = 'auth__input form__input'
-const inputsParams = [
+const inputsList: InputProps[] = [
   {
     className, name: 'email', type: 'email', placeholder: 'Электронная почта',validate: [
       {
@@ -109,7 +109,7 @@ const inputsParams = [
   }
 ]
 
-const inputs = inputsParams.map((props) => new Input(props))
+const inputs = inputsList.map((props) => new Input(props))
 
 const formcontent = [
   ...inputs,

@@ -4,7 +4,7 @@ import { renderDOM } from './../../utils/renderDOM.js';
 import { Button } from './../../blocks/Button/Button.js';
 import { Form } from './../../blocks/Form/Form.js';
 import { Custom } from './../../blocks/Custom/Custom.js';
-import { Input } from './../../blocks/Input/Input.js';
+import { Input, InputProps } from './../../blocks/Input/Input.js';
 
 
 function uploadAvatarProfileHandler() {
@@ -37,7 +37,7 @@ const goBackButton = new Button({
   _template: '<i class="fa fa-arrow-left"></i>'
 });
 
-const inputs = [
+const inputsList: InputProps[] = [
   { 
     className: 'profile__input', name: 'oldPassword', type: 'password', placeholder: '•••••••••••••••••',
     validate: [
@@ -63,7 +63,9 @@ const inputs = [
     ],
     label: 'Подтверждение пароля'
   }
-].map((props) => new Input(props));
+]
+
+const inputs = inputsList.map((props) => new Input(props));
 
 const profileListBlocks = inputs.map(inputItem => {
   return new Custom('li', { 

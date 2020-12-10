@@ -1,6 +1,4 @@
-type TemplatorType = {
-  [index: string]: any
-}
+import { getObjectValue } from './getObjectValue.js'
 
 export class Templator {
   TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
@@ -9,30 +7,18 @@ export class Templator {
 
   constructor(private _template: string | undefined) {}
   
-  get(obj: {}, path: string, defaultValue: string = ''): any {
-    const keys = path.split('.');
-    let result: TemplatorType = obj;
-    for (let key of keys) {
-      result = result[key];
-      if (result === undefined) {
-        return defaultValue;
-      }
-    }
-    return result ?? defaultValue;
-  }
-
   compile(ctx: {}) {
     if (typeof this._template === 'undefined') {
       return undefined
     }
-    let html = this._parseTemplate(this._template, ctx);
+    let html = this.compose(this._template, ctx);
     let block = this._htmlToElement(html);
     let fragment = this._prepareFragment(block);
     let tpls = fragment.querySelectorAll('tpl');
     tpls.forEach((tpl) => {
       let selector = tpl.getAttribute('selector');
       if (selector !== null) {
-        const data = this.get(ctx, selector);
+        const data = getObjectValue(ctx, selector);
         if (Array.isArray(data)) {
           let chunkFragment = document.createDocumentFragment();
           data.forEach((item) => {
@@ -68,11 +54,11 @@ export class Templator {
     return template.content.childNodes;
   }
 
-  _parseTemplate(template: string, ctx: {}) {
-    let parsedProps = this._parseProps(template, ctx);
-    let parsedTags = this._parseTags(parsedProps);
-    let parsedText = this._parseText(parsedTags, ctx);
-    return parsedText;
+  compose(template: string, ctx: {}) {
+    let templateProps = this._parseProps(template, ctx);
+    let templateTags = this._parseTags(templateProps);
+    let templateText = this._parseText(templateTags, ctx);
+    return templateText;
   }
 
   _parseText(template: string, ctx: {}) {
@@ -83,7 +69,7 @@ export class Templator {
       if (key[1]) {
         const tmplValue: string = key[1].trim();
         const replacedValue: string = key[0].trim();
-        const data = this.get(ctx, tmplValue);
+        const data = getObjectValue(ctx, tmplValue);
         
         tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), data);
       }
@@ -99,7 +85,7 @@ export class Templator {
       if (key[2]) {
         const tmplValue: string = key[2].trim();
         const replacedValue: string = key[1].trim();
-        const data = this.get(ctx, tmplValue);
+        const data = getObjectValue(ctx, tmplValue);
 
         if (typeof data === 'object' && typeof data._element !== 'undefined') {
           tmpl = tmpl.replace(
