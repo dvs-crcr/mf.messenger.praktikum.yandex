@@ -1,3 +1,4 @@
+@import './../../styles/_colors';
 .btn {
   margin-bottom: 0;
   font-size: 14px;
@@ -18,45 +19,39 @@
     outline: 0;
   }
 }
-
 .btn_fullwidth {
   width: 100%;
 }
-
 .btn_primary {
-  background-color: #0099D2;
-  color: #fff;
+  background-color: $button-primary-background;
+  color: $button-primary-color;
   &:hover {
-    background-color: #0088BB;
+    background-color: $button-primary-background-hover;
   }
 }
-
 .btn_warning {
-  background-color: #FF5A4C;
-  color: #fff;
+  background-color: $button-warning-background;
+  color: $button-warning-color;
   &:hover {
-    background-color: #F64434;
+    background-color: $button-warning-background-hover;
   }
 }
-
 .btn_gray {
-  background-color: #dbdbdb;
-  color: #757575;
+  background-color: $button-gray-background;
+  color: $button-gray-color;
   &:hover {
-    background-color: #cccccc;
+    background-color: $button-gray-background-hover;
   }
 }
-
 .btn_link {
   background: transparent;
-  color: #0099D2;
+  color: $link-color;
   text-decoration: underline;
   font-size: 14px;
   &:hover {
     text-decoration: none;
   }
 }
-
 .btn-round {
   border: none;
   display: inline-block;
@@ -72,21 +67,19 @@
     outline: none;
   }
 }
-
 .btn-round_primary {
-  background-color: #0099D2;
-  color: #fff;
+  background-color: $button-primary-background;
+  color: $button-primary-color;
   &:hover {
-    background-color: #0088BB;
-    color: #fff;
+    background-color: $button-primary-background-hover;
+    color: $button-primary-color;
   }
 }
-
 .btn-round_transparent {
-  background-color: transparent;
-  color: #757575;
+  background-color: $button-round-transparent-background;
+  color: $button-round-transparent-color;
   &:hover {
-    background-color: #fbfbfb;
-    color: #0099D2;
+    background-color: $button-round-transparent-background-hover;
+    color: $button-round-transparent-color-hover;
   }
 }
