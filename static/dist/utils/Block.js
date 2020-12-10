@@ -1,5 +1,6 @@
 import { EventBus } from './EventBus.js';
 import { Templator } from './UglyTemplator.js';
+import { default as shallowEqualObjects } from './shallowEqualObjects.js';
 var Block = /** @class */ (function () {
     function Block(tagName, props, template) {
         var _this = this;
@@ -74,8 +75,7 @@ var Block = /** @class */ (function () {
     };
     Block.prototype.componentDidUpdate = function (oldProps, newProps) {
         if (typeof oldProps !== 'undefined' && typeof newProps !== 'undefined') {
-            // если пропсы являются объектами, то сравнение х****ое
-            if (oldProps === newProps) {
+            if (shallowEqualObjects(oldProps, newProps)) {
                 return false;
             }
             else {

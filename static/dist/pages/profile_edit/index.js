@@ -36,7 +36,7 @@ var goBackButton = new Button({
     _template: '<i class="fa fa-arrow-left"></i>'
 });
 var className = 'profile__input';
-var inputs = [
+var inputsList = [
     {
         className: className,
         name: 'email', type: 'email',
@@ -141,7 +141,8 @@ var inputs = [
         ],
         label: 'Телефон'
     }
-].map(function (props) { return new Input(props); });
+];
+var inputs = inputsList.map(function (props) { return new Input(props); });
 var profileListBlocks = inputs.map(function (inputItem) {
     return new Custom('li', {
         attr: { className: 'profile__list' },

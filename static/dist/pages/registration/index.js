@@ -18,7 +18,7 @@ var error_line = new Custom('p', {
     content: 'Не все поля заполнены корректно'
 });
 var className = 'auth__input form__input';
-var inputsParams = [
+var inputsList = [
     {
         className: className,
         name: 'email', type: 'email', placeholder: 'Электронная почта', validate: [
@@ -119,7 +119,7 @@ var inputsParams = [
         ]
     }
 ];
-var inputs = inputsParams.map(function (props) { return new Input(props); });
+var inputs = inputsList.map(function (props) { return new Input(props); });
 var formcontent = __spreadArrays(inputs, [
     new Button({
         className: 'auth__button btn btn_primary btn_fullwidth',

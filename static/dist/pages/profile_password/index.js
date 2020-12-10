@@ -31,7 +31,7 @@ var goBackButton = new Button({
     type: 'button',
     _template: '<i class="fa fa-arrow-left"></i>'
 });
-var inputs = [
+var inputsList = [
     {
         className: 'profile__input', name: 'oldPassword', type: 'password', placeholder: '•••••••••••••••••',
         validate: [
@@ -57,7 +57,8 @@ var inputs = [
         ],
         label: 'Подтверждение пароля'
     }
-].map(function (props) { return new Input(props); });
+];
+var inputs = inputsList.map(function (props) { return new Input(props); });
 var profileListBlocks = inputs.map(function (inputItem) {
     return new Custom('li', {
         attr: { className: 'profile__list' },

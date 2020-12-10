@@ -39,7 +39,7 @@
 .chat__search-input {
   display: inline-block;
   height: 32px;
-  background: #eeeeee;
+  background: #EEEEEE;
   color: #000000;
   border: 0;
   border-radius: 5px;
@@ -130,7 +130,7 @@
   background: #0099D2;
   font-weight: 600;
   font-size: 11px;
-  color: #ffffff;
+  color: #FFFFFF;
   border-radius: 10px;
   padding: 0px 6px;
   min-width: 20px;
@@ -153,7 +153,6 @@
 .chat__list-item_active > .chat__list-item-hover {
   background: rgba(0, 153, 210, 0.15); }
 
-/* Right */
 .chat__right {
   flex-grow: 1;
   display: flex;
@@ -265,7 +264,7 @@
 
 .chat__body-message-text {
   max-width: 400px;
-  background: #f5f5f5;
+  background: #F5F5F5;
   border-radius: 0px 10px 10px 10px;
   padding: 10px 10px 10px 10px;
   color: #1E1E1E;
@@ -307,7 +306,7 @@
 
 .chat__body-message_delivered > .chat__body-message-status {
   display: inline-block;
-  color: #dbdbdb; }
+  color: #DBDBDB; }
 
 .chat__body-message_read > .chat__body-message-status {
   display: inline-block;

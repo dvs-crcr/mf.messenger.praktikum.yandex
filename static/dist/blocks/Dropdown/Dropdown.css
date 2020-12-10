@@ -5,8 +5,8 @@
 .dropdown__list {
   display: none;
   position: absolute;
-  background-color: #ffffff;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  background-color: #FFFFFF;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
   padding: 15px;
   z-index: 1; }
 
@@ -56,7 +56,7 @@
 .dropdown__toggle_active > svg {
   fill: #0099D2; }
 
-.icon-btn {
+.icon-button {
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -64,20 +64,20 @@
   vertical-align: middle;
   margin-right: 15px; }
 
-.icon-btn_add-user {
+.icon-button_add-user {
   background-position: 0px 0px; }
 
-.icon-btn_delete-user {
+.icon-button_delete-user {
   background-position: 0px -20px; }
 
-.icon-btn_delete-chat {
+.icon-button_delete-chat {
   background-position: 0px -40px; }
 
-.icon-btn_media {
+.icon-button_media {
   background-position: 0px -80px; }
 
-.icon-btn_file {
+.icon-button_file {
   background-position: 0px -100px; }
 
-.icon-btn_location {
+.icon-button_location {
   background-position: 0px -60px; }

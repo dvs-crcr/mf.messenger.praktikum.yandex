@@ -10,12 +10,12 @@
 .form__input {
   width: 100%;
   border: none;
-  border-bottom: 1px solid #d8d8d8;
+  border-bottom: 1px solid #DBDBDB;
   line-height: 31px;
   font-size: 13px; }
   .form__input:focus {
     outline: 0;
-    border-bottom-color: #0099d2; }
+    border-bottom-color: #0099D2; }
   .form__input:invalid {
     border-bottom-color: #FF5A4C; }
 

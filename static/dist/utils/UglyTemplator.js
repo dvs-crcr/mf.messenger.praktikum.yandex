@@ -1,3 +1,4 @@
+import { getObjectValue } from './getObjectValue.js';
 var Templator = /** @class */ (function () {
     function Templator(_template) {
         this._template = _template;
@@ -5,32 +6,18 @@ var Templator = /** @class */ (function () {
         this.TAG_TEMPLATE_REGEXP = /\>[\s]*(\{\{(.*?)\}\})[\s]*\</gi;
         this.PROP_TEMPLATE_REGEXP = /\"[\s]*(\{\{(.*?)\}\})[\s]*\"/gi;
     }
-    Templator.prototype.get = function (obj, path, defaultValue) {
-        if (defaultValue === void 0) { defaultValue = ''; }
-        var keys = path.split('.');
-        var result = obj;
-        for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
-            var key = keys_1[_i];
-            result = result[key];
-            if (result === undefined) {
-                return defaultValue;
-            }
-        }
-        return result !== null && result !== void 0 ? result : defaultValue;
-    };
     Templator.prototype.compile = function (ctx) {
-        var _this = this;
         if (typeof this._template === 'undefined') {
             return undefined;
         }
-        var html = this._parseTemplate(this._template, ctx);
+        var html = this.compose(this._template, ctx);
         var block = this._htmlToElement(html);
         var fragment = this._prepareFragment(block);
         var tpls = fragment.querySelectorAll('tpl');
         tpls.forEach(function (tpl) {
             var selector = tpl.getAttribute('selector');
             if (selector !== null) {
-                var data = _this.get(ctx, selector);
+                var data = getObjectValue(ctx, selector);
                 if (Array.isArray(data)) {
                     var chunkFragment_1 = document.createDocumentFragment();
                     data.forEach(function (item) {
@@ -63,11 +50,11 @@ var Templator = /** @class */ (function () {
         template.innerHTML = html.trim();
         return template.content.childNodes;
     };
-    Templator.prototype._parseTemplate = function (template, ctx) {
-        var parsedProps = this._parseProps(template, ctx);
-        var parsedTags = this._parseTags(parsedProps);
-        var parsedText = this._parseText(parsedTags, ctx);
-        return parsedText;
+    Templator.prototype.compose = function (template, ctx) {
+        var templateProps = this._parseProps(template, ctx);
+        var templateTags = this._parseTags(templateProps);
+        var templateText = this._parseText(templateTags, ctx);
+        return templateText;
     };
     Templator.prototype._parseText = function (template, ctx) {
         var tmpl = template;
@@ -76,7 +63,7 @@ var Templator = /** @class */ (function () {
             if (key[1]) {
                 var tmplValue = key[1].trim();
                 var replacedValue = key[0].trim();
-                var data = this.get(ctx, tmplValue);
+                var data = getObjectValue(ctx, tmplValue);
                 tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), data);
             }
         }
@@ -89,7 +76,7 @@ var Templator = /** @class */ (function () {
             if (key[2]) {
                 var tmplValue = key[2].trim();
                 var replacedValue = key[1].trim();
-                var data = this.get(ctx, tmplValue);
+                var data = getObjectValue(ctx, tmplValue);
                 if (typeof data === 'object' && typeof data._element !== 'undefined') {
                     tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), data._element.outerHTML);
                     continue;

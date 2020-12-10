@@ -21,21 +21,21 @@
 
 .btn_primary {
   background-color: #0099D2;
-  color: #fff; }
+  color: #FFFFFF; }
   .btn_primary:hover {
     background-color: #0088BB; }
 
 .btn_warning {
   background-color: #FF5A4C;
-  color: #fff; }
+  color: #FFFFFF; }
   .btn_warning:hover {
     background-color: #F64434; }
 
 .btn_gray {
-  background-color: #dbdbdb;
+  background-color: #DBDBDB;
   color: #757575; }
   .btn_gray:hover {
-    background-color: #cccccc; }
+    background-color: #CCCCCC; }
 
 .btn_link {
   background: transparent;
@@ -60,14 +60,14 @@
 
 .btn-round_primary {
   background-color: #0099D2;
-  color: #fff; }
+  color: #FFFFFF; }
   .btn-round_primary:hover {
     background-color: #0088BB;
-    color: #fff; }
+    color: #FFFFFF; }
 
 .btn-round_transparent {
   background-color: transparent;
   color: #757575; }
   .btn-round_transparent:hover {
-    background-color: #fbfbfb;
+    background-color: #FBFBFB;
     color: #0099D2; }

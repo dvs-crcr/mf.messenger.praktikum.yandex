@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center; }
   .profile__goback:hover {
-    background: #f5f5f5; }
+    background: #F5F5F5; }
 
 .profile__content {
   flex-grow: 1;
@@ -39,7 +39,7 @@
   background: rgba(0, 0, 0, 0.5);
   font-size: 14px;
   font-weight: 600;
-  color: #ffffff;
+  color: #FFFFFF;
   cursor: pointer;
   display: flex;
   width: 128px;
