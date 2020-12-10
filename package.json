@@ -1,6 +1,6 @@
 {
   "name": "mf.messenger.praktikum.yandex",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple messenger with js & css & html",
   "main": "index.js",
   "scripts": {
