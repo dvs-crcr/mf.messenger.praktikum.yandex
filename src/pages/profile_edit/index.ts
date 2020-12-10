@@ -4,7 +4,7 @@ import { renderDOM } from './../../utils/renderDOM.js';
 import { Button } from './../../blocks/Button/Button.js';
 import { Form } from './../../blocks/Form/Form.js';
 import { Custom } from './../../blocks/Custom/Custom.js';
-import { Input } from './../../blocks/Input/Input.js';
+import { Input, InputProps } from './../../blocks/Input/Input.js';
 
 
 function uploadAvatarProfileHandler() {
@@ -42,7 +42,7 @@ const goBackButton = new Button({
 });
 
 const className = 'profile__input';
-const inputs = [
+const inputsList: InputProps[] = [
   {
     className, name: 'email', type: 'email', 
     placeholder: 'johndoe@mail.rus',
@@ -141,7 +141,9 @@ const inputs = [
     ],
     label: 'Телефон'
   }
-].map((props) => new Input(props));
+];
+
+const inputs = inputsList.map((props) => new Input(props));
 
 const profileListBlocks = inputs.map(inputItem => {
   return new Custom('li', { 

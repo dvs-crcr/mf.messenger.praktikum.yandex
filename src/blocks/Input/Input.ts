@@ -2,7 +2,7 @@
 import { Block, BlockPropsMethods } from './../../utils/Block.js';
 import { validator, ValidateListInterface } from './../../utils/Validator.js';
 
-interface InputProps {
+export interface InputProps {
   attr?: {
     [key: string]: any
   }
@@ -13,6 +13,7 @@ interface InputProps {
   value?: string;
   methods?: BlockPropsMethods;
   validate?:ValidateListInterface[];
+  label?: string;
 }
 
 export class Input extends Block {

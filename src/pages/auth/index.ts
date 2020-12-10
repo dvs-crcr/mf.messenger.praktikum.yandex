@@ -3,7 +3,7 @@ import { renderDOM } from './../../utils/renderDOM.js';
 
 import { Form } from './../../blocks/Form/Form.js' 
 import { Button } from './../../blocks/Button/Button.js';
-import { Input } from './../../blocks/Input/Input.js';
+import { Input, InputProps } from './../../blocks/Input/Input.js';
 import { Custom } from './../../blocks/Custom/Custom.js';
 
 const error_line = new Custom('p', {
@@ -13,7 +13,7 @@ const error_line = new Custom('p', {
   content: 'Не все поля заполнены корректно'
 })
 
-const inputsParams = [
+const inputsParams: InputProps[] = [
   { 
     className: 'auth__input form__input',
     name: 'login', 
@@ -44,7 +44,7 @@ const inputsParams = [
   }
 ]
 
-const inputs = inputsParams.map((props) => new Input(props))
+const inputs = inputsParams.map((props) => new Input(props));
 
 const formcontent = [
   ...inputs,
