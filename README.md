@@ -1,5 +1,5 @@
 # Мессенджер
-![](https://img.shields.io/badge/version-0.0.2-blue.svg)
+![](https://img.shields.io/badge/version-0.0.3-blue.svg)
 ![](https://img.shields.io/badge/Course-Middle%20frontend-orange.svg) 
 ![](https://img.shields.io/badge/Cohort-3-green.svg) 
 ![](https://img.shields.io/badge/Sprint-2-green.svg) 
@@ -35,6 +35,11 @@
 * валидация по `focus` / `blur` / `submit`
 * подключен TypeScript
 * подключен шаблонизатор `UglyTemplator`
+
+`2020-12-10`
+* добавлен `.nvmrc`
+* зананы строгие типы для методов класса `Validator`
+* мелкие исправления по итогам ревью
 
 ---
 

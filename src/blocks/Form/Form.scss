@@ -1,39 +1,36 @@
+@import './../../styles/_colors';
 .form__group {
   margin-bottom: 15px;
   &:last-child {
     margin-bottom: 0;
   }
 }
-
 .form__group_flex {
   display: flex;
   justify-content: space-between;
 }
-
 .form__input {
   width: 100%;
   border: none;
-  border-bottom: 1px solid #d8d8d8;
+  border-bottom: 1px solid $default-border;
   line-height: 31px;
   font-size: 13px;
   &:focus {
     outline: 0;
-    border-bottom-color: #0099d2;
+    border-bottom-color: $primary;
   }
   &:invalid {
-    border-bottom-color: #FF5A4C;
+    border-bottom-color: $danger;
   }
 }
-
 .form__input-error-msg {
   font-size: 11px;
-  color: #FF5A4C;
+  color: $danger;
   text-align: right;
 }
-
 .form__text {
   font-size: 13px;
   line-height: 18px;
-  color: #757575;
+  color: $gray;
   margin-bottom: 15px;
 }
