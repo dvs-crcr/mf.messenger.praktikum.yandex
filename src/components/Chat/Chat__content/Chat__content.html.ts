@@ -14,9 +14,9 @@ export default `
           </svg>
       </button>
       <div class="dropdown__list">
-        <button onclick="Chat.showModal('add_user_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_add-user"></i>Добавить пользователя</button>
-        <button onclick="Chat.showModal('delete_user_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_delete-user"></i>Удалить пользователя</button>
-        <button onclick="Chat.showModal('delete_chat_modal');" class="dropdown__list-button"><i class="icon-btn icon-btn_delete-chat"></i>Удалить чат</button>
+        <button onclick="Chat.showModal('add_user_modal');" class="dropdown__list-button"><i class="icon-button icon-button_add-user"></i>Добавить пользователя</button>
+        <button onclick="Chat.showModal('delete_user_modal');" class="dropdown__list-button"><i class="icon-button icon-button_delete-user"></i>Удалить пользователя</button>
+        <button onclick="Chat.showModal('delete_chat_modal');" class="dropdown__list-button"><i class="icon-button icon-button_delete-chat"></i>Удалить чат</button>
       </div>
     </div>
   </div>
@@ -26,9 +26,9 @@ export default `
   <div class="dropdown top_left">
     <button type="button" class="dropdown__toggle chat__message-attach"><i class="fa fa-paperclip"></i></button>
     <div class="dropdown__list">
-      <button class="dropdown__list-button"><i class="icon-btn icon-btn_media"></i>Фото и Видео</button>
-      <button class="dropdown__list-button"><i class="icon-btn icon-btn_file"></i>Файл</button>
-      <button class="dropdown__list-button"><i class="icon-btn icon-btn_location"></i>Локация</button>
+      <button class="dropdown__list-button"><i class="icon-button icon-button_media"></i>Фото и Видео</button>
+      <button class="dropdown__list-button"><i class="icon-button icon-button_file"></i>Файл</button>
+      <button class="dropdown__list-button"><i class="icon-button icon-button_location"></i>Локация</button>
     </div>
   </div>
   <input class="chat__message-text" name="message" type="text" placeholder="Сообщение">
