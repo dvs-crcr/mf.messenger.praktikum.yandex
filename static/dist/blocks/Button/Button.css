@@ -1,4 +1,4 @@
-.btn {
+.button {
   margin-bottom: 0;
   font-size: 14px;
   font-weight: 400;
@@ -13,39 +13,39 @@
   padding: 0px 15px;
   margin-top: 5px;
   transition: all 0.2s ease-in; }
-  .btn:active, .btn:focus {
+  .button:active, .button:focus {
     outline: 0; }
 
-.btn_fullwidth {
+.button_fullwidth {
   width: 100%; }
 
-.btn_primary {
+.button_primary {
   background-color: #0099D2;
   color: #FFFFFF; }
-  .btn_primary:hover {
+  .button_primary:hover {
     background-color: #0088BB; }
 
-.btn_warning {
+.button_warning {
   background-color: #FF5A4C;
   color: #FFFFFF; }
-  .btn_warning:hover {
+  .button_warning:hover {
     background-color: #F64434; }
 
-.btn_gray {
+.button_gray {
   background-color: #DBDBDB;
   color: #757575; }
-  .btn_gray:hover {
+  .button_gray:hover {
     background-color: #CCCCCC; }
 
-.btn_link {
+.button_link {
   background: transparent;
   color: #0099D2;
   text-decoration: underline;
   font-size: 14px; }
-  .btn_link:hover {
+  .button_link:hover {
     text-decoration: none; }
 
-.btn-round {
+.button-round {
   border: none;
   display: inline-block;
   width: 30px;
@@ -55,19 +55,19 @@
   transition: all 0.2s ease-in;
   text-align: center;
   cursor: pointer; }
-  .btn-round:focus, .btn-round:active {
+  .button-round:focus, .button-round:active {
     outline: none; }
 
-.btn-round_primary {
+.button-round_primary {
   background-color: #0099D2;
   color: #FFFFFF; }
-  .btn-round_primary:hover {
+  .button-round_primary:hover {
     background-color: #0088BB;
     color: #FFFFFF; }
 
-.btn-round_transparent {
+.button-round_transparent {
   background-color: transparent;
   color: #757575; }
-  .btn-round_transparent:hover {
+  .button-round_transparent:hover {
     background-color: #FBFBFB;
     color: #0099D2; }

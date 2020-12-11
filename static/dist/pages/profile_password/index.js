@@ -27,7 +27,7 @@ function submitProfileHandler(event) {
     }
 }
 var goBackButton = new Button({
-    className: 'btn-round btn-round_primary',
+    className: 'button-round button-round_primary',
     type: 'button',
     _template: '<i class="fa fa-arrow-left"></i>'
 });
@@ -69,7 +69,7 @@ var profileListBlocks = inputs.map(function (inputItem) {
     });
 });
 var saveButton = new Button({
-    className: 'btn btn_primary profile__btn-save',
+    className: 'button button_primary profile__button-save',
     type: 'submit',
     content: 'Сохранить'
 });

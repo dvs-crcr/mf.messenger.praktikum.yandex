@@ -122,7 +122,7 @@ var inputsList = [
 var inputs = inputsList.map(function (props) { return new Input(props); });
 var formcontent = __spreadArrays(inputs, [
     new Button({
-        className: 'auth__button btn btn_primary btn_fullwidth',
+        className: 'auth__button button button_primary button_fullwidth',
         type: 'submit',
         content: 'Зарегистрировать'
     })
