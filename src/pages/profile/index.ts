@@ -24,7 +24,7 @@ const profilePage = new Profile({
   goBackProfileHandler,
   uploadAvatarProfileHandler,
   goBackButton: new Button({
-    className: 'btn-round btn-round_primary', type: 'button', _template: '<i class="fa fa-arrow-left"></i>'
+    className: 'button-round button-round_primary', type: 'button', _template: '<i class="fa fa-arrow-left"></i>'
   }),
   avatar: '/assets/img/avatar_profile_128x128.png',
   title: 'John Ivanov',

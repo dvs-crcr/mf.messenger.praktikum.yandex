@@ -36,7 +36,7 @@ function submitProfileHandler(event: Event) {
 }
 
 const goBackButton = new Button({
-  className: 'btn-round btn-round_primary',
+  className: 'button-round button-round_primary',
   type: 'button',
   _template: '<i class="fa fa-arrow-left"></i>'
 });
@@ -159,7 +159,7 @@ const profileListBlocks = inputs.map(inputItem => {
 });
 
 const saveButton = new Button({
-  className: 'btn btn_primary profile__btn-save',
+  className: 'button button_primary profile__button-save',
   type: 'submit',
   content: 'Сохранить'
 });

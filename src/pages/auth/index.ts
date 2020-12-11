@@ -49,7 +49,7 @@ const inputs = inputsParams.map((props) => new Input(props));
 const formcontent = [
   ...inputs,
   new Button({
-    className: 'auth__button btn btn_primary btn_fullwidth',
+    className: 'auth__button button button_primary button_fullwidth',
     type: 'submit',
     content: 'Войти'
   })
