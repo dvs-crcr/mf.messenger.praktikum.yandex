@@ -1,5 +1,5 @@
 @import './../../styles/_colors';
-.btn {
+.button {
   margin-bottom: 0;
   font-size: 14px;
   font-weight: 400;
@@ -19,31 +19,31 @@
     outline: 0;
   }
 }
-.btn_fullwidth {
+.button_fullwidth {
   width: 100%;
 }
-.btn_primary {
+.button_primary {
   background-color: $button-primary-background;
   color: $button-primary-color;
   &:hover {
     background-color: $button-primary-background-hover;
   }
 }
-.btn_warning {
+.button_warning {
   background-color: $button-warning-background;
   color: $button-warning-color;
   &:hover {
     background-color: $button-warning-background-hover;
   }
 }
-.btn_gray {
+.button_gray {
   background-color: $button-gray-background;
   color: $button-gray-color;
   &:hover {
     background-color: $button-gray-background-hover;
   }
 }
-.btn_link {
+.button_link {
   background: transparent;
   color: $link-color;
   text-decoration: underline;
@@ -52,7 +52,7 @@
     text-decoration: none;
   }
 }
-.btn-round {
+.button-round {
   border: none;
   display: inline-block;
   width: 30px;
@@ -67,7 +67,7 @@
     outline: none;
   }
 }
-.btn-round_primary {
+.button-round_primary {
   background-color: $button-primary-background;
   color: $button-primary-color;
   &:hover {
@@ -75,7 +75,7 @@
     color: $button-primary-color;
   }
 }
-.btn-round_transparent {
+.button-round_transparent {
   background-color: $button-round-transparent-background;
   color: $button-round-transparent-color;
   &:hover {
