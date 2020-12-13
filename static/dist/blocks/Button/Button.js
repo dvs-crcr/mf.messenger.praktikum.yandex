@@ -19,13 +19,14 @@ var Button = /** @class */ (function (_super) {
         return _super.call(this, 'button', props) || this;
     }
     Button.prototype.render = function (template, props) {
-        var className = props.className, type = props.type, value = props.value, _a = props.methods, methods = _a === void 0 ? {} : _a, _template = props._template;
+        var className = props.className, type = props.type, value = props.value, text = props.text, _a = props.methods, methods = _a === void 0 ? {} : _a, _template = props._template;
         if (typeof _template !== 'undefined') {
             template = _template;
         }
         Object.assign(props, {
             attr: { className: className, type: type, value: value },
-            methods: methods
+            methods: methods,
+            text: text
         });
         return { template: template, props: props };
     };

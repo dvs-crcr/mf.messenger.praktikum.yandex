@@ -3,7 +3,7 @@ var Templator = /** @class */ (function () {
     function Templator(_template) {
         this._template = _template;
         this.TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
-        this.TAG_TEMPLATE_REGEXP = /\>[\s]*(\{\{(.*?)\}\})[\s]*\</gi;
+        this.TAG_TEMPLATE_REGEXP = /(\{\{(.*?)\}\})/gi;
         this.PROP_TEMPLATE_REGEXP = /\"[\s]*(\{\{(.*?)\}\})[\s]*\"/gi;
     }
     Templator.prototype.compile = function (ctx) {
@@ -14,8 +14,8 @@ var Templator = /** @class */ (function () {
         var block = this._htmlToElement(html);
         var fragment = this._prepareFragment(block);
         var tpls = fragment.querySelectorAll('tpl');
-        tpls.forEach(function (tpl) {
-            var selector = tpl.getAttribute('selector');
+        var _loop_1 = function (i) {
+            var selector = tpls[i].textContent;
             if (selector !== null) {
                 var data = getObjectValue(ctx, selector);
                 if (Array.isArray(data)) {
@@ -25,24 +25,27 @@ var Templator = /** @class */ (function () {
                             chunkFragment_1.appendChild(item.getContent());
                         }
                     });
-                    tpl.replaceWith(chunkFragment_1);
+                    tpls[i].replaceWith(chunkFragment_1);
                 }
                 if (typeof data === 'string') {
                     var textnode = document.createTextNode(data);
-                    tpl.replaceWith(textnode);
+                    tpls[i].replaceWith(textnode);
                 }
                 if (typeof data === 'object' && typeof data._element !== 'undefined') {
-                    tpl.replaceWith(data.getContent());
+                    tpls[i].replaceWith(data.getContent());
                 }
             }
-        });
+        };
+        for (var i = 0; i < tpls.length; i++) {
+            _loop_1(i);
+        }
         return fragment;
     };
     Templator.prototype._prepareFragment = function (block) {
         var fragment = document.createDocumentFragment();
-        block.forEach(function (item) {
-            fragment.appendChild(item);
-        });
+        for (var i = 0; i < block.length; i++) {
+            fragment.appendChild(block[i]);
+        }
         return fragment;
     };
     Templator.prototype._htmlToElement = function (html) {
@@ -53,42 +56,34 @@ var Templator = /** @class */ (function () {
     Templator.prototype.compose = function (template, ctx) {
         var templateProps = this._parseProps(template, ctx);
         var templateTags = this._parseTags(templateProps);
-        var templateText = this._parseText(templateTags, ctx);
-        return templateText;
-    };
-    Templator.prototype._parseText = function (template, ctx) {
-        var tmpl = template;
-        var key = null;
-        while ((key = this.TEMPLATE_REGEXP.exec(tmpl))) {
-            if (key[1]) {
-                var tmplValue = key[1].trim();
-                var replacedValue = key[0].trim();
-                var data = getObjectValue(ctx, tmplValue);
-                tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), data);
-            }
-        }
-        return tmpl;
+        return templateTags;
     };
     Templator.prototype._parseProps = function (template, ctx) {
         var tmpl = template;
         var key = null;
-        while ((key = this.PROP_TEMPLATE_REGEXP.exec(tmpl))) {
+        var parserArr = [];
+        while ((key = this.PROP_TEMPLATE_REGEXP.exec(tmpl)) !== null) {
+            if (key.index === this.PROP_TEMPLATE_REGEXP.lastIndex) {
+                this.PROP_TEMPLATE_REGEXP.lastIndex++;
+            }
             if (key[2]) {
                 var tmplValue = key[2].trim();
                 var replacedValue = key[1].trim();
                 var data = getObjectValue(ctx, tmplValue);
-                if (typeof data === 'object' && typeof data._element !== 'undefined') {
-                    tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), data._element.outerHTML);
-                    continue;
-                }
-                if (typeof data === 'function') {
-                    window[tmplValue] = data;
-                    tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), "window." + tmplValue + "(event)");
-                    continue;
-                }
-                tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), data);
+                parserArr.push({ tmplValue: tmplValue, replacedValue: replacedValue, data: data });
             }
         }
+        parserArr.forEach(function (_a) {
+            var tmplValue = _a.tmplValue, replacedValue = _a.replacedValue, data = _a.data;
+            if (typeof data === 'object' && typeof data._element !== 'undefined') {
+                tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), data._element.outerHTML);
+            }
+            if (typeof data === 'function') {
+                window[tmplValue] = data;
+                tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), "window." + tmplValue + "(event)");
+            }
+            tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), data);
+        });
         return tmpl;
     };
     Templator.prototype._parseTags = function (template) {
@@ -98,7 +93,7 @@ var Templator = /** @class */ (function () {
             if (key[2]) {
                 var tmplValue = key[2].trim();
                 var replacedValue = key[1].trim();
-                tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), "<tpl selector=\"" + tmplValue + "\"></tpl>");
+                tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), "<tpl>" + tmplValue + "</tpl>");
             }
         }
         return tmpl;
