@@ -2,7 +2,7 @@ import { getObjectValue } from './getObjectValue.js'
 
 export class Templator {
   TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
-  TAG_TEMPLATE_REGEXP = /\>[\s]*(\{\{(.*?)\}\})[\s]*\</gi;
+  TAG_TEMPLATE_REGEXP = /(\{\{(.*?)\}\})/gi;
   PROP_TEMPLATE_REGEXP = /\"[\s]*(\{\{(.*?)\}\})[\s]*\"/gi;
 
   constructor(private _template: string | undefined) {}
@@ -15,8 +15,8 @@ export class Templator {
     let block = this._htmlToElement(html);
     let fragment = this._prepareFragment(block);
     let tpls = fragment.querySelectorAll('tpl');
-    tpls.forEach((tpl) => {
-      let selector = tpl.getAttribute('selector');
+    for (let i = 0; i < tpls.length; i++) {
+      let selector = tpls[i].textContent;
       if (selector !== null) {
         const data = getObjectValue(ctx, selector);
         if (Array.isArray(data)) {
@@ -26,25 +26,25 @@ export class Templator {
               chunkFragment.appendChild(item.getContent())
             }
           })
-          tpl.replaceWith(chunkFragment);
+          tpls[i].replaceWith(chunkFragment);
         }
         if (typeof data === 'string') {
           let textnode = document.createTextNode(data);
-          tpl.replaceWith(textnode);
+          tpls[i].replaceWith(textnode);
         }
         if (typeof data === 'object' && typeof data._element !== 'undefined') {
-          tpl.replaceWith(data.getContent());
+          tpls[i].replaceWith(data.getContent());
         }
       }
-    })
-    return fragment
+    }
+    return fragment;
   }
 
   _prepareFragment(block: NodeList) {
     let fragment = document.createDocumentFragment();
-    block.forEach((item) => {
-      fragment.appendChild(item);
-    })
+    for (let i = 0; i < block.length; i++) {
+      fragment.appendChild(block[i]);
+    }
     return fragment;
   }
 
@@ -57,74 +57,57 @@ export class Templator {
   compose(template: string, ctx: {}) {
     let templateProps = this._parseProps(template, ctx);
     let templateTags = this._parseTags(templateProps);
-    let templateText = this._parseText(templateTags, ctx);
-    return templateText;
-  }
-
-  _parseText(template: string, ctx: {}) {
-    let tmpl = template;
-    let key = null;
-
-    while ((key = this.TEMPLATE_REGEXP.exec(tmpl))) {
-      if (key[1]) {
-        const tmplValue: string = key[1].trim();
-        const replacedValue: string = key[0].trim();
-        const data = getObjectValue(ctx, tmplValue);
-        
-        tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), data);
-      }
-    }
-    return tmpl;
+    return templateTags;
   }
 
   _parseProps(template: string, ctx: {}) {
     let tmpl = template;
     let key = null;
-
-    while ((key = this.PROP_TEMPLATE_REGEXP.exec(tmpl))) {
+    let parserArr = [];
+    while ((key = this.PROP_TEMPLATE_REGEXP.exec(tmpl)) !== null) {
+      if (key.index === this.PROP_TEMPLATE_REGEXP.lastIndex) {
+        this.PROP_TEMPLATE_REGEXP.lastIndex++;
+      }
       if (key[2]) {
         const tmplValue: string = key[2].trim();
         const replacedValue: string = key[1].trim();
         const data = getObjectValue(ctx, tmplValue);
-
-        if (typeof data === 'object' && typeof data._element !== 'undefined') {
-          tmpl = tmpl.replace(
-            new RegExp(replacedValue, 'gi'),
-            data._element.outerHTML
-          );
-          continue;
-        }
-
-        if (typeof data === 'function') {
-          (<any>window)[tmplValue] = data;
-          tmpl = tmpl.replace(
-            new RegExp(replacedValue, 'gi'),
-            `window.${tmplValue}(event)`
-          );
-          continue;
-        }
-        tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), data);
+        parserArr.push({ tmplValue, replacedValue, data })
       }
     }
+    parserArr.forEach(({ tmplValue, replacedValue, data }) => {
+      if (typeof data === 'object' && typeof data._element !== 'undefined') {
+        tmpl = tmpl.replace(
+          new RegExp(replacedValue, 'gi'),
+          data._element.outerHTML
+        );
+      } 
+      if (typeof data === 'function') {
+        (<any>window)[tmplValue] = data;
+        tmpl = tmpl.replace(
+          new RegExp(replacedValue, 'gi'),
+          `window.${tmplValue}(event)`
+        );
+      }
+      tmpl = tmpl.replace(new RegExp(replacedValue, 'gi'), data);
+    });
     return tmpl;
   }
 
   _parseTags(template: string) {
     let tmpl = template;
     let key = null;
-
     while ((key = this.TAG_TEMPLATE_REGEXP.exec(tmpl))) {
       if (key[2]) {
         const tmplValue: string = key[2].trim();
         const replacedValue: string = key[1].trim();
         tmpl = tmpl.replace(
           new RegExp(replacedValue, 'gi'), 
-          `<tpl selector="${tmplValue}"></tpl>`
+          `<tpl>${tmplValue}</tpl>`
         );
       }
     }
     return tmpl;
   }
-
 
 }
