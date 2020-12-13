@@ -1,9 +1,11 @@
 import { Block, BlockPropsMethods } from './../../utils/Block.js';
 
-type ButtonProps = {
+export type ButtonProps = {
+  [key: string]: any;
   className?: string;
   type?: 'submit' | 'reset' | 'button';
   value?: string;
+  text?: string;
   methods?: BlockPropsMethods;
   _template?: string;
   content?: Block[] | string;
@@ -15,7 +17,7 @@ export class Button extends Block {
   }
 
   render(template: string, props: ButtonProps) {
-    const { className, type, value, methods = {}, _template } = props
+    const { className, type, value, text, methods = {}, _template } = props
 
     if (typeof _template !== 'undefined') {
       template = _template
@@ -23,7 +25,8 @@ export class Button extends Block {
 
     Object.assign(props, {
       attr: { className, type, value },
-      methods
+      methods,
+      text
     });
     
     return { template, props }
