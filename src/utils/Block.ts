@@ -159,7 +159,6 @@ export class Block {
     this._setAttributes();
     this._addEvents();
     if (block !== undefined && typeof this._element !== 'undefined') {
-
       this._element.textContent = '';
       this._element.appendChild(block);
     }
