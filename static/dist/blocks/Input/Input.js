@@ -33,7 +33,7 @@ var Input = /** @class */ (function (_super) {
     }
     Input.prototype.render = function (template, props) {
         var _this = this;
-        var attr = props.attr, className = props.className, name = props.name, type = props.type, placeholder = props.placeholder, value = props.value, _a = props.validate, validate = _a === void 0 ? [] : _a, _b = props.methods, methods = _b === void 0 ? {} : _b;
+        var attr = props.attr, _a = props.className, className = _a === void 0 ? 'form__input' : _a, name = props.name, type = props.type, placeholder = props.placeholder, value = props.value, _b = props.validate, validate = _b === void 0 ? [] : _b, _c = props.methods, methods = _c === void 0 ? {} : _c;
         if (validate.length > 0) {
             Object.assign(methods, {
                 focus: function () {
