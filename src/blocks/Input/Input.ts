@@ -23,7 +23,7 @@ export class Input extends Block {
   }
 
   render(template: string, props: InputProps) {
-    const { attr, className, name, type, placeholder, value, validate = [], methods = {} } = props
+    const { attr, className = 'form__input', name, type, placeholder, value, validate = [], methods = {} } = props
 
     if (validate.length > 0) {
       Object.assign(methods, {
