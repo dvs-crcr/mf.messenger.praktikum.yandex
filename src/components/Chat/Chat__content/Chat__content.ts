@@ -6,6 +6,7 @@ import { Dropdown } from './../../../blocks/Dropdown/Dropdown.js';
 import { Form } from './../../../blocks/Form/Form.js';
 import { Button, ButtonProps } from './../../../blocks/Button/Button.js';
 import { Input } from './../../../blocks/Input/Input.js';
+import { Modal } from './../../../blocks/Modal/Modal.js';
 
 export interface ChatContentProps {
   className?: string;
@@ -31,24 +32,83 @@ export class Chat__content extends Block {
 <path d="M3 13.5C3 14.3284 2.32843 15 1.5 15C0.671573 15 0 14.3284 0 13.5C0 12.6716 0.671573 12 1.5 12C2.32843 12 3 12.6716 3 13.5Z" />
 <path d="M3 7.5C3 8.32843 2.32843 9 1.5 9C0.671573 9 0 8.32843 0 7.5C0 6.67157 0.671573 6 1.5 6C2.32843 6 3 6.67157 3 7.5Z" />
 </svg>`;
+    const addUserInput = new Input({ 
+      name: 'login', type: 'text', placeholder: 'Логин', 
+      validate: [{ type: 'notEmpty', msg: 'Поле не должно быть пустым' }]
+    });
+    const addUserButton = new Button({
+      className: ['button', 'button_primary', 'button_fullwidth', 'mt20'].join(' '), type: 'submit', content: 'Добавить'
+    });
+    const addUserModal = new Modal({
+      header: 'Добавить пользователя',
+      modalContent: new Form({ attr: { className: 'form', method: 'POST' }, content: [ addUserInput, addUserButton ] })
+    });
+    const delUserInput = new Input({ 
+      name: 'login', type: 'text', placeholder: 'Логин', 
+      validate: [{ type: 'notEmpty', msg: 'Поле не должно быть пустым' }]
+    });
+    const delUserButton = new Button({
+      className: ['button', 'button_warning', 'button_fullwidth', 'mt20'].join(' '), type: 'submit', content: 'Удалить'
+    });
+    const delUserModal = new Modal({
+      header: 'Удалить пользователя',
+      modalContent: new Form({ attr: { className: 'form', method: 'POST' }, content: [ delUserInput, delUserButton ] })
+    });
+    const delChatModal = new Modal({
+      header: 'Удалить чат',
+      modalContent: new Form(
+        { 
+          attr: { className: 'form', method: 'POST' }, 
+          content: [ 
+            new Custom('p', {
+              attr: { className: 'form__text' },
+              content: 'Вы уверены, что желаете удалить текущий чат?'
+            }),
+            new Custom('div', {
+              attr: { className: 'form__group form__group_flex' },
+              content: [
+                new Button({
+                  className: 'button button_gray',
+                  type: 'button', 
+                  content: 'Нет, я передумал',
+                  methods: { 
+                    click: () => {
+                      delChatModal.hide()
+                    }
+                  }
+                }),
+                new Button({
+                  className: 'button button_warning',
+                  type: 'submit', 
+                  content: 'Да!'
+                })
+              ]
+            })
+          ]
+        }
+      )
+    });
     const headerDrpdownButtonsList: ButtonProps[] = [
       {
         className: 'dropdown__list-button',
         _template: `<span><i class="icon-button icon-button_add-user"></i>{{text}}</span>`,
         text: 'Добавить пользователя',
-        type: 'button'
+        type: 'button',
+        methods: { click: () => addUserModal.show() }
       },
       {
         className: 'dropdown__list-button',
         _template: `<span><i class="icon-button icon-button_delete-user"></i>{{text}}</span>`,
         text: 'Удалить пользователя',
-        type: 'button'
+        type: 'button',
+        methods: { click: () => delUserModal.show() }
       },
       {
         className: 'dropdown__list-button',
         _template: `<span><i class="icon-button icon-button_delete-chat"></i>{{text}}</span>`,
         text: 'Удалить чат',
-        type: 'button'
+        type: 'button',
+        methods: { click: () => delChatModal.show() }
       }
     ];
     const headerDrpdownButtonsListBlocks = headerDrpdownButtonsList.map((button) => new Button({ ...button }));
