@@ -1,8 +1,8 @@
 # Мессенджер
 ![](https://img.shields.io/badge/version-0.0.3-blue.svg)
 ![](https://img.shields.io/badge/Course-Middle%20frontend-orange.svg) 
-![](https://img.shields.io/badge/Cohort-3-green.svg) 
-![](https://img.shields.io/badge/Sprint-2-green.svg) 
+![](https://img.shields.io/badge/Cohort-4-green.svg) 
+![](https://img.shields.io/badge/Sprint-3-green.svg) 
 
 **Мессенджер** - программный комплекс, который позволяет пользователям обмениваться мгновенными сообщениями в режиме реального времени. Мессенджер использует только технологии JavaScript, HTML и CSS. Никаких сторонних библиотек и фреймворков.
 
