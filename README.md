@@ -42,4 +42,4 @@ $ npm run build
 
 ---
 
-Список изменений: [HISTORY.md](https://github.com/dvs-crcr/mf.messenger.praktikum.yandex/blob/main/HISORY.md).
+История изменений: [HISTORY.md](https://github.com/dvs-crcr/mf.messenger.praktikum.yandex/blob/main/HISTORY.md).
