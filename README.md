@@ -14,12 +14,16 @@
 ---
 
 ## Запуск в режиме отладки
-`npm run dev`
+```bash
+$ npm run dev
+```
 
 ---
 
 ## Cборка проекта
-`npm run build`
+```bash
+$ npm run build
+```
 
 ---
 
