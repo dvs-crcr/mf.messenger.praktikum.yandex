@@ -8,7 +8,7 @@ const errorPage = new Errors({
   header: '500',
   p1: 'Что-то пошло не так :(',
   p2: 'Мы уже решаем проблему',
-  errorsGoBackHander: (event: Event) => {
+  errorsGoBackHandler: (event: Event) => {
     event.preventDefault();
     window.history.go(-1);
   }

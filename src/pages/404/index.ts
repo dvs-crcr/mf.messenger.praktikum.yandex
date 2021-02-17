@@ -8,7 +8,7 @@ const errorPage = new Errors({
   header: '404',
   p1: 'Страница не найдена',
   p2: 'Возможно вы заблудились?',
-  errorsGoBackHander: (event: Event) => {
+  errorsGoBackHandler: (event: Event) => {
     event.preventDefault();
     window.history.go(-1);
   }
