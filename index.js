@@ -10,13 +10,13 @@ class App {
   init = async () => {
     const { port = 3000, routes = {} } = this._options;
     await this._init_routes(routes);
-    await this._listen(port)
+    await this._listen(port);
   }
 
   _init_routes = async (routes) => {
     routes.forEach((route) => {
       this._app.use(...route);
-    })
+    });
   }
 
   _listen = async (port) => {
@@ -36,10 +36,9 @@ class App {
   const appServer = new App({
     routes: [
       ['/src', express.static(path.join(__dirname, 'src'))],
-      ['/', express.static(path.join(__dirname, 'static'))]
+      ['/', express.static(path.join(__dirname, 'static'))],
+      ['/dist', express.static(path.join(__dirname, 'build'))],
     ],
   });
   await appServer.init();
 })();
-
-

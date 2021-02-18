@@ -7,7 +7,7 @@ import { Button } from './../../blocks/Button/Button.js';
 import { Custom } from '../../blocks/Custom/Custom.js';
 
 function uploadAvatarProfileHandler() {
-  console.log('show modal')
+  console.log('show modal');
 };
 
 function goBackProfileHandler() {
@@ -29,6 +29,6 @@ const profilePage = new Profile({
   avatar: '/assets/img/avatar_profile_128x128.png',
   title: 'John Ivanov',
   profileContent
-})
+});
 
 renderDOM('.root', profilePage, 'Профиль');
