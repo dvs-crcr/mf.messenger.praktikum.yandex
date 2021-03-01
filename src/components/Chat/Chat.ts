@@ -38,7 +38,8 @@ export class Chat extends Block {
       return new Chat__list(itemProps);
     });
 
-    const chatListContent = new Custom('ul', {
+    const chatListContent = new Custom({
+      tagName: 'ul',
       attr: {
         className: listClassName
       },

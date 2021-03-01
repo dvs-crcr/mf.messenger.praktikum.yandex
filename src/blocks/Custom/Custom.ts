@@ -2,6 +2,7 @@ import { Block, BlockPropsMethods } from './../../utils/Block.js';
 
 type CustomProps = {
   [key: string]: any;
+  tagName?: string;
   attr?: {
     className?: string;
     [key: string]: any
@@ -13,8 +14,8 @@ type CustomProps = {
 
 export class Custom extends Block {
 
-  constructor(tagName: string, props: CustomProps = {}) {
-    super(tagName, props);
+  constructor(props: CustomProps = { tagName: 'div' }) {
+    super(props.tagName, props);
   }
 
   render(template: string, props: CustomProps) {

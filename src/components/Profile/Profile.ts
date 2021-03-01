@@ -5,7 +5,6 @@ type ProfileProps = {
   attr?: {
     className?: string
   };
-  goBackProfileHandler?: Function;
   uploadAvatarProfileHandler?: Function;
   goBackButton?: Block;
   avatar?: string;

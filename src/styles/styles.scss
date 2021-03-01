@@ -16,9 +16,14 @@ body, html {
   scrollbar-width: 5px;
   scrollbar-color: $scrollbar-color;
 }
-.index {
-  margin: 50px;
-  font-size: 1.2em;
+.root {
+  height: 100%;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 a {
   color: $link-color;

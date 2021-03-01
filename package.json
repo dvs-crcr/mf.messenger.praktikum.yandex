@@ -4,7 +4,8 @@
   "description": "Simple messenger with js & css & html",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && npm run sass",
+    "build": "npm run buildts && npm run sass",
+    "buildts": "tsc",
     "dev": "node index.js --dev",
     "start": "node index.js",
     "sass": "node-sass src -o static/dist",

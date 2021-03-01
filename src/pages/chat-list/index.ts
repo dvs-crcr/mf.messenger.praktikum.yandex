@@ -1,7 +1,5 @@
 import { Chat } from './../../components/Chat/Chat.js';
-import { renderDOM } from './../../utils/renderDOM.js';
-
-import { chatList } from './../chat/data.js'
+import { chatList } from './../chat/index.data.js'
 
 const activeItemClass = 'chat__list-item_active';
 
@@ -20,6 +18,6 @@ const chatListContent = new Chat({
       }
     }
   }
-})
+});
 
-renderDOM('.root', chatListContent, 'Список чатов')
+export default chatListContent;

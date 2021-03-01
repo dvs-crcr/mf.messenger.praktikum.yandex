@@ -1,6 +1,6 @@
 export default 
 `
-<aside class="profile__goback" onclick="{{goBackProfileHandler}}">
+<aside class="profile__goback" onclick="window.router.back();">
   {{goBackButton}}
 </aside>
 <div class="profile__content">

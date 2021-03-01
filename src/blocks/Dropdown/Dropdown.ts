@@ -17,7 +17,7 @@ export class Dropdown extends Block {
   }
   render(template: string, props: DropdownProps) {
     const { className = 'dropdown', buttonTemplate, buttonClasses = [], listContent } = props;
-    const dropdownList = new Custom('div', {
+    const dropdownList = new Custom({
       attr: { className: 'dropdown__list' },
       content: listContent
     });

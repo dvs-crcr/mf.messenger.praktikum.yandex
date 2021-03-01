@@ -1,17 +1,24 @@
-import { Errors } from './../../components/Errors/Errors.js';
-import { renderDOM } from './../../utils/renderDOM.js';
+import { Errors, ErrorsProps } from './../../components/Errors/Errors.js';
+import { Page } from './../../utils/Page.js';
 
-const errorPage = new Errors({
-  attr: {
-    class: 'error-page'
-  },
-  header: '500',
-  p1: 'Что-то пошло не так :(',
-  p2: 'Мы уже решаем проблему',
-  errorsGoBackHander: (event: Event) => {
-    event.preventDefault();
-    window.history.go(-1);
+class ErrorPage extends Page {
+  page: Errors;
+  state: ErrorsProps = {};
+
+  constructor() {
+    super();
+    this.page = new Errors({
+      attr: { className: 'wrapper' },
+      header: '500',
+      p1: 'Что-то пошло не так :(',
+      p2: 'Мы уже решаем проблему'
+    });
   }
-});
 
-renderDOM('.root', errorPage, '500 - Ошибка сервера')
+  render() {
+    return this.page
+  }
+
+}
+
+export default ErrorPage;

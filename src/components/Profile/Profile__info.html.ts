@@ -26,8 +26,8 @@ export default `
   </li>
 </ul>
 <ul class="profile__list profile__list-links">
-  <li><a class="profile__link" href="/profile_edit.html">Изменить данные</a></li>
-  <li><a class="profile__link" href="/profile_password.html">Изменить пароль</a></li>
+  <li><a class="profile__link" href="/profile_edit.html" onclick="window.router.go('/profile_edit.html'); return false;">Изменить данные</a></li>
+  <li><a class="profile__link" href="/profile_password.html" onclick="window.router.go('/profile_password.html'); return false;">Изменить пароль</a></li>
   <li><a class="profile__link profile__link_logout" href="/auth.html">Выйти</a></li>
 </ul>
 `

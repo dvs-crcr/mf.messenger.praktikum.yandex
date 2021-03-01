@@ -1,7 +1,5 @@
 import { Chat } from './../../components/Chat/Chat.js';
-import { renderDOM } from './../../utils/renderDOM.js';
-
-import { chatList, chatContentData } from './data.js'
+import { chatList, chatContentData } from './index.data.js'
 
 const chatListContent = new Chat({
   className: 'chat',
@@ -13,4 +11,4 @@ const chatListContent = new Chat({
   chatContentData
 })
 
-renderDOM('.root', chatListContent, 'Чат')
+export default chatListContent;

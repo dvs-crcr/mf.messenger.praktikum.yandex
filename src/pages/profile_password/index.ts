@@ -1,5 +1,4 @@
 import { Profile } from './../../components/Profile/Profile.js';
-import { renderDOM } from './../../utils/renderDOM.js';
 
 import { Button } from './../../blocks/Button/Button.js';
 import { Form } from './../../blocks/Form/Form.js';
@@ -9,12 +8,6 @@ import { Input, InputProps } from './../../blocks/Input/Input.js';
 
 function uploadAvatarProfileHandler() {
   window.location.href = '/profile.html';
-};
-
-
-function goBackProfileHandler() {
-  window.history.go(-1);
-  return false;
 };
 
 function submitProfileHandler(event: Event) {
@@ -68,7 +61,8 @@ const inputsList: InputProps[] = [
 const inputs = inputsList.map((props) => new Input(props));
 
 const profileListBlocks = inputs.map(inputItem => {
-  return new Custom('li', { 
+  return new Custom({
+    tagName: 'li', 
     attr: { className: 'profile__list' },
     label: inputItem.props.label,
     input: [ inputItem ],
@@ -87,11 +81,12 @@ const saveButton = new Button({
 });
 
 const formContent = [
-  new Custom('ul', { 
+  new Custom({
+    tagName: 'ul',  
     attr: { className: 'profile__list' },
     content: profileListBlocks
   }),
-  new Custom('div', { 
+  new Custom({ 
     attr: { className: 'profile__buttons form__group' },
     content: [ saveButton ]
   }),
@@ -108,7 +103,6 @@ const profilePage = new Profile({
   attr: {
     className: 'profile'
   },
-  goBackProfileHandler,
   uploadAvatarProfileHandler,
   goBackButton,
   avatar: '/assets/img/avatar_profile_128x128.png',
@@ -116,4 +110,4 @@ const profilePage = new Profile({
   profileContent: form
 })
 
-renderDOM('.root', profilePage, 'Редактирование пароля');
+export default profilePage;

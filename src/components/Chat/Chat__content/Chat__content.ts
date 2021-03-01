@@ -60,11 +60,12 @@ export class Chat__content extends Block {
         { 
           attr: { className: 'form', method: 'POST' }, 
           content: [ 
-            new Custom('p', {
+            new Custom({
+              tagName: 'p',
               attr: { className: 'form__text' },
               content: 'Вы уверены, что желаете удалить текущий чат?'
             }),
-            new Custom('div', {
+            new Custom({
               attr: { className: 'form__group form__group_flex' },
               content: [
                 new Button({
@@ -183,7 +184,8 @@ export class Chat__content extends Block {
     const messageListBlocks = messageList.map((message) => {
       return new Chat__message(message)
     })
-    return new Custom('ul', {
+    return new Custom({
+      tagName: 'ul',
       attr: {
         className: 'chat__body'
       },

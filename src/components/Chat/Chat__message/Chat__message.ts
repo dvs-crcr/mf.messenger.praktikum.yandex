@@ -44,7 +44,7 @@ export class Chat__message extends Block {
         classes.push('chat__body-message_self');
         if (status === 'read') {
           classes.push('chat__body-message_read');
-          msgStatus = new Custom('div', {
+          msgStatus = new Custom({
             attr: {
               className: 'chat__body-message-status'
             },

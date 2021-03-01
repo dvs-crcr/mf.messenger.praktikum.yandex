@@ -1,6 +1,10 @@
 import { EventBus } from './EventBus.js';
+import { cloneDeep } from './cloneDeep.js';
 import { Templator } from './UglyTemplator.js';
-import { default as shallowEqualObjects } from './shallowEqualObjects.js';
+import { default as isEqual } from './isEqual.js'
+import { Store } from './Store.js';
+const store = Store.getInstance();
+console.log(store.state)
 
 export type BlockPropsMethods = {
   [key: string]: EventListenerOrEventListenerObject | Function | undefined
@@ -25,16 +29,13 @@ export class Block {
 
   private eventBus: () => EventBus;
   _element: HTMLElement | undefined = undefined;
-  _meta: {tagName: string, props: BlockPropsType};
+  _tagName: string;
   _template: string | undefined;
   props: BlockPropsType;
 
   constructor(tagName: string = 'div', props: BlockPropsType = {}, template?: string) {
     const eventBus = new EventBus();
-    this._meta = {
-      tagName,
-      props
-    };
+    this._tagName = tagName;
     this._template = template;
     this.props = this._makePropsProxy(props);
     this.eventBus = () => eventBus;
@@ -49,19 +50,14 @@ export class Block {
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
-    this._element = this._createDocumentElement(this._meta.tagName);
-  }
-
   _createDocumentElement(tagName: string) {
-    const { props } = this._meta;
     let node = document.createElement(tagName);
-    if (typeof props.content !== 'undefined') {
+    if (typeof this.props.content !== 'undefined') {
       let chunkFragment = document.createDocumentFragment();
-      if (typeof props.content === 'string') {
-        chunkFragment.textContent = props.content;
+      if (typeof this.props.content === 'string') {
+        chunkFragment.textContent = this.props.content;
       } else {
-        props.content.forEach((item) => {
+        this.props.content.forEach((item) => {
           let itemContent = item.getContent()
           if (typeof itemContent !== 'undefined') {
             chunkFragment.appendChild(itemContent);
@@ -74,23 +70,24 @@ export class Block {
   }
 
   init(): void {
-    this._createResources();
+    this._element = this._createDocumentElement(this._tagName);
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   _componentDidMount() {
-    const { props } = this._meta;
-    this.componentDidMount(props);
+    console.log('DID MOUNT')
+    this.componentDidMount(this.props);
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
 	componentDidMount(oldProps?: object) {
     if (typeof oldProps !== 'undefined') {
-
+      
     }
   }
 
   _componentDidUpdate(oldProps: object, newProps: object) {
+    console.log('DID UPDATE')
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
@@ -98,7 +95,7 @@ export class Block {
 
   componentDidUpdate(oldProps?: object, newProps?: object) {
     if (typeof oldProps !== 'undefined' && typeof newProps !== 'undefined') {
-      if (shallowEqualObjects(oldProps, newProps)) {
+      if (isEqual(oldProps, newProps)) {
         return false
       } else {
         return true
@@ -112,9 +109,9 @@ export class Block {
     if (!nextProps) {
       return;
     }
-    let oldprops = this.props;
+    const oldProps = cloneDeep(this.props);
     Object.assign(this.props, nextProps);
-    this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldprops, nextProps);
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, nextProps);
   }
 
   get element() {
@@ -150,6 +147,7 @@ export class Block {
   }
 
   _render() {
+    console.log('RENDER', this.constructor.name)
     const blockRender = this.render(this._template, this.props);
     let props = this.props;
     if (typeof blockRender.props !== 'undefined') {
@@ -172,9 +170,9 @@ export class Block {
     return this.element;
   }
 
-  _makePropsProxy(props: {}) {
+  _makePropsProxy(props: { [index: string]: string }) {
     return new Proxy(props, {
-      set: (target: { [index: string]: string }, prop: string, value) => {
+      set: (target, prop: string, value) => {
         if (prop.startsWith('_')) {
           throw new Error('нет доступа');
         } else {

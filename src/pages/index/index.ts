@@ -1,32 +1,41 @@
-import { renderDOM } from './../../utils/renderDOM.js';
+import { Custom } from './../../blocks/Custom/Custom.js';
+import { default as linksData } from './index.data.js';
+import { Page } from './../../utils/Page.js';
 
-import { Custom } from './../../blocks/Custom/Custom.js'
+class IndexPage extends Page {
+  navLinks: Custom;
+  page: Custom;
 
-const linksTemplate = `
-<a target="{{target}}" href="{{href}}">{{title}}</a>
-{{descr}}
-`;
-
-const links = [
-  { target:'blank', href: '/auth.html', title: 'Авторизация', descr: ' - макет страницы авторизации' },
-  { target:'_blank', href: '/registration.html', title: 'Регистрация', descr: ' - макет страницы регистрации' },
-  { target:'_blank', href: '/chat-list.html', title: 'Список чатов', descr: ' - макет страницы со списком чатов' },
-  { target:'_blank', href: '/chat.html', title: 'Чат', descr: ' - макет страницы c лентой переписки' },
-  { href: '/profile.html', title: 'Профиль', descr: ' - макет страницы c профилем пользователя' },
-  { href: '/profile_edit.html', title: 'Редактирование профиля', descr: ' - макет страницы с настройкой пользователя' },
-  { href: '/profile_password.html', title: 'Пароль профиля', descr: ' - макет страницы для смены пароля профиля' },
-  { href: '/404.html', title: 'Ошибка 404', descr: ' - макет страницы c ошибкой 404' },
-  { href: '/500.html', title: 'Ошибка 500', descr: ' - макет страницы c ошибкой 5**' }
-];
-
-const indexList = new Custom('nav', {
-  content: links.map(link => {
-    const { target, href, title, descr } = link
-    return new Custom('li', {
-      _template: linksTemplate,
-      target, href, title, descr
+  constructor() {
+    super();
+    this.navLinks = new Custom({
+      tagName: 'nav',
+      content: this.getNavLinkBlocks(),
     })
-  }),
-});
+    this.page = new Custom({
+      attr: { className: 'wrapper' },
+      content: [this.navLinks]
+    });
+  }
 
-renderDOM('.indexList', indexList, 'INDEX');
+  getNavLinkBlocks() {
+    return linksData.map(link => {
+      const { target, href, title, descr } = link
+      return new Custom({
+        tagName: 'li',
+        _template: `
+        <a target="{{target}}" href="{{href}}" onclick="window.router.go('{{href}}'); return false;">{{title}}</a>
+        {{descr}}
+        `,
+        target, href, title, descr
+      })
+    })
+  }
+
+  render() {
+    return this.page;
+  }
+
+}
+
+export default IndexPage;

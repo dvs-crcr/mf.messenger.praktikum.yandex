@@ -12,7 +12,11 @@ _log = (...msg) => {
 }
 
 app.use('/src', express.static(path.join(__dirname, 'src')));
-app.use(express.static(path.join(__dirname, 'static')));
+app.use('/assets', express.static(path.join(__dirname, 'static', 'assets')));
+app.use('/dist', express.static(path.join(__dirname, 'static', 'dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'static', 'index.html'));
+});
 
 app.listen(PORT, () => {
   _log(`APP running on port: ${PORT}`);
