@@ -1,15 +1,15 @@
 {
   "name": "mf.messenger.praktikum.yandex",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Simple messenger with js & css & html",
   "main": "index.js",
   "scripts": {
-    "build": "npm run buildts && npm run sass",
-    "buildts": "tsc",
+    "build": "npm run build_ts && npm run sass",
+    "build_ts": "tsc",
     "dev": "node index.js --dev",
     "start": "node index.js",
-    "sass": "node-sass src -o static/dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "node-sass src -o build",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
   "homepage": "https://github.com/dvs-crcr/mf.messenger.praktikum.yandex#readme",
   "devDependencies": {
     "express": "4.17.1",
+    "mocha": "8.3.0",
     "node-sass": "5.0.0",
     "sass": "1.29.0"
   }

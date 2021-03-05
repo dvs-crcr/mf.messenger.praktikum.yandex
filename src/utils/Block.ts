@@ -2,9 +2,6 @@ import { EventBus } from './EventBus.js';
 import { cloneDeep } from './cloneDeep.js';
 import { Templator } from './UglyTemplator.js';
 import { default as isEqual } from './isEqual.js'
-import { Store } from './Store.js';
-const store = Store.getInstance();
-console.log(store.state)
 
 export type BlockPropsMethods = {
   [key: string]: EventListenerOrEventListenerObject | Function | undefined
@@ -75,19 +72,17 @@ export class Block {
   }
 
   _componentDidMount() {
-    console.log('DID MOUNT')
     this.componentDidMount(this.props);
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-	componentDidMount(oldProps?: object) {
+  componentDidMount(oldProps?: object) {
     if (typeof oldProps !== 'undefined') {
       
     }
   }
 
   _componentDidUpdate(oldProps: object, newProps: object) {
-    console.log('DID UPDATE')
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
@@ -147,7 +142,6 @@ export class Block {
   }
 
   _render() {
-    console.log('RENDER', this.constructor.name)
     const blockRender = this.render(this._template, this.props);
     let props = this.props;
     if (typeof blockRender.props !== 'undefined') {

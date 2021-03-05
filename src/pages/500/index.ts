@@ -2,12 +2,12 @@ import { Errors, ErrorsProps } from './../../components/Errors/Errors.js';
 import { Page } from './../../utils/Page.js';
 
 class ErrorPage extends Page {
-  page: Errors;
+  _page: Errors;
   state: ErrorsProps = {};
 
   constructor() {
     super();
-    this.page = new Errors({
+    this._page = new Errors({
       attr: { className: 'wrapper' },
       header: '500',
       p1: 'Что-то пошло не так :(',
@@ -16,7 +16,7 @@ class ErrorPage extends Page {
   }
 
   render() {
-    return this.page
+    return this._page
   }
 
 }

@@ -1,3 +1,7 @@
+type StringObject = {
+  [k in string]: string;
+};
+
 export interface ValidateListInterface {
   type: 'notEmpty' | 'isEmpty' | 'isAlpha' | 'isRussianAlpha' | 'isEmail' | 'isPhone' | 'isInputValueEqual';
   options?: object;
@@ -63,6 +67,18 @@ class Validator {
       return false
     }
     return (document.querySelector(selector) as HTMLInputElement).value === target;
+  }
+
+  // XSS: ESCAPE SPECIAL CHARS
+  escapeHtml(text: string) {
+    let map: StringObject = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, (m) => map[m]);
   }
 
 }

@@ -2,6 +2,7 @@ import { Block, BlockPropsMethods } from './../../utils/Block.js';
 import { default as modalTemplate } from './Modal.html.js';
 
 export interface ModalProps {
+  caller_context?: Block | string;
   className?: string;
   header: string;
   modalContent: Block | Block[] | string;
@@ -14,7 +15,7 @@ export class Modal extends Block {
   }
 
   render(template: string, props: ModalProps) {
-    const { className = 'modal hidden', header, modalContent } = props;
+    const { className = 'modal hidden', header, modalContent, caller_context } = props;
     const methods: BlockPropsMethods = {
       click: (event: Event) => {
         event.preventDefault();
@@ -29,14 +30,22 @@ export class Modal extends Block {
       header,
       modalContent
     });
-    this.insert();
+    this.insert(caller_context);
     return { template, props }
   }
 
-  insert() {
+  insert(caller_context?: Block | string) {
     let element = this.getContent();
+    let context = document.body;
+    if (caller_context) {
+      if (typeof caller_context === 'string') {
+        context = document.querySelector(caller_context) || document.body;
+      } else {
+        context = caller_context._element!;
+      }
+    }
     if (typeof element !== 'undefined') {
-      document.body.insertAdjacentElement('beforeend', element);
+      context?.insertAdjacentElement('beforeend', element);
     }
   }
 

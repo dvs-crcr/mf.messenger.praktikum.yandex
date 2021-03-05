@@ -39,5 +39,4 @@ export class Auth extends Block {
     }
     return { template, props }
   }
-
 }

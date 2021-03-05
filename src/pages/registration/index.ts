@@ -1,4 +1,5 @@
 import { Auth } from './../../components/Auth/Auth.js';
+import { AuthApi, AuthApiSignupType } from './../../components/Auth/Auth.api.js';
 import { Form } from './../../blocks/Form/Form.js';
 import { Button } from './../../blocks/Button/Button.js';
 import { Input, InputProps } from './../../blocks/Input/Input.js';
@@ -6,11 +7,18 @@ import { Custom } from './../../blocks/Custom/Custom.js';
 import { Page } from './../../utils/Page.js';
 
 class RegistrationPage extends Page {
-  page: Auth;
+  _api: AuthApi;
+  _page: Auth;
+  _inputs?: Input[];
+  _button?: Button;
+  _errorLine?: Custom;
+  _form?: Form;
 
   constructor() {
     super();
-    this.page = new Auth({
+    this._api = new AuthApi();
+    this.init();
+    this._page = new Auth({
       attr: { className: 'wrapper' },
       header: 'Регистрация',
       error_line: this.errorLine,
@@ -22,41 +30,40 @@ class RegistrationPage extends Page {
     })
   }
 
-  get errorLine() {
-    return new Custom({
+  init() {
+    this._errorLine = new Custom({
       tagName: 'p',
       attr: { className: 'auth__error hidden' },
-      content: 'Не все поля заполнены корректно'
-    })
-  }
-
-  get form() {
-    return new Form({
+      _template: `{{errorMsg}}`
+    });
+    this._inputs = this.inputsParams.map((props) => new Input(props));
+    this._button = new Button({
+      className: 'auth__button button button_primary button_fullwidth',
+      type: 'submit',
+      content: 'Зарегистрировать'
+    });
+    this._form = new Form({
       attr: {
         className: 'auth__form form',
         method: 'POST'
       },
       content: [
-        ...this.inputs,
-        new Button({
-          className: 'auth__button button button_primary button_fullwidth',
-          type: 'submit',
-          content: 'Зарегистрировать'
-        })
+        ...(this.inputs as Input[]),
+        this._button,
       ],
       methods: {
-        submit: (event: Event) => {
+        submit: async (event: Event) => {
           event.preventDefault();
           const formEl = (event.target as HTMLFormElement);
-          this.inputs.forEach(items => {
+          this.inputs?.forEach(items => {
             items._validateBlock();
           })
           if (!formEl.checkValidity()) {
-            this.errorLine.show();
+            this.showError();
           } else {
-            this.errorLine.hide();
+            this.errorLine?.hide();
             let formdata = new FormData(formEl);
-            let result = {
+            let request_data = {
               email: formdata.get('email'),
               login: formdata.get('login'),
               first_name: formdata.get('first_name'),
@@ -64,11 +71,51 @@ class RegistrationPage extends Page {
               phone: formdata.get('phone'),
               password: formdata.get('password')
             }
-            console.log(result)
+            await this.signUp((request_data as AuthApiSignupType));
           }
         }
       }
-    })
+    });
+  }
+
+  showError(code?: number) {
+    let errorMsg;
+    switch (code) {
+      case 400:
+        errorMsg = 'Ошибка в запросе!'
+        break;
+      case 401:
+        errorMsg = 'Логин или пароль введены неправильно!';
+        break;
+      case 409:
+        errorMsg = 'Логин уже существует!';
+        break;
+      case 500:
+        errorMsg = 'Ошибка на стороне сервера!';
+        break;
+      default:
+        errorMsg = 'Не все поля заполнены корректно!'
+    }
+    this.errorLine?.setProps({ errorMsg })
+    this.errorLine?.show();
+  }
+
+  signUp = (request_data: AuthApiSignupType) => {
+    this._api.signUp(request_data)
+        .then(() => {
+          (<any>window).router.go('/chat.html');
+        })
+        .catch((errorCode) => {
+          this.showError(errorCode);
+        });
+  }
+
+  get errorLine() {
+    return this._errorLine;
+  }
+
+  get form() {
+    return this._form;
   }
 
   get inputsParams(): InputProps[] {
@@ -106,10 +153,6 @@ class RegistrationPage extends Page {
             type: 'notEmpty',
             msg: 'Поле не должно быть пустым'
           },
-          {
-            type: 'isRussianAlpha',
-            msg: 'Плиз, энтер рассиан леттерз'
-          }
         ]
       },
       { 
@@ -118,10 +161,6 @@ class RegistrationPage extends Page {
           {
             type: 'notEmpty',
             msg: 'Поле не должно быть пустым'
-          },
-          {
-            type: 'isRussianAlpha',
-            msg: 'Плиз, энтер рассиан леттерз'
           }
         ]
       },
@@ -170,13 +209,12 @@ class RegistrationPage extends Page {
   }
 
   get inputs() {
-    return this.inputsParams.map((props) => new Input(props));
+    return this._inputs;
   }
 
   render() {
-    return this.page
+    return this._page
   }
-
 }
 
 export default RegistrationPage;

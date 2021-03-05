@@ -32,6 +32,8 @@
 }
 .profile__avatar-image {
   border-radius: 50%;
+  width: 128px;
+  height: 128px;
 }
 .profile__avatar-hover {
   opacity: 0;
@@ -98,6 +100,10 @@
 }
 .profile__list-links {
   margin-top: 40px;
+}
+.profile__link {
+  text-decoration: underline;
+  cursor: pointer;
 }
 .profile__link_logout {
   color: $profile-logout-link-color;

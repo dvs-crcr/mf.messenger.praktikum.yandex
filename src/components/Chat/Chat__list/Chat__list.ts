@@ -24,7 +24,7 @@ export class Chat__list extends Block {
   }
 
   render(template: string, props: ChatPropsList) {
-    const { attr, isActive, activeClass, isSelf, selfmsg, title, lastmsg } = props
+    const { attr, isActive, activeClass, isSelf, selfmsg, title, lastmsg, avatar } = props
     
     let className = '';
     if (typeof attr !== 'undefined') {
@@ -46,6 +46,7 @@ export class Chat__list extends Block {
       attr: {
         className: `${className} ${addclass}`
       },
+      avatar: avatar ?? '/assets/img/avatar_50x50.png',
       selfmsg: isSelf ? selfmsg : '',
       title: this._substr(title, 21),
       lastmsg: this._substr(lastmsg, selfMsgLen)

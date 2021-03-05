@@ -10,7 +10,7 @@ enum METHODS {
 
 type RequestOptions = {
 	data?: string | Document | Blob | ArrayBufferView | ArrayBuffer | FormData | URLSearchParams | ReadableStream<Uint8Array> | null | undefined,
-	query?: StringIndexed, 
+	query?: StringIndexed,
 	headers?: {
 		[index: string]: any
 	},
@@ -42,14 +42,16 @@ export class HTTPTransport {
 		return this.request(url, {...options, method: METHODS.DELETE});
 	};
 
-	request = (url: string, options: RequestOptions) => {
+	request = (url: string, options: RequestOptions): Promise<XMLHttpRequest> => {
 		if (typeof url === 'undefined') {
 			throw new Error('NO URL');
 		}
 		const { data, headers, method = METHODS.GET, timeout = 5000 } = options;
-		return new Promise((resolve) => {
+		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
 			xhr.timeout = timeout;
+			xhr.withCredentials = true;
+			xhr.open(method, `${OPT.baseAPIUrl}${this.instanceUrl}${url}`);
 			if (typeof headers === 'object') {
 				for (let key in headers) {
 					if (typeof key === 'string' && typeof headers[key] === 'string') {
@@ -57,11 +59,12 @@ export class HTTPTransport {
 					}
 				}
 			}
-			xhr.open(method, `${OPT.baseAPIUrl}${this.instanceUrl}${url}`);
-			
 			xhr.onload = function() {
 				resolve(xhr);
 			};
+			xhr.onabort = reject;
+			xhr.onerror = reject;
+			xhr.ontimeout = reject;
 
 			if (method === METHODS.GET || !data) {
 				xhr.send();

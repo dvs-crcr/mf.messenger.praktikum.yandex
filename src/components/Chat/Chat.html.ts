@@ -5,8 +5,9 @@ export default `
       <input class="chat__search-input" type="text" placeholder="Поиск" />
       <i class="fa fa-search chat__search-icon"></i>
     </div>
+    {{addChatButton}}
     {{chatListContent}}
   </aside>
   {{chatContent}}
-  <span></span>
+  {{chatModals}}
 `;
