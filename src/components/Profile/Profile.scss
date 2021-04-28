@@ -37,10 +37,10 @@
 }
 .profile__avatar-hover {
   opacity: 0;
-  background: $profive-avatar-background;
+  background: $profile-avatar-background;
   font-size: 14px;
   font-weight: 600;
-  color: $profive-avatar-color;
+  color: $profile-avatar-color;
   cursor: pointer;
   display: flex;
   width: 128px;
@@ -70,12 +70,12 @@
   min-width: 500px;
 }
 .profile__settings-label {
-  color: $profie-settings-label-color;
+  color: $profile-settings-label-color;
   flex-grow: 1;
 }
 .profile__settings-value {
   flex-grow: 1;
-  color: $profie-settings-color;
+  color: $profile-settings-color;
   text-align: right;
 }
 .profile__input {

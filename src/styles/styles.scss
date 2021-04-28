@@ -1,11 +1,14 @@
 @import './_colors';
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body, html {
+
+body,
+html {
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: normal;
@@ -16,31 +19,39 @@ body, html {
   scrollbar-width: 5px;
   scrollbar-color: $scrollbar-color;
 }
+
 .root {
   height: 100%;
 }
+
 .wrapper {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 a {
   color: $link-color;
 }
+
 a:hover {
   text-decoration: none;
 }
+
 .hidden {
   display: none;
 }
+
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
+
 ::-webkit-scrollbar-track {
   background: $scrollbar-background;
 }
+
 ::-webkit-scrollbar-thumb {
   background: $scrollbar-color;
 }

@@ -3,61 +3,61 @@ $danger: #FF5A4C;
 $light-gray: #DBDBDB;
 $gray: #757575;
 $danger-background: #FFE5E5;
-$boxshadow-color: rgba(0,0,0,0.3);
+$box-shadow-color: rgba(0, 0, 0, 0.3);
 $default-border: $light-gray;
 
-$main-background: #FFFFFF;
-$main-font-color: #000000;
+$main-background: #FFF;
+$main-font-color: #000;
 $link-color: $primary;
 
 $scrollbar-background: transparent;
 $scrollbar-color: rgba(0, 0, 0, 0.4);
 
-$auth-background: #FFFFFF;
+$auth-background: #FFF;
 $auth-error-background: $danger-background;
 $auth-error-color: $danger;
 
-$errorpage-title-color: #DBDBDB;
+$error-page-title-color: #DBDBDB;
 
 $profile-goback-background: #FBFBFB;
 $profile-goback-background-hover: #F5F5F5;
 $profile-logout-link-color: $danger;
-$profie-settings-color: $gray;
-$profie-settings-label-color: #000000;
-$profive-avatar-background: rgba(0, 0, 0, 0.5);
-$profive-avatar-color: #FFFFFF;
+$profile-settings-color: $gray;
+$profile-settings-label-color: #000;
+$profile-avatar-background: rgba(0, 0, 0, 0.5);
+$profile-avatar-color: #FFF;
 
 $modal-background: rgba(0, 0, 0, 0.4);
-$modal-warpper-background: #FFFFFF;
+$modal-wrapper-background: #FFF;
 $modal-error-background: $danger-background;
 $modal-error-color: $danger;
 
-$dropdown-list-background: #FFFFFF;
-$dropdown-list-button-color: #000000;
+$dropdown-list-background: #FFF;
+$dropdown-list-button-color: #000;
 
 $button-primary-background: $primary;
-$button-primary-color: #FFFFFF;
-$button-primary-background-hover: #0088BB;
+$button-primary-color: #FFF;
+$button-primary-background-hover: #08B;
 $button-warning-background: $danger;
-$button-warning-color: #FFFFFF;
+$button-warning-color: #FFF;
 $button-warning-background-hover: #F64434;
 $button-gray-background: #DBDBDB;
 $button-gray-color: $gray;
-$button-gray-background-hover: #CCCCCC;
+$button-gray-background-hover: #CCC;
 $button-round-transparent-background: transparent;
 $button-round-transparent-color: $gray;
 $button-round-transparent-background-hover: #FBFBFB;
 $button-round-transparent-color-hover: $primary;
 
-$chat-input-background: #EEEEEE;
-$chat-input-color: $main-font-color; 
+$chat-input-background: #EEE;
+$chat-input-color: $main-font-color;
 
-$chat-item-lastmsg: #888888;
-$chat-item-time: #888888;
-$chat-item-count-color: #FFFFFF;
+$chat-item-lastmsg: #888;
+$chat-item-time: #888;
+$chat-item-count-color: #FFF;
 $chat-item-background: rgba(0, 153, 210, 0);
-$chat-item-background-hover: rgba(0, 153, 210, .1);
-$chat-item-background-active: rgba(0, 153, 210, .15);
+$chat-item-background-hover: rgba(0, 153, 210, 0.1);
+$chat-item-background-active: rgba(0, 153, 210, 0.15);
 $chat-attach-color: #757575;
 $chat-attach-color-hover: $primary;
 $chat-message-background: #E3E3E3;
@@ -65,7 +65,7 @@ $chat-message-color: #757575;
 $chat-message-date-color: #757575;
 $chat-message-text-background: #F5F5F5;
 $chat-message-text-color: #1E1E1E;
-$chat-message-time-color: #888888;
-$chat-message-self-color: #000000;
+$chat-message-time-color: #888;
+$chat-message-self-color: #000;
 $chat-message-self-background: #E2F1F7;
 $chat-message-self-time-color: $primary;

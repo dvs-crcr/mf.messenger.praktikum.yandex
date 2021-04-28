@@ -1,36 +1,38 @@
 const express = require('express');
-const child_process = require('child_process');
 const path = require('path');
 
 class App {
   constructor(options) {
-    this._options = options;
-    this._app = express();
+    this.options = options;
+    this.app = express();
   }
 
   init = async () => {
-    const { port = 3000, routes = {} } = this._options;
-    await this._init_routes(routes);
-    await this._listen(port);
-  }
+    const {
+      port = 3000,
+      routes = {},
+    } = this.options;
+    await this.initRoutes(routes);
+    await this.listen(port);
+  };
 
-  _init_routes = async (routes) => {
+  initRoutes = async (routes) => {
     routes.forEach((route) => {
-      this._app.use(...route);
+      this.app.use(...route);
     });
-  }
+  };
 
-  _listen = async (port) => {
-    this._app.listen(port, () => {
-      this._log(`APP running on port: ${port}`);
+  listen = async (port) => {
+    this.app.listen(port, () => {
+      this.log(`APP running on port: ${port}`);
     });
-  }
+  };
 
-  _log = (...msg) => {
+  log = (...msg) => {
     if (process.argv.includes('--dev')) {
-      console.log(...msg);
+      console.dir(...msg);
     }
-  }
+  };
 }
 
 (async () => {
@@ -47,8 +49,4 @@ class App {
   };
   const appServer = new App(options);
   await appServer.init();
-  if (process.argv.includes('--dev')) {
-    const open_command = (process.platform == 'darwin'? 'open': process.platform == 'win32' ? 'start': 'xdg-open');
-    child_process.exec(`${open_command} http://localhost${(options.port ? `:${options.port}` : '')}`);
-  }
 })();

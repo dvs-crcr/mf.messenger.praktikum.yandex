@@ -4,11 +4,9 @@
   "description": "Simple messenger with js & css & html",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build_ts && npm run sass",
-    "build_ts": "tsc",
+    "build": "tsc",
     "dev": "node index.js --dev",
     "start": "node index.js",
-    "sass": "node-sass src -o build",
     "test": "mocha"
   },
   "repository": {
@@ -30,9 +28,15 @@
   },
   "homepage": "https://github.com/dvs-crcr/mf.messenger.praktikum.yandex#readme",
   "devDependencies": {
-    "express": "4.17.1",
-    "mocha": "8.3.0",
-    "node-sass": "5.0.0",
-    "sass": "1.29.0"
+    "@typescript-eslint/eslint-plugin": "4.22.0",
+    "@typescript-eslint/parser": "4.22.0",
+    "eslint": "7.25.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-xo": "0.36.0",
+    "stylelint": "^13.13.0",
+    "stylelint-config-standard": "22.0.0"
+  },
+  "dependencies": {
+    "express": "4.17.1"
   }
 }
